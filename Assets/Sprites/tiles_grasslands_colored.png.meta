@@ -1,0 +1,583 @@
+fileFormatVersion: 2
+guid: b19d7678f3d8a4e289a4dbf000f16fa6
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5054618721893178985
+    second: tiles_grasslands_colored_0
+  - first:
+      213: -8334800152830488670
+    second: tiles_grasslands_colored_1
+  - first:
+      213: 1767897084548498649
+    second: tiles_grasslands_colored_2
+  - first:
+      213: -2365656456574959431
+    second: tiles_grasslands_colored_3
+  - first:
+      213: 6166522247410921705
+    second: tiles_grasslands_colored_4
+  - first:
+      213: -4660370638197277337
+    second: tiles_grasslands_colored_5
+  - first:
+      213: 138108977397510342
+    second: tiles_grasslands_colored_6
+  - first:
+      213: -3972804737325457401
+    second: tiles_grasslands_colored_7
+  - first:
+      213: -5773186862130501297
+    second: tiles_grasslands_colored_8
+  - first:
+      213: 8918388482787105404
+    second: tiles_grasslands_colored_9
+  - first:
+      213: -2273131484030987828
+    second: tiles_grasslands_colored_10
+  - first:
+      213: 6539249321343576787
+    second: tiles_grasslands_colored_11
+  - first:
+      213: -7264374711630957990
+    second: tiles_grasslands_colored_12
+  - first:
+      213: -7945545350562791758
+    second: tiles_grasslands_colored_13
+  - first:
+      213: 716126592122669671
+    second: tiles_grasslands_colored_14
+  - first:
+      213: 6918965283396370559
+    second: tiles_grasslands_colored_15
+  - first:
+      213: -40820926181836176
+    second: tiles_grasslands_colored_16
+  - first:
+      213: -9221826911326192332
+    second: tiles_grasslands_colored_17
+  - first:
+      213: 3935884542621479902
+    second: tiles_grasslands_colored_18
+  - first:
+      213: -7197807259837894284
+    second: tiles_grasslands_colored_19
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 2
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: tiles_grasslands_colored_0
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 1687
+        width: 347
+        height: 147
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7aceaeed9c589499fadf182a651799ca
+      internalID: -5054618721893178985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_grasslands_colored_1
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 1687
+        width: 348
+        height: 154
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 720a9ac435e7a4f669be78e42b971b01
+      internalID: -8334800152830488670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_grasslands_colored_2
+      rect:
+        serializedVersion: 2
+        x: 776
+        y: 1688
+        width: 348
+        height: 151
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae9f5059ee8694bf1b42bd5c0cd7a774
+      internalID: 1767897084548498649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_grasslands_colored_3
+      rect:
+        serializedVersion: 2
+        x: 1156
+        y: 1688
+        width: 348
+        height: 147
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb79fc6917aae41dcbd568fcfa6688d9
+      internalID: -2365656456574959431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_grasslands_colored_4
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1687
+        width: 348
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd2515805251e40e4922a2316174a4d4
+      internalID: 6166522247410921705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_grasslands_colored_5
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 1308
+        width: 349
+        height: 153
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f3537a4458f646679b99ccf5e1fa553
+      internalID: -4660370638197277337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_grasslands_colored_6
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 1307
+        width: 348
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3805f1437d0b464a96760b30399cc25
+      internalID: 138108977397510342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_grasslands_colored_7
+      rect:
+        serializedVersion: 2
+        x: 776
+        y: 1307
+        width: 347
+        height: 152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0eefebdf80a9d41058e2ca19208d2d42
+      internalID: -3972804737325457401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_grasslands_colored_8
+      rect:
+        serializedVersion: 2
+        x: 1157
+        y: 1308
+        width: 347
+        height: 147
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a833afe1303bc457bac862c9ce5561dd
+      internalID: -5773186862130501297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_grasslands_colored_9
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1307
+        width: 349
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95a3902f07ea64f048891c8a2aef3066
+      internalID: 8918388482787105404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_grasslands_colored_10
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 928
+        width: 346
+        height: 152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 313ca4053363b4a81bd65ca290e1683f
+      internalID: -2273131484030987828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_grasslands_colored_11
+      rect:
+        serializedVersion: 2
+        x: 397
+        y: 928
+        width: 347
+        height: 157
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c224bc26fe43f401d8dd27f486e26bae
+      internalID: 6539249321343576787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_grasslands_colored_12
+      rect:
+        serializedVersion: 2
+        x: 777
+        y: 928
+        width: 347
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e251d7519ec0e4f7d83db6933d7910f0
+      internalID: -7264374711630957990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_grasslands_colored_13
+      rect:
+        serializedVersion: 2
+        x: 1157
+        y: 927
+        width: 348
+        height: 150
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e22ebeaa7e33e47e7bd998e0fbce1748
+      internalID: -7945545350562791758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_grasslands_colored_14
+      rect:
+        serializedVersion: 2
+        x: 1537
+        y: 927
+        width: 348
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 626c8f1dc4c134ae1874315e094e96b9
+      internalID: 716126592122669671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_grasslands_colored_15
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 547
+        width: 348
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7f4ed2bbf0074783b7b39f2b398be7c
+      internalID: 6918965283396370559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_grasslands_colored_16
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 547
+        width: 349
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2b4c76c2f1c64a23b17d7507eda626c
+      internalID: -40820926181836176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_grasslands_colored_17
+      rect:
+        serializedVersion: 2
+        x: 776
+        y: 548
+        width: 349
+        height: 143
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a05860563e48d406b984a878e6006d92
+      internalID: -9221826911326192332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_grasslands_colored_18
+      rect:
+        serializedVersion: 2
+        x: 1157
+        y: 548
+        width: 349
+        height: 149
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cacfd1baa9a81404f8ef93f534f43c7c
+      internalID: 3935884542621479902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_grasslands_colored_19
+      rect:
+        serializedVersion: 2
+        x: 1537
+        y: 548
+        width: 347
+        height: 145
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16a903ce74676410daf2d12d4adc6767
+      internalID: -7197807259837894284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: ec51881b8a01747fea37e56fcdae357b
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

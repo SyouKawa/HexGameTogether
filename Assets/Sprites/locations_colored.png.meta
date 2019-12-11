@@ -1,0 +1,823 @@
+fileFormatVersion: 2
+guid: d9681d343c90d4087b6ebaf10cdf00e7
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1330652573534574528
+    second: locations_colored_0
+  - first:
+      213: -932327390583642921
+    second: locations_colored_1
+  - first:
+      213: -1611124479742038995
+    second: locations_colored_2
+  - first:
+      213: -1491044502060064273
+    second: locations_colored_3
+  - first:
+      213: -3393828132682759216
+    second: locations_colored_4
+  - first:
+      213: -1991139909430192752
+    second: locations_colored_5
+  - first:
+      213: -1192324549201219190
+    second: locations_colored_6
+  - first:
+      213: 8131824075702417331
+    second: locations_colored_7
+  - first:
+      213: -492348521961611550
+    second: locations_colored_8
+  - first:
+      213: -6420105582865853204
+    second: locations_colored_9
+  - first:
+      213: 2701123800505154195
+    second: locations_colored_10
+  - first:
+      213: -3625345788081442979
+    second: locations_colored_11
+  - first:
+      213: 1073006637854346194
+    second: locations_colored_12
+  - first:
+      213: -771284066534456328
+    second: locations_colored_13
+  - first:
+      213: -2253550905954888213
+    second: locations_colored_14
+  - first:
+      213: 7988235810845126509
+    second: locations_colored_15
+  - first:
+      213: -6032610800142418288
+    second: locations_colored_16
+  - first:
+      213: 953235811531058402
+    second: locations_colored_17
+  - first:
+      213: -4504240053581920159
+    second: locations_colored_18
+  - first:
+      213: 2863033358062697790
+    second: locations_colored_19
+  - first:
+      213: -1463951863063116824
+    second: locations_colored_20
+  - first:
+      213: 5343899858066598295
+    second: locations_colored_21
+  - first:
+      213: 7403313239539692510
+    second: locations_colored_22
+  - first:
+      213: -7691964034071681125
+    second: locations_colored_23
+  - first:
+      213: -2977805566757626040
+    second: locations_colored_24
+  - first:
+      213: 704574850503381124
+    second: locations_colored_25
+  - first:
+      213: -4057420215496964198
+    second: locations_colored_26
+  - first:
+      213: 1346195139027595121
+    second: locations_colored_27
+  - first:
+      213: -1779343668446058383
+    second: locations_colored_28
+  - first:
+      213: 6397708764990847379
+    second: locations_colored_29
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 2
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: locations_colored_0
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 942
+        width: 59
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45bba2c29efe2470cab3ffc51d587671
+      internalID: 1330652573534574528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: locations_colored_1
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 942
+        width: 83
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fee97b254311a4df2a0a0fdeca23ddde
+      internalID: -932327390583642921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: locations_colored_2
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 942
+        width: 58
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06c1111146f4941d981778fd5021ebf2
+      internalID: -1611124479742038995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: locations_colored_3
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 942
+        width: 88
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f729b13c75e794dd2bd63a8f9a90b8fe
+      internalID: -1491044502060064273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: locations_colored_4
+      rect:
+        serializedVersion: 2
+        x: 365
+        y: 943
+        width: 65
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8440d112d746e4a5e9645ded0113c824
+      internalID: -3393828132682759216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: locations_colored_5
+      rect:
+        serializedVersion: 2
+        x: 440
+        y: 941
+        width: 85
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6cb081dbdb3d4637b3f05b2ac4dbf4e
+      internalID: -1991139909430192752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: locations_colored_6
+      rect:
+        serializedVersion: 2
+        x: 535
+        y: 941
+        width: 75
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4756146770c247cd867039054d776bf
+      internalID: -1192324549201219190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: locations_colored_7
+      rect:
+        serializedVersion: 2
+        x: 635
+        y: 941
+        width: 52
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbf29c4fa988b4d27921899de8e60a54
+      internalID: 8131824075702417331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: locations_colored_8
+      rect:
+        serializedVersion: 2
+        x: 718
+        y: 940
+        width: 60
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ffa75ae2dc5944a1d95167e2b16d08e6
+      internalID: -492348521961611550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: locations_colored_9
+      rect:
+        serializedVersion: 2
+        x: 794
+        y: 940
+        width: 86
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84b1184fa0b5644b3a50b72d76d33bab
+      internalID: -6420105582865853204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: locations_colored_10
+      rect:
+        serializedVersion: 2
+        x: 903
+        y: 942
+        width: 42
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b1fd5fdeab0b4d9389c9e8583518851
+      internalID: 2701123800505154195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: locations_colored_11
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 853
+        width: 86
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d7a69dc20f034913979e608f16ad880
+      internalID: -3625345788081442979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: locations_colored_12
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 854
+        width: 79
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe3ec45894ec348cfbd5f8b48a1c6ef0
+      internalID: 1073006637854346194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: locations_colored_13
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 854
+        width: 39
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2c90d3501c3e4fac9e56783e3bdcb5b
+      internalID: -771284066534456328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: locations_colored_14
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 852
+        width: 78
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f7879f6b8cb1472cab832bf2baf91a4
+      internalID: -2253550905954888213
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: locations_colored_15
+      rect:
+        serializedVersion: 2
+        x: 356
+        y: 852
+        width: 81
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7bc265a9b0c21404a969f099809dc243
+      internalID: 7988235810845126509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: locations_colored_16
+      rect:
+        serializedVersion: 2
+        x: 452
+        y: 853
+        width: 70
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0012d5fb201c48189ce68c8d470c3cb
+      internalID: -6032610800142418288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: locations_colored_17
+      rect:
+        serializedVersion: 2
+        x: 535
+        y: 853
+        width: 74
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9398e217884d4934ae525a6e932c7cf
+      internalID: 953235811531058402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: locations_colored_18
+      rect:
+        serializedVersion: 2
+        x: 626
+        y: 853
+        width: 68
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c254f45f0e004c138ce02f782652fa5
+      internalID: -4504240053581920159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: locations_colored_19
+      rect:
+        serializedVersion: 2
+        x: 714
+        y: 853
+        width: 68
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 644eeedc9b61d4921be7724bf07a9d5d
+      internalID: 2863033358062697790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: locations_colored_20
+      rect:
+        serializedVersion: 2
+        x: 799
+        y: 851
+        width: 72
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c17e41b0d1fdd41ff9c60d19f0e5af96
+      internalID: -1463951863063116824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: locations_colored_21
+      rect:
+        serializedVersion: 2
+        x: 888
+        y: 853
+        width: 74
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9217ce371682f48ce81827fc9f7b9a30
+      internalID: 5343899858066598295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: locations_colored_22
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 766
+        width: 62
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 335ae9fb87aeb4233a3e85a879208cb2
+      internalID: 7403313239539692510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: locations_colored_23
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 764
+        width: 65
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 840e1fa51af3c4c09abeee55fe928eec
+      internalID: -7691964034071681125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: locations_colored_24
+      rect:
+        serializedVersion: 2
+        x: 183
+        y: 765
+        width: 75
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6e72d2a04feb4e1882fb905c0e269bd
+      internalID: -2977805566757626040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: locations_colored_25
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 766
+        width: 64
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db43726917b834fbebfaf719ddba3c44
+      internalID: 704574850503381124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: locations_colored_26
+      rect:
+        serializedVersion: 2
+        x: 367
+        y: 765
+        width: 73
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 319d94f88d5844da0b73a47997324bed
+      internalID: -4057420215496964198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: locations_colored_27
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 764
+        width: 69
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d4962e32a294458ebe8cce8e1b3e0ab
+      internalID: 1346195139027595121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: locations_colored_28
+      rect:
+        serializedVersion: 2
+        x: 548
+        y: 766
+        width: 51
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a6cd95df7c0f440e858e0804d6c243b
+      internalID: -1779343668446058383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: locations_colored_29
+      rect:
+        serializedVersion: 2
+        x: 628
+        y: 764
+        width: 66
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f83d59847f68f4650bdbcea2175d0a51
+      internalID: 6397708764990847379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 3734d336ff0024e0ea7640c699a44bab
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

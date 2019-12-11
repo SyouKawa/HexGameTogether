@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class HexGrid : MonoBehaviour
 {
     //地图大小
-    public int width = 6;
+    public int width = 1;
     public int height = 6;
 
     ///预制体引用列表
@@ -25,17 +25,17 @@ public class HexGrid : MonoBehaviour
         gridCanvas = GetComponentInChildren<Canvas>();
 
         cells = new HexCell[height * width];
-        for(int i = 0,row = 0;row<height ;row++) { 
-            for(int col = 0;col<width ;col++ ) {
-                SpawnCell(row, col, i++);
+        for(int i = 0,col = 0;col<width ;col++) { 
+            for(int row = 0;row<height ;row++ ) {
+                SpawnCell(col, row, i++);
             }
         }
     }
 
-    void SpawnCell(int row,int col,int i) {
+    void SpawnCell(int col,int row,int i) {
         Vector3 pos;
-        pos.x = (col + (row * 0.5f - row / 2)) * (GameStaticData.innerRadius * 2f);//偏移量(奇数行向右偏移半个六边形,偶数行不偏)+每个六边形的间距
-        pos.y = row * (GameStaticData.outerRadius * 1.5f);//高度差为外径的1.5倍
+        pos.x = col * (GameStaticData.MaxOuterRadius * 1.3f);//每个六边形的间距为最大外径的1.3倍
+        pos.y = (row + (col * 0.5f - col / 2)) * (GameStaticData.MinInnerRadius*2f);//(奇数列向右偏移半个六边形,偶数列不偏)平角向上-列优先排列  的 高度差为最小内径的2倍
         pos.z = 0f;
         //按坐标新建每一个cell
         HexCell cell = cells[i] = Instantiate(cellPrefab);
