@@ -28,6 +28,8 @@ public class HexGrid : MonoBehaviour
 
         SpawnMap();
 
+        cells[2, 1].Img.GetComponent<SpriteRenderer>().sprite = null;
+
     }
     /// <summary>
     /// 生成菱形地图坐标
@@ -46,22 +48,22 @@ public class HexGrid : MonoBehaviour
     /// <summary>
     /// 创建一个单独的Cell
     /// </summary>
-    /// <param name="row">所在行.</param>
-    /// <param name="col">所在列.</param>
+    /// <param name="row">所在行(45度方向坐标系的Y值).</param>
+    /// <param name="col">所在列(45度方向坐标系的X值).</param>
     /// <param name="pos">在世界坐标中的位置.</param>
     void CreateCell(int row,int col, Vector3 pos){
-        //按坐标新建每一个cell
-        cells[row, col] = new HexCell(new Vector2(row, col), Instantiate(cellPrefab));
-        cells[row, col].cell.transform.position = new Vector3(pos.x + GameStaticData.ConstHorizonDis * col, pos.y + GameStaticData.MinInnerRadius * col, 0f);
-        cells[row, col].cell.transform.SetParent(transform, false);
-        cells[row,col].cell.name = "cell:" + row.ToString() + "," + col.ToString();
+        //按坐标新建每一个cell(数组下标按坐标,而非行列,所以row和col位置互换)
+        cells[col, row] = new HexCell(new Vector2(row, col), Instantiate(cellPrefab));
+        cells[col, row].cell.transform.position = new Vector3(pos.x + GameStaticData.ConstHorizonDis * col, pos.y + GameStaticData.MinInnerRadius * col, 0f);
+        cells[col, row].cell.transform.SetParent(transform, false);
+        cells[col, row].cell.name = "cell:" + col.ToString() + "," + row.ToString();
         //按照倍率调节图片缩放
-        cells[row, col].Img.transform.localScale = new Vector3(GameStaticData.Rates, GameStaticData.Rates,0f);
+        cells[col, row].Img.transform.localScale = new Vector3(GameStaticData.Rates, GameStaticData.Rates,0f);
         //显示cell的游戏坐标
         Text label = Instantiate(cellLabelPrefab);
         label.rectTransform.SetParent(gridCanvas.transform, false);
-        label.rectTransform.anchoredPosition = new Vector2(cells[row, col].cell.transform.position.x, cells[row, col].cell.transform.position.y);
-        label.text = row.ToString() + "," + col.ToString();
-        label.name = "(" + row.ToString() + "," + col.ToString() + ")";
+        label.rectTransform.anchoredPosition = new Vector2(cells[col, row].cell.transform.position.x, cells[col, row].cell.transform.position.y);
+        label.text = col.ToString() + "," + row.ToString();
+        label.name = "(" + col.ToString() + "," + row.ToString() + ")";
     }
 }
