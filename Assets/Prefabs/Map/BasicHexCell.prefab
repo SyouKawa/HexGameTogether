@@ -69,7 +69,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -6887754414677254516, guid: bd4c9d46eaee64364ac84c93a8565734,
+  m_Sprite: {fileID: 3581211524718732958, guid: bd4c9d46eaee64364ac84c93a8565734,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -90,7 +90,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 513429583732160726}
-  - component: {fileID: 8528713106292071760}
   m_Layer: 0
   m_Name: BasicHexCell
   m_TagString: Untagged
@@ -113,15 +112,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8528713106292071760
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 513429583732160728}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcbcfb4fe14ef41abbdc89511bce4a37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
