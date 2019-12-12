@@ -7,4 +7,20 @@ public class GameStaticData{
     public const float MaxOuterRadius = 1.7f * Rates;//最大外径
     public const float MinInnerRadius = 0.68f * Rates;//最小内径
     public const float ConstHorizonDis = 2.2f * Rates;//固定水平间距
+
+    public static Dictionary<string, float> FieldGenRate = new Dictionary<string, float> {
+        {"Moun",30},{"Lake",10},{"Forest",60},{"Plain",100}
+     };
+
+
+    /// <summary>
+    /// 地形分类
+    /// </summary>
+    public enum FieldType {
+        Mountain, //山地
+        Lake, //湖
+        Forest, // 森林
+        EdgeSea, //边境海(将地形环绕一周,非行动区)
+        Plain // 平原
+     }
 }
