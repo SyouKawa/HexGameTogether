@@ -2,16 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// 骰子 包含六个面
+/// </summary>
+public class Dice {
+    public List<DiceSides> sides;
+
+    /// <summary>
+    /// 返回投掷的结果
+    /// </summary>
+    public DiceSides GetResult() {
+        return sides[UnityEngine.Random.Range(0, 5)];
+    }
+}
+
 public class DiceControl : MonoBehaviour
 {
-    public Sprite sprite;
+    public DiceSides thisSide = DiceSides.蓝观察;
 
     // Start is called before the first frame update
     void Start()
     {
-        sprite = Resources.Load<Sprite>("hexGameIcon/0");
-
-        GetComponent<SpriteRenderer>().sprite = sprite;
+        GetComponent<SpriteRenderer>().sprite = BattleMode.Instance.LoadSprite(thisSide);
     }
 
     // Update is called once per frame
