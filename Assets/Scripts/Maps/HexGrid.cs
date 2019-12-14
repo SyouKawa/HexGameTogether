@@ -53,7 +53,10 @@ public class HexGrid : MonoBehaviour
         Sprite curImg = (Sprite)(FieldTiles[(int)curcell.type][Random.Range(0, FieldTiles[(int)curcell.type].Length)]);
         curcell.Img.GetComponent<SpriteRenderer>().sprite = curImg;
     }
-
+    /// <summary>
+    /// 随机产生一个地形类型
+    /// </summary>
+    /// <returns>The field by rates.</returns>
     GameStaticData.FieldType RandomFieldByRates()
     {
         int roll = Random.Range(0, 100);
@@ -83,6 +86,7 @@ public class HexGrid : MonoBehaviour
             Sprite curImg = (Sprite)(FieldTiles[3][Random.Range(0, FieldTiles[3].Length)]);
             cells[0, i].Img.GetComponent<SpriteRenderer>().sprite = curImg;
             cells[i,0].Img.GetComponent<SpriteRenderer>().sprite = curImg;
+            //TODO:后排换成纯水
             cells[width - 1, i].Img.GetComponent<SpriteRenderer>().sprite = curImg;
             cells[i, width - 1].Img.GetComponent<SpriteRenderer>().sprite = curImg;
         }
