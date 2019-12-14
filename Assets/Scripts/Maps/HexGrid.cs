@@ -85,10 +85,14 @@ public class HexGrid : MonoBehaviour
         for(int i=0;i<width ;i++) {
             Sprite curImg = (Sprite)(FieldTiles[3][Random.Range(0, FieldTiles[3].Length)]);
             cells[0, i].Img.GetComponent<SpriteRenderer>().sprite = curImg;
+            cells[0, i].SetImgOrder(-1);
             cells[i,0].Img.GetComponent<SpriteRenderer>().sprite = curImg;
+            cells[i,0].SetImgOrder(-1);
             //TODO:后排换成纯水
             cells[width - 1, i].Img.GetComponent<SpriteRenderer>().sprite = curImg;
+            cells[width - 1, i].SetImgOrder(-1);
             cells[i, width - 1].Img.GetComponent<SpriteRenderer>().sprite = curImg;
+            cells[i, width - 1].SetImgOrder(-1);
         }
     }
 
@@ -107,6 +111,13 @@ public class HexGrid : MonoBehaviour
     }
 
     /// <summary>
+    /// 调整地形的显示(由远及近,但低洼地形永不遮挡远处)
+    /// </summary>
+    void JustifyTileShow() {
+        
+     }
+
+    /// <summary>
     /// 创建一个单独的Cell
     /// </summary>
     /// <param name="row">所在行(45度方向坐标系的Y值).</param>
@@ -115,13 +126,17 @@ public class HexGrid : MonoBehaviour
     void CreateCell(int row,int col, Vector3 pos){
         //按坐标新建每一个cell(数组下标按坐标,而非行列,所以row和col位置互换)
         cells[col, row] = new HexCell(new Vector2(row, col), Instantiate(cellPrefab));
-        cells[col, row].cell.transform.position = new Vector3(pos.x + GameStaticData.ConstHorizonDis * col, pos.y + GameStaticData.MinInnerRadius * col, 0f);
+        // 随机地形及显示Tile
+        RandomGenerateField(cells[col, row]);
+        //调整坐标,并按照row+col之和修改z值保证屏幕远近的遮挡关系(如果为湖海,则调节orderinLayer为更低层级)
+        cells[col, row].cell.transform.position = new Vector3(pos.x + GameStaticData.ConstHorizonDis * col, pos.y + GameStaticData.MinInnerRadius * col, col + row);
+        if (cells[col,row].type == GameStaticData.FieldType.Lake) {
+            cells[col, row].SetImgOrder(-1);
+         }
         cells[col, row].cell.transform.SetParent(transform, false);
         cells[col, row].cell.name = "cell:" + col.ToString() + "," + row.ToString();
         //按照倍率调节图片缩放
         cells[col, row].Img.transform.localScale = new Vector3(GameStaticData.Rates, GameStaticData.Rates,0f);
-        // 随机地形及显示Tile
-        RandomGenerateField(cells[col, row]);
 
         //显示cell的游戏坐标
         Text label = Instantiate(cellLabelPrefab);

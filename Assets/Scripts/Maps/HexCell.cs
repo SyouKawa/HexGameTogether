@@ -21,4 +21,8 @@ public class HexCell
     public void SetFieldType(GameStaticData.FieldType _type) {
         type = _type;
      }
+
+    public void SetImgOrder(int order) {
+        Img.GetComponent<SpriteRenderer>().sortingOrder = order;
+    }
 }
