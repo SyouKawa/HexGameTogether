@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HexGrid : MonoBehaviour
+public class MapManager : MonoBehaviour
 {
+    public static MapManager Instance { get; private set; }
+
     //地图大小
     public int width;
     public int height;
@@ -21,9 +23,14 @@ public class HexGrid : MonoBehaviour
     //显示坐标图层
     Canvas gridCanvas;
 
-    HexCell[,] cells;
+    public HexCell[,] cells;
+
+    public Dictionary<int, HexCell> CellObjects;
+
     private void Awake()
     {
+        Instance = this;
+
         gridCanvas = GetComponentInChildren<Canvas>();
 
         cells = new HexCell[height , width];
@@ -37,7 +44,7 @@ public class HexGrid : MonoBehaviour
     /// <summary>
     /// 加载游戏需要的资源
     /// </summary>
-    void LoadRes() {
+    private void LoadRes() {
         //加载显示的Tile数组
         int length = System.Enum.GetValues(typeof(GameStaticData.FieldType)).Length;
         for(int i=0;i<length ;i++ ) {
@@ -46,7 +53,7 @@ public class HexGrid : MonoBehaviour
         }
     }
 
-    void RandomGenerateField(HexCell curcell) {
+    private void RandomGenerateField(HexCell curcell) {
         //为当前cell roll 一个地形
         curcell.SetFieldType(RandomFieldByRates());
         //为该地形roll一个显示Tile
@@ -126,6 +133,8 @@ public class HexGrid : MonoBehaviour
     void CreateCell(int row,int col, Vector3 pos){
         //按坐标新建每一个cell(数组下标按坐标,而非行列,所以row和col位置互换)
         cells[col, row] = new HexCell(new Vector2(row, col), Instantiate(cellPrefab));
+        //将cell加入Hash表,保证寻路时射线获取GameObject时,可按照Hash与cell对应
+        CellObjects.Add(cells[col, row].cell.GetHashCode(), cells[col, row]);
         // 随机地形及显示Tile
         RandomGenerateField(cells[col, row]);
         //调整坐标,并按照row+col之和修改z值保证屏幕远近的遮挡关系(如果为湖海,则调节orderinLayer为更低层级)
