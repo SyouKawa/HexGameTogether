@@ -4,19 +4,18 @@ using UnityEngine;
 
 public class PathManager : MonoBehaviour
 {
-    private static PathManager _instance;
-    public static PathManager Instance { get { return _instance; } }
+    public static PathManager Instance { get; private set; }
 
     private void Awake(){
-        _instance = this;
+        Instance = this;
     }
 
-    void Start()
+    private void Start()
     {
         
     }
 
-    void Update()
+    private void Update()
     {
         RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
