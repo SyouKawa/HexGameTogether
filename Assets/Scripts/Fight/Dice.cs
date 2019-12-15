@@ -26,85 +26,94 @@ public enum DiceSides {
     黄稳定,
     黄迅速,
     
-    工程路障,
-    火炮,
-    重力锤,
+    灰工程路障,
+    灰火炮,
+    灰重力锤,
+    灰空,
+
     炮弹,
     建材,
 }
 
-/// <summary>
-/// 人物可以组合出的技能,通常技能都是伴随人物
-/// 根据人物的特性从而可以进行组合 释放技能时很多时候都会消耗消耗品
-/// </summary>
-public class Skill {
-    /// <summary>
-    /// 名字
-    /// </summary>
-    public string name;
-    /// <summary>
-    /// 描述
-    /// </summary>
-    public string discrition;
-    /// <summary>
-    /// 释放的前提条件
-    /// </summary>
-    public List<DiceSides> needDices;
-    /// <summary>
-    /// 释放后发生的事情
-    /// </summary>
-    public virtual void Use() {
-
-    }
-}
-
-//火炮 + 能量1 + 弹药 可以释放强力射击
-public class A1Skill : Skill {
-    public A1Skill() {
-        name = "精准射击";
-        discrition = "强力射击";
-        needDices = new List<DiceSides>() { DiceSides.火炮, DiceSides.紫能量I, DiceSides.炮弹 };
-    }
-    public override void Use() {
-
-    }
-}
-
 
 /// <summary>
-/// 精准的符合一定为1种或小于1种. 
-/// 如果两个技能的前置条件完全一样,那么他们互斥,不可能同时出现,通常可以根据技能稀有度进行排序,只能携带更强的技能
+/// 骰子 包含六个面
 /// </summary>
-public class SkillSearchResult {
-    //释放的结果 小于等于1种
-    Skill Result;
-    //可能参考的结果 都有可能
-    List<Skill> Reference;
-}
+public class Dice {
+    public List<DiceSides> sides = new List<DiceSides>();
 
-/// <summary>
-/// 负责释放技能的类
-/// </summary>
-public class SkillCaster {
+    public Dice() { }
 
-    /// <summary>
-    /// 所有当前被选择的资源
-    /// </summary>
-    public List<DiceSides> SelectedSides;
+    public Dice(DiceSides t) {
+        AddSide(t);
+    }
+
+    public Dice(DiceSides t, int count) {
+        AddSide(t, count);
+    }
 
     /// <summary>
-    /// 所有可供释放的技能
+    /// 添加指定个某面
     /// </summary>
-    public List<Skill> TotalSkills;
+    public Dice AddSide(DiceSides t, int count) {
+        //溢出无条件返回
+        if (count + sides.Count > 6)
+            return this;
+        for (int i = 0; i < count; i++) {
+            sides.Add(t);
+        }
+        return this;
+    }
 
     /// <summary>
-    /// 根据当前已经选择的词条,可以释放的技能 
+    /// 使用某面填充剩余面
     /// </summary>
-    public SkillSearchResult CanCastSkill() {
+    public Dice AddSide(DiceSides t) {
+        int count = 6 - sides.Count;
 
+        for (int i = 0; i < count; i++) {
+            sides.Add(t);
+        }
+        return this;
+    }
 
+    /// <summary>
+    /// 返回投掷的结果
+    /// </summary>
+    public DiceSides GetResult() {
+        return sides[UnityEngine.Random.Range(0, 5)];
+    }
 
-        SkillSearchResult result = new SkillSearchResult();
+    /*
+     * 己方骰子组
+     * 紫色半满 * 2 (3 0)
+     * 黄色半满 * 2 (2 2 0)
+     * 蓝色半满 * 1
+     * 炮 * 2 (4 0)
+     * 路障 * 1 (4 0)
+     * 弹药 * 1 (6)
+     * 建材 * 1 (6)
+    */
+    public static List<Dice> GetTestDices() {
+        List<Dice> result = new List<Dice>();
+        Dice energyHalf = new Dice(DiceSides.紫能量I, 3).AddSide(DiceSides.紫空);
+        Dice machinHalf = new Dice(DiceSides.黄稳定, 2).AddSide(DiceSides.黄迅速, 2).AddSide(DiceSides.黄空);
+        Dice intHalf = new Dice(DiceSides.蓝智慧, 2).AddSide(DiceSides.蓝观察, 2).AddSide(DiceSides.蓝空);
+        result.Add(energyHalf);
+        result.Add(energyHalf);
+        result.Add(machinHalf);
+        result.Add(machinHalf);
+        result.Add(intHalf);
+
+        result.Add(new Dice(DiceSides.灰工程路障, 4).AddSide(DiceSides.灰空));
+        result.Add(new Dice(DiceSides.灰火炮, 4).AddSide(DiceSides.灰空));
+        result.Add(new Dice(DiceSides.灰火炮, 4).AddSide(DiceSides.灰空));
+
+        result.Add(new Dice(DiceSides.炮弹));
+        result.Add(new Dice(DiceSides.建材));
+
         return result;
     }
 }
+
+
