@@ -3,19 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-/// <summary>
-/// 骰子 包含六个面
-/// </summary>
-public class Dice {
-    public List<DiceSides> sides;
-
-    /// <summary>
-    /// 返回投掷的结果
-    /// </summary>
-    public DiceSides GetResult() {
-        return sides[UnityEngine.Random.Range(0, 5)];
-    }
-}
 
 public class DiceControl : MonoBehaviour
 {
