@@ -7,6 +7,8 @@ public class MapManager : MonoBehaviour
 {
     public static MapManager Instance { get; private set; }
 
+    public Vector2Int testFrom;
+
     //地图大小
     public int width;
     public int height;
@@ -32,7 +34,7 @@ public class MapManager : MonoBehaviour
         Instance = this;
 
         gridCanvas = GetComponentInChildren<Canvas>();
-
+        CellObjects = new Dictionary<int, HexCell>();
         cells = new HexCell[height , width];
 
         LoadRes();
@@ -48,7 +50,6 @@ public class MapManager : MonoBehaviour
         //加载显示的Tile数组
         int length = System.Enum.GetValues(typeof(GameStaticData.FieldType)).Length;
         for(int i=0;i<length ;i++ ) {
-            print("Sprites/tiles_" + ((GameStaticData.FieldType)i).ToString() + "_colored");
             FieldTiles.Add(Resources.LoadAll("Sprites/tiles_"+((GameStaticData.FieldType)i).ToString()+"_colored", typeof(Sprite)));
         }
     }
@@ -57,7 +58,7 @@ public class MapManager : MonoBehaviour
         //为当前cell roll 一个地形
         curcell.SetFieldType(RandomFieldByRates());
         //为该地形roll一个显示Tile
-        Sprite curImg = (Sprite)(FieldTiles[(int)curcell.type][Random.Range(0, FieldTiles[(int)curcell.type].Length)]);
+        Sprite curImg = (Sprite)(FieldTiles[(int)curcell.type][GameStaticData.random.Next(0, FieldTiles[(int)curcell.type].Length)]);
         curcell.Img.GetComponent<SpriteRenderer>().sprite = curImg;
     }
     /// <summary>
@@ -66,8 +67,7 @@ public class MapManager : MonoBehaviour
     /// <returns>The field by rates.</returns>
     GameStaticData.FieldType RandomFieldByRates()
     {
-        int roll = Random.Range(0, 100);
-        print("cur roll" + roll);
+        int roll = GameStaticData.random.Next(0, 100);
 
         if (roll <= GameStaticData.FieldGenRate["Lake"])
         {
@@ -93,13 +93,17 @@ public class MapManager : MonoBehaviour
             Sprite curImg = (Sprite)(FieldTiles[3][Random.Range(0, FieldTiles[3].Length)]);
             cells[0, i].Img.GetComponent<SpriteRenderer>().sprite = curImg;
             cells[0, i].SetImgOrder(-1);
+            cells[0, i].type = GameStaticData.FieldType.EdgeSea;
             cells[i,0].Img.GetComponent<SpriteRenderer>().sprite = curImg;
             cells[i,0].SetImgOrder(-1);
+            cells[i,0].type = GameStaticData.FieldType.EdgeSea;
             //TODO:后排换成纯水
             cells[width - 1, i].Img.GetComponent<SpriteRenderer>().sprite = curImg;
             cells[width - 1, i].SetImgOrder(-1);
+            cells[width - 1, i].type = GameStaticData.FieldType.EdgeSea;
             cells[i, width - 1].Img.GetComponent<SpriteRenderer>().sprite = curImg;
             cells[i, width - 1].SetImgOrder(-1);
+            cells[i, width - 1].type = GameStaticData.FieldType.EdgeSea;
         }
     }
 
@@ -132,8 +136,9 @@ public class MapManager : MonoBehaviour
     /// <param name="pos">在世界坐标中的位置.</param>
     void CreateCell(int row,int col, Vector3 pos){
         //按坐标新建每一个cell(数组下标按坐标,而非行列,所以row和col位置互换)
-        cells[col, row] = new HexCell(new Vector2(row, col), Instantiate(cellPrefab));
+        cells[col, row] = new HexCell(new Vector2Int(col, row), Instantiate(cellPrefab));
         //将cell加入Hash表,保证寻路时射线获取GameObject时,可按照Hash与cell对应
+        print(cells[col, row].cell.GetHashCode()+"--"+ cells[col, row].cell.name);
         CellObjects.Add(cells[col, row].cell.GetHashCode(), cells[col, row]);
         // 随机地形及显示Tile
         RandomGenerateField(cells[col, row]);
@@ -144,6 +149,7 @@ public class MapManager : MonoBehaviour
          }
         cells[col, row].cell.transform.SetParent(transform, false);
         cells[col, row].cell.name = "cell:" + col.ToString() + "," + row.ToString();
+        print(cells[col, row].cell.GetHashCode() + "-=-" + cells[col, row].cell.name);
         //按照倍率调节图片缩放
         cells[col, row].Img.transform.localScale = new Vector3(GameStaticData.Rates, GameStaticData.Rates,0f);
 
@@ -154,4 +160,26 @@ public class MapManager : MonoBehaviour
         label.text = col.ToString() + "," + row.ToString();
         label.name = "(" + col.ToString() + "," + row.ToString() + ")";
     }
+
+    /// <summary>
+    /// 获取以传入cell为中心的相邻可行进cells
+    /// </summary>
+    public List<HexCell> AdjacentHex(HexCell centercell) {
+        int x = centercell.MapPos.x;
+        int y = centercell.MapPos.y;
+        List<HexCell> adj = new List<HexCell> {
+            cells[x + 1,y + 1], 
+            cells[x - 1, y - 1], 
+            cells[x , y + 1], 
+            cells[x , y - 1],
+            cells[x + 1 , y],
+            cells[x - 1 , y] };
+        for (int i = adj.Count - 1;i >= 0 ;i-- ) {
+            //如果属于不能在当前载具情况下行动的边境海,就将其剔除
+            if(adj[i].type == GameStaticData.FieldType.EdgeSea|| adj[i].type == GameStaticData.FieldType.Lake) {
+                adj.Remove(adj[i]);
+             }
+        }
+        return adj;
+     }
 }
