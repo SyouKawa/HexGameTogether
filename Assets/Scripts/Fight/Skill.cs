@@ -21,50 +21,13 @@ public class Skill {
     /// <summary>
     /// 释放的前提条件
     /// </summary>
-    public List<DiceSides> needSides;
-
-    protected BattleMode battle;
+    public List<DiceSide> needSides;
     /// <summary>
-    /// 释放后发生的事情
+    /// 绑定的释放逻辑,暂时使用ks语言来执行
     /// </summary>
-    public virtual void Use() {
+    public string logic;
 
-    }
-}
-/*
- * 技能组
- * 火炮开火 2伤 炮+弹
- * 迅速射击 2伤 炮+弹+红技巧 射击后获得炮*1
- * 强力射击 4伤 炮+弹+能量1
- * 爆炸射击 4伤 炮+弹+红力量
- * 精准射击 2伤 炮+黄稳定
- * 脆弱路障 1盾 路障
- * 能量屏障 2盾 路障+能量1
- * 强效路障 4盾 路障+建材
- * 坚固路障 3盾 路障+黄迅速+蓝观察
-*/
 
-public class A1Skill : Skill {
-    public A1Skill() {
-        name = "火炮开火";
-        discrition = "2伤 炮+弹";
-        needSides = new List<DiceSides>() { DiceSides.灰火炮, DiceSides.炮弹 };
-    }
-    public override void Use() {
-        battle.AttackEnemy(2);
-    }
-}
-
-public class A2Skill : Skill {
-    public A2Skill() {
-        name = "迅速射击";
-        discrition = "2伤 炮+弹+红技巧 射击后获得炮*1";
-        needSides = new List<DiceSides>() { DiceSides.灰火炮, DiceSides.炮弹, DiceSides.红技巧};
-    }
-    public override void Use() {
-        battle.AttackEnemy(2);
-        battle.AddDice(new Dice(DiceSides.灰火炮, 4).AddSide(DiceSides.灰空));
-    }
 }
 
 
@@ -83,24 +46,51 @@ public class SkillSearchResult {
 /// 负责释放技能的类
 /// </summary>
 public class SkillCaster {
-    /// <summary>
-    /// 所有当前被选择的资源
-    /// </summary>
-    public List<DiceSides> SelectedSides;
 
-    /// <summary>
-    /// 所有可供释放的技能
-    /// </summary>
-    public List<Skill> TotalSkills;
+    private KSInterpreter<KSHelper> interpreter;
+    public SkillCaster() {
+        interpreter = new KSInterpreter<KSHelper>(new KSHelper());
+    }
+    public SkillSearchResult Result;
+
+    public void Select() {
+
+    }
 
     /// <summary>
     /// 根据当前已经选择的词条,可以释放的技能 
     /// </summary>
     public SkillSearchResult CanCastSkill() {
-
-
-
         SkillSearchResult result = new SkillSearchResult();
         return result;
     }
+
+    public void Cast(Skill skill) {
+        interpreter.Run(skill.logic);
+    }
+}
+
+public class KSHelper {
+    private BattleMode battle;
+
+    public KSHelper() {
+        battle = BattleMode.Instance;
+    }
+
+    #region 技能的释放逻辑,用于供ks调用
+    public void Attack(int damage) {
+        battle.EnemyHP -= damage;
+    }
+
+    /// <summary>
+    /// 临时增加一个骰子
+    /// </summary>
+    public void AddDice() {
+        new Dice(DiceSide.灰火炮, 4).AddSide(DiceSide.灰空);
+    }
+
+    public void Shield(int shield) {
+        battle.PlayerShield += shield;
+    }
+    #endregion
 }

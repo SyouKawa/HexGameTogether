@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
 /// 骰子可以投出的面的种类
 /// 目前对应的贴图和spritesheet的顺序是一样的.
 /// </summary>
-public enum DiceSides {
+public enum DiceSide {
     紫能量I,
     紫能量II,
     紫空,
@@ -25,11 +21,12 @@ public enum DiceSides {
     黄空,
     黄稳定,
     黄迅速,
-    
+
+    灰空,
     灰工程路障,
     灰火炮,
     灰重力锤,
-    灰空,
+
 
     炮弹,
     建材,
@@ -39,26 +36,128 @@ public enum DiceSides {
 /// <summary>
 /// 骰子 包含六个面
 /// </summary>
-public class Dice {
-    public List<DiceSides> sides = new List<DiceSides>();
+public class Dice  {
+    public class DiceObj {
+        private Dice dice;
 
-    public Dice() { }
+        public GameObject sourceObj;
+        public SpriteRenderer image;
+        public SpriteRenderer redImage;
+        public SpriteRenderer greenImage;
 
-    public Dice(DiceSides t) {
-        AddSide(t);
+        public Transform transform { get => sourceObj.transform; }
+
+        public DiceObj(Dice dice) {
+            this.dice = dice;
+            sourceObj = ObjectManager.GetInstantiate(dice);
+            redImage = sourceObj.transform.GetChild(0).GetComponent<SpriteRenderer>();
+            greenImage = sourceObj.transform.GetChild(1).GetComponent<SpriteRenderer>();
+            image = sourceObj.transform.GetChild(2).GetComponent<SpriteRenderer>();
+        }
+
+        ~DiceObj() {
+            ObjectManager.ReturnInstantiate<Dice>(sourceObj);
+        }
+
     }
 
-    public Dice(DiceSides t, int count) {
+    public DiceObj obj;
+
+    public void CreateGameObj() {
+        obj = new DiceObj(this);
+    }
+    public void DeleteGameObj() {
+        obj = null;
+    }
+
+    private DiceSide topSide;
+    /// <summary>
+    /// 朝上生效的一个面,更改它会自动更改贴图
+    /// </summary>
+    public DiceSide TopSide {
+        set {
+            topSide = value;
+            if(obj != null)
+                obj.image.sprite = BattleMode.Instance.LoadSprite(topSide);
+        } get {
+            return topSide;
+        } }
+
+
+    public enum Type {
+        Available,
+        UnAvailable,
+        Selected,
+        Default
+    }
+    private Type selectType;
+    /// <summary>
+    /// 边框模式,更改它会自动更改边框
+    /// </summary>
+    public Type SelectType {
+        get { return selectType; }
+        set {
+            selectType = value;
+            if (obj == null)
+                return;
+            switch (selectType) {
+                case Type.Available:
+                    obj.redImage.enabled = false;
+                    obj.greenImage.enabled = true;
+                    break;
+                case Type.UnAvailable:
+                    obj.redImage.enabled = true;
+                    obj.greenImage.enabled = false;
+                    break;
+                case Type.Default:
+                    obj.redImage.enabled = false;
+                    obj.greenImage.enabled = false;
+                    break;
+            }
+        }
+    }
+
+
+
+
+    /// <summary>
+    /// 重新投掷骰子 会改变TopSide的值
+    /// </summary>
+    public DiceSide Random() {
+        if (sides.Count != 6) {
+            Debug.LogError("骰子的面不为6 请检查错误");
+            return TopSide;
+        }
+        TopSide = sides[UnityEngine.Random.Range(0, 5)];
+        
+        return TopSide;
+    }
+
+    #region 骰子的面和设置方法
+    public List<DiceSide> sides = new List<DiceSide>();
+
+    /// <summary>
+    /// 禁止创建空骰子
+    /// </summary>
+    public Dice(DiceSide t) {
+        AddSide(t);
+        TopSide = sides[0];
+    }
+
+    public Dice(DiceSide t, int count) {
         AddSide(t, count);
+        TopSide = sides[0];
     }
 
     /// <summary>
     /// 添加指定个某面
     /// </summary>
-    public Dice AddSide(DiceSides t, int count) {
+    public Dice AddSide(DiceSide t, int count) {
         //溢出无条件返回
-        if (count + sides.Count > 6)
+        if (count + sides.Count > 6) {
             return this;
+        }
+
         for (int i = 0; i < count; i++) {
             sides.Add(t);
         }
@@ -68,7 +167,7 @@ public class Dice {
     /// <summary>
     /// 使用某面填充剩余面
     /// </summary>
-    public Dice AddSide(DiceSides t) {
+    public Dice AddSide(DiceSide t) {
         int count = 6 - sides.Count;
 
         for (int i = 0; i < count; i++) {
@@ -77,43 +176,9 @@ public class Dice {
         return this;
     }
 
-    /// <summary>
-    /// 返回投掷的结果
-    /// </summary>
-    public DiceSides GetResult() {
-        return sides[UnityEngine.Random.Range(0, 5)];
-    }
+    #endregion
 
-    /*
-     * 己方骰子组
-     * 紫色半满 * 2 (3 0)
-     * 黄色半满 * 2 (2 2 0)
-     * 蓝色半满 * 1
-     * 炮 * 2 (4 0)
-     * 路障 * 1 (4 0)
-     * 弹药 * 1 (6)
-     * 建材 * 1 (6)
-    */
-    public static List<Dice> GetTestDices() {
-        List<Dice> result = new List<Dice>();
-        Dice energyHalf = new Dice(DiceSides.紫能量I, 3).AddSide(DiceSides.紫空);
-        Dice machinHalf = new Dice(DiceSides.黄稳定, 2).AddSide(DiceSides.黄迅速, 2).AddSide(DiceSides.黄空);
-        Dice intHalf = new Dice(DiceSides.蓝智慧, 2).AddSide(DiceSides.蓝观察, 2).AddSide(DiceSides.蓝空);
-        result.Add(energyHalf);
-        result.Add(energyHalf);
-        result.Add(machinHalf);
-        result.Add(machinHalf);
-        result.Add(intHalf);
 
-        result.Add(new Dice(DiceSides.灰工程路障, 4).AddSide(DiceSides.灰空));
-        result.Add(new Dice(DiceSides.灰火炮, 4).AddSide(DiceSides.灰空));
-        result.Add(new Dice(DiceSides.灰火炮, 4).AddSide(DiceSides.灰空));
-
-        result.Add(new Dice(DiceSides.炮弹));
-        result.Add(new Dice(DiceSides.建材));
-
-        return result;
-    }
 }
 
 

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3129ba78d85fdb245a74cd807ad9b2aa
+guid: 0efe6d1cf28c5f548a76be2055f34b4b
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -38,6 +38,27 @@ TextureImporter:
   - first:
       213: 5222547359987953877
     second: hexGameIcon_11
+  - first:
+      213: -6309011060070542301
+    second: hexGameIcon_12
+  - first:
+      213: 1487921079042042469
+    second: hexGameIcon_13
+  - first:
+      213: 2886321106360233075
+    second: hexGameIcon_14
+  - first:
+      213: 8496817196391571834
+    second: hexGameIcon_15
+  - first:
+      213: -7540524336577389607
+    second: hexGameIcon_16
+  - first:
+      213: -4070973762232775989
+    second: hexGameIcon_17
+  - first:
+      213: -5624745425330734517
+    second: hexGameIcon_18
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -136,7 +157,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 539c21d59f21c6047b11583eb2d15da1
+      spriteID: 51d1cd142605c3a498d7269a4a107688
       internalID: -3702806657024361297
       vertices: []
       indices: 
@@ -157,7 +178,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0200e463d4c717e4bbfb22afd21034d7
+      spriteID: 8ebe3429be82d694fa597c56f0f66ef6
       internalID: -8868387065271042175
       vertices: []
       indices: 
@@ -178,7 +199,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bff8f5bd6bfb46740a8be3bcc763c6d9
+      spriteID: 69981bf0b971ace40924de12df527ef6
       internalID: -8091205405271268385
       vertices: []
       indices: 
@@ -199,7 +220,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 991ae87746c9128499e4fe803a39ed95
+      spriteID: 8cac66a552a300f40a22323aad103319
       internalID: -7632300464107216702
       vertices: []
       indices: 
@@ -220,7 +241,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 02060ef2785cdb742bb560aa1378879e
+      spriteID: 452f716b528514a4fb6628991117c9a5
       internalID: -8547749095082441194
       vertices: []
       indices: 
@@ -241,7 +262,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b803fc27af7d9034e998574bf2117ce3
+      spriteID: 99d53e38ad078ae479833f527ddd4713
       internalID: -4525973682060953631
       vertices: []
       indices: 
@@ -262,7 +283,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 42c2a1fce7d19554eb22ab69ca259616
+      spriteID: 0ee0f18a60212a7458b4318dfa7c0560
       internalID: -3755974042467447913
       vertices: []
       indices: 
@@ -283,7 +304,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 01db255ade9aedc40ac97c6a20982ee3
+      spriteID: cc4490bed43c8ae478eed28ac8aed92e
       internalID: -892388331161346950
       vertices: []
       indices: 
@@ -304,7 +325,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cd69c742d97d8fc4a8d0ba034d2393bf
+      spriteID: cae19dc723590614595f3d4394393409
       internalID: -2646044187820147966
       vertices: []
       indices: 
@@ -325,7 +346,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b00d76cc46ba4604380f67f5e7314b8b
+      spriteID: b56d749f2fa437341a50889730e85561
       internalID: -5693344743769777489
       vertices: []
       indices: 
@@ -346,7 +367,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eb9abc5f12a2d4c45b7d22d505ce08f1
+      spriteID: 41993fcf75a47ad489d438766bb86dff
       internalID: -1128771201163956553
       vertices: []
       indices: 
@@ -367,8 +388,155 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7f20fd605a282564abd7e3a4fd0f792c
+      spriteID: 5c85c1779ba80f84c8f5e8f64c65da30
       internalID: 5222547359987953877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hexGameIcon_12
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: decedfbe53c25244e93c49faeae1d8b8
+      internalID: -6309011060070542301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hexGameIcon_13
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08327d6612cf9ac4bb6ac3e41c77686d
+      internalID: 1487921079042042469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hexGameIcon_14
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ad842dbd93c4cf4a83972a7f76fefc7
+      internalID: 2886321106360233075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hexGameIcon_15
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0488f3b16262b2408f537af4eb733cc
+      internalID: 8496817196391571834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hexGameIcon_16
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a0bdb4b43881634798503ea553e14f4
+      internalID: -7540524336577389607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hexGameIcon_17
+      rect:
+        serializedVersion: 2
+        x: 544
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7fc865cdb5a42344a143b09386ee4f5
+      internalID: -4070973762232775989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hexGameIcon_18
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a27266c9731f3e64bb93899e535dca7d
+      internalID: -5624745425330734517
       vertices: []
       indices: 
       edges: []
