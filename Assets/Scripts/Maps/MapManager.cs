@@ -138,7 +138,6 @@ public class MapManager : MonoBehaviour
         //按坐标新建每一个cell(数组下标按坐标,而非行列,所以row和col位置互换)
         cells[col, row] = new HexCell(new Vector2Int(col, row), Instantiate(cellPrefab));
         //将cell加入Hash表,保证寻路时射线获取GameObject时,可按照Hash与cell对应
-        print(cells[col, row].cell.GetHashCode()+"--"+ cells[col, row].cell.name);
         CellObjects.Add(cells[col, row].cell.GetHashCode(), cells[col, row]);
         // 随机地形及显示Tile
         RandomGenerateField(cells[col, row]);
@@ -149,7 +148,6 @@ public class MapManager : MonoBehaviour
          }
         cells[col, row].cell.transform.SetParent(transform, false);
         cells[col, row].cell.name = "cell:" + col.ToString() + "," + row.ToString();
-        print(cells[col, row].cell.GetHashCode() + "-=-" + cells[col, row].cell.name);
         //按照倍率调节图片缩放
         cells[col, row].Img.transform.localScale = new Vector3(GameStaticData.Rates, GameStaticData.Rates,0f);
 
@@ -161,25 +159,4 @@ public class MapManager : MonoBehaviour
         label.name = "(" + col.ToString() + "," + row.ToString() + ")";
     }
 
-    /// <summary>
-    /// 获取以传入cell为中心的相邻可行进cells
-    /// </summary>
-    public List<HexCell> AdjacentHex(HexCell centercell) {
-        int x = centercell.MapPos.x;
-        int y = centercell.MapPos.y;
-        List<HexCell> adj = new List<HexCell> {
-            cells[x + 1,y + 1], 
-            cells[x - 1, y - 1], 
-            cells[x , y + 1], 
-            cells[x , y - 1],
-            cells[x + 1 , y],
-            cells[x - 1 , y] };
-        for (int i = adj.Count - 1;i >= 0 ;i-- ) {
-            //如果属于不能在当前载具情况下行动的边境海,就将其剔除
-            if(adj[i].type == GameStaticData.FieldType.EdgeSea|| adj[i].type == GameStaticData.FieldType.Lake) {
-                adj.Remove(adj[i]);
-             }
-        }
-        return adj;
-     }
 }
