@@ -31,7 +31,6 @@ public class MapManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        //ObjectManager.AddPool(typeof(HexCell), cellPrefab);
 
         gridCanvas = GetComponentInChildren<Canvas>();
         CellObjects = new Dictionary<int, HexCell>();

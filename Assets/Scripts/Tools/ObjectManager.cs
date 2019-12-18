@@ -23,35 +23,28 @@ public class AddPool : Attribute {
 
 
 /// <summary>
-/// 框架类和Unity类的双向绑定器,纯静态类
-/// 框架类: 不和Unity挂钩的自定义类 Unity类: Unity对象,二者强制一对一绑定
-/// Collider必须挂在最上层,否则检测不到(可能考虑对自定义获取的支持)
-/// 使用说明: 
-/// 1.使用AddPool添加和绑定对象池
-/// 2.使用GetInstantiate获取实例
-/// 3.使用ReturnInstantiate删除实例
-/// 4.使用GetClass通过实例反向获取框架对象
+/// 对象池数据源
 /// </summary>
-public static class ObjectManager {
+public class ObjectPoolData {
     /// <summary>
     /// 通过类型找到对应的ObjectPool
     /// </summary>
-    private static Dictionary<System.Type, ObjectPool> PoolDic = new Dictionary<System.Type, ObjectPool>();
+    private Dictionary<System.Type, ObjectPool> PoolDic = new Dictionary<System.Type, ObjectPool>();
 
     /// <summary>
     /// 将GameObject翻译成类型
     /// </summary>
-    private static readonly Dictionary<System.Type, Dictionary<GameObject, object>> data = new Dictionary<System.Type, Dictionary<GameObject, object>>();
+    private readonly Dictionary<System.Type, Dictionary<GameObject, object>> data = new Dictionary<System.Type, Dictionary<GameObject, object>>();
 
     /// <summary>
     /// 对象池新建的根节点,仍在屏幕外面.
     /// </summary>
-    public static Transform poolRootTransform;
+    public Transform poolRootTransform;
 
     /// <summary>
     /// 将AddPool特性的类自动建池
     /// </summary>
-    public static void InitPool() {
+    public void InitPool() {
         //Type[] entryTypes = Assembly.GetEntryAssembly().GetTypes();
         Type[] currentTypes = Assembly.GetExecutingAssembly().GetTypes();
 
@@ -71,7 +64,7 @@ public static class ObjectManager {
     /// </summary>
     /// <param name="type">对象绑定的框架类类型</param>
     /// <param name="path">要建池的对象</param>
-    public static void AddPool(System.Type type, GameObject gameObject) {
+    public void AddPool(System.Type type, GameObject gameObject) {
         if (PoolDic.ContainsKey(type)) {
             Debug.LogError("这个池子已经被建立过了,不能重复建立." + type.ToString());
         }
@@ -81,7 +74,7 @@ public static class ObjectManager {
         node.localPosition = Vector3.zero;
         node.gameObject.SetActive(false);
         //2 新建对象池
-        ObjectPool pool = new ObjectPool(type, gameObject, node);
+        ObjectPool pool = new ObjectPool(type, gameObject, node,this);
         PoolDic.Add(type, pool);
         //3 添加新的反向绑定词典
         data.Add(type, new Dictionary<GameObject, object>());
@@ -91,14 +84,14 @@ public static class ObjectManager {
     /// 从对象池中获取需要提供框架类的对象来进行双向绑定
     /// 会自动识别类型返回需要的GameObject
     /// </summary>
-    public static GameObject GetInstantiate(object con) {
+    public GameObject GetInstantiate(object con) {
         return PoolDic[con.GetType()].GetInstantiate(con);
     }
 
     /// <summary>
     /// 需要提供框架类型,还回对象
     /// </summary>
-    public static void ReturnInstantiate<T>(GameObject obj) {
+    public void ReturnInstantiate<T>(GameObject obj) {
         PoolDic[typeof(T)].ReturnInstantiate(obj);
     }
 
@@ -108,7 +101,7 @@ public static class ObjectManager {
     /// <typeparam name="T">要获取的框架类型</typeparam>
     /// <param name="gameObject"></param>
     /// <returns></returns>
-    public static T GetClass<T>(GameObject gameObject) where T : class {
+    public T GetClass<T>(GameObject gameObject) where T : class {
         Dictionary<GameObject, object> dic = data[typeof(T)];
         if (dic.ContainsKey(gameObject)) {
             return dic[gameObject] as T;
@@ -149,10 +142,12 @@ public static class ObjectManager {
         /// </summary>
         public Transform PoolNode;
 
-        public ObjectPool(System.Type type, GameObject obj, Transform node) {
+        private ObjectPoolData manager;
+        public ObjectPool(System.Type type, GameObject obj, Transform node,ObjectPoolData objectManager) {
             this.type = type;
             this.GamePrefeb = obj;
             this.PoolNode = node;
+            manager = objectManager;
         }
 
         private void Create() {
@@ -179,7 +174,7 @@ public static class ObjectManager {
             ObjPoolActive.Add(obj);
 
             //设置对象词典
-            data[type].Add(obj, con);
+            manager.data[type].Add(obj, con);
 
             return obj;
         }
@@ -193,7 +188,7 @@ public static class ObjectManager {
             obj.transform.SetParent(PoolNode);
             ObjPoolSleep.Add(obj);
             //删除对象词典
-            data[type].Remove(obj);
+            manager.data[type].Remove(obj);
         }
     }
 
