@@ -1,9 +1,26 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using UnityEngine;
 
 /*
  * 
  */
+
+
+/// <summary>
+/// 一种新的初始化方式,通过挂载这个特性来对某个类进行建池
+/// </summary>
+[AttributeUsage(AttributeTargets.Class)]
+public class AddPool : Attribute {
+    public string path;
+
+    public AddPool(string path) {
+        this.path = path;
+    }
+}
+
 
 /// <summary>
 /// 框架类和Unity类的双向绑定器,纯静态类
@@ -29,14 +46,32 @@ public static class ObjectManager {
     /// <summary>
     /// 对象池新建的根节点,仍在屏幕外面.
     /// </summary>
-    public static Transform poolRootTransform = Global.Instance.transform;
+    public static Transform poolRootTransform;
+
+    /// <summary>
+    /// 将AddPool特性的类自动建池
+    /// </summary>
+    public static void InitPool() {
+        //Type[] entryTypes = Assembly.GetEntryAssembly().GetTypes();
+        Type[] currentTypes = Assembly.GetExecutingAssembly().GetTypes();
+
+        List<Type> allTypes = currentTypes.ToList();
+        //allTypes.AddRange();
+
+        foreach (Type type in allTypes) {
+            AddPool poolAtr = type.GetCustomAttribute<AddPool>();
+            if (poolAtr != null) {
+                AddPool(type, Resources.Load<GameObject>(poolAtr.path));
+            }
+        }
+    }
 
     /// <summary>
     /// 建立对象池,对象池通过框架类的类型绑定
     /// </summary>
     /// <param name="type">对象绑定的框架类类型</param>
     /// <param name="path">要建池的对象</param>
-    public static void AddPool(System.Type type,GameObject gameObject) {
+    public static void AddPool(System.Type type, GameObject gameObject) {
         if (PoolDic.ContainsKey(type)) {
             Debug.LogError("这个池子已经被建立过了,不能重复建立." + type.ToString());
         }
@@ -46,7 +81,7 @@ public static class ObjectManager {
         node.localPosition = Vector3.zero;
         node.gameObject.SetActive(false);
         //2 新建对象池
-        ObjectPool pool = new ObjectPool(type, gameObject,node);
+        ObjectPool pool = new ObjectPool(type, gameObject, node);
         PoolDic.Add(type, pool);
         //3 添加新的反向绑定词典
         data.Add(type, new Dictionary<GameObject, object>());
@@ -74,9 +109,10 @@ public static class ObjectManager {
     /// <param name="gameObject"></param>
     /// <returns></returns>
     public static T GetClass<T>(GameObject gameObject) where T : class {
-        var dic = data[typeof(T)];
-        if (dic.ContainsKey(gameObject))
+        Dictionary<GameObject, object> dic = data[typeof(T)];
+        if (dic.ContainsKey(gameObject)) {
             return dic[gameObject] as T;
+        }
         else {
             Debug.LogError("未找到框架类" + typeof(T).Name);
             return null;
@@ -87,11 +123,11 @@ public static class ObjectManager {
     /// 一个对象池,可能不是那么好用
     /// </summary>
     /// <typeparam name="T">对象池绑定的框架类的类型</typeparam>
-    class ObjectPool {
+    private class ObjectPool {
         /// <summary>
         /// 绑定的框架类的类型
         /// </summary>
-        private System.Type type;
+        private readonly System.Type type;
 
         /// <summary>
         /// Unity对象的类型一定是GameObject
@@ -120,7 +156,7 @@ public static class ObjectManager {
         }
 
         private void Create() {
-            GameObject obj = Object.Instantiate(GamePrefeb, PoolNode);
+            GameObject obj = UnityEngine.Object.Instantiate(GamePrefeb, PoolNode);
             ObjPoolSleep.Add(obj);
             obj.SetActive(false);
         }
@@ -132,7 +168,7 @@ public static class ObjectManager {
             if (ObjPoolSleep.Count == 0) {
                 Create();
             }
-            var em = ObjPoolSleep.GetEnumerator();
+            HashSet<GameObject>.Enumerator em = ObjPoolSleep.GetEnumerator();
             em.MoveNext();
             //取出对象
             GameObject obj = em.Current;

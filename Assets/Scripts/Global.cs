@@ -8,6 +8,7 @@ public class Global : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-
+        ObjectManager.poolRootTransform = transform;
+        ObjectManager.InitPool();
     }
 }

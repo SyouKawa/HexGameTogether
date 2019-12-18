@@ -193,7 +193,6 @@ public class BattleMode : MonoBehaviour {
     * 建材 * 1 (6)
    */
     public static List<Dice> GetTestDices() {
-        ObjectManager.AddPool(typeof(Dice), Resources.Load<GameObject>("Prefabs/Fight/DiceObj"));
 
         List<Dice> result = new List<Dice>();
         Dice EnergyHalf() => new Dice(DiceSide.紫能量I, 3).AddSide(DiceSide.紫空);

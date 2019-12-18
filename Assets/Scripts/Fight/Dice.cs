@@ -32,10 +32,13 @@ public enum DiceSide {
     建材,
 }
 
+// ObjectManager.AddPool(typeof(Dice), Resources.Load<GameObject>("Prefabs/Fight/DiceObj"));
+
 
 /// <summary>
 /// 骰子 包含六个面
 /// </summary>
+[AddPool("Prefabs/Fight/DiceObj")]
 public class Dice  {
     public class DiceObj {
         private Dice dice;

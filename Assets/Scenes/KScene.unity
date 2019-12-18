@@ -991,7 +991,6 @@ MonoBehaviour:
   EnemyHP: 10
   PlayerShield: 0
   UnSelectedSidesCount: 0
-  SelectedSidesCount: 0
 --- !u!114 &941301355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1001,7 +1000,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 941301352}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58b9eb05d8f03ec458667188ed948dcb, type: 3}
+  m_Script: {fileID: 11500000, guid: a74b7bff5bb5348289a534f73bc6b312, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!224 &1655160188 stripped
