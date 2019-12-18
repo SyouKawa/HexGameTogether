@@ -5,7 +5,8 @@ using UnityEngine.UI;
 public class MapManager : MonoBehaviour
 {
     public static MapManager Instance { get; private set; }
-    
+
+    public Vector2Int testFrom;
     //地图大小
     public int width;
     public int height;
@@ -32,8 +33,8 @@ public class MapManager : MonoBehaviour
         Instance = this;
 
         gridCanvas = GetComponentInChildren<Canvas>();
-
-        cells = new HexCell[height, width];
+        CellObjects = new Dictionary<int, HexCell>();
+        cells = new HexCell[height , width];
 
         LoadRes();
 
@@ -47,9 +48,8 @@ public class MapManager : MonoBehaviour
     private void LoadRes() {
         //加载显示的Tile数组
         int length = System.Enum.GetValues(typeof(GameStaticData.FieldType)).Length;
-        for (int i = 0; i < length; i++) {
-            print("Sprites/tiles_" + ((GameStaticData.FieldType)i).ToString() + "_colored");
-            FieldTiles.Add(Resources.LoadAll("Sprites/tiles_" + ((GameStaticData.FieldType)i).ToString() + "_colored", typeof(Sprite)));
+        for(int i=0;i<length ;i++ ) {
+            FieldTiles.Add(Resources.LoadAll("Sprites/tiles_"+((GameStaticData.FieldType)i).ToString()+"_colored", typeof(Sprite)));
         }
     }
 
@@ -57,7 +57,7 @@ public class MapManager : MonoBehaviour
         //为当前cell roll 一个地形
         curcell.SetFieldType(RandomFieldByRates());
         //为该地形roll一个显示Tile
-        Sprite curImg = (Sprite)(FieldTiles[(int)curcell.type][Random.Range(0, FieldTiles[(int)curcell.type].Length)]);
+        Sprite curImg = (Sprite)(FieldTiles[(int)curcell.type][GameStaticData.random.Next(0, FieldTiles[(int)curcell.type].Length)]);
         curcell.Img.GetComponent<SpriteRenderer>().sprite = curImg;
     }
 
@@ -65,9 +65,9 @@ public class MapManager : MonoBehaviour
     /// 随机产生一个地形类型
     /// </summary>
     /// <returns>The field by rates.</returns>
-    private GameStaticData.FieldType RandomFieldByRates() {
-        int roll = Random.Range(0, 100);
-        print("cur roll" + roll);
+    GameStaticData.FieldType RandomFieldByRates()
+    {
+        int roll = GameStaticData.random.Next(0, 100);
 
         if (roll <= GameStaticData.FieldGenRate["Lake"]) {
             return GameStaticData.FieldType.Lake;
@@ -89,13 +89,18 @@ public class MapManager : MonoBehaviour
             Sprite curImg = (Sprite)(FieldTiles[3][Random.Range(0, FieldTiles[3].Length)]);
             cells[0, i].Img.GetComponent<SpriteRenderer>().sprite = curImg;
             cells[0, i].SetImgOrder(-1);
-            cells[i, 0].Img.GetComponent<SpriteRenderer>().sprite = curImg;
-            cells[i, 0].SetImgOrder(-1);
+
+            cells[0, i].type = GameStaticData.FieldType.EdgeSea;
+            cells[i,0].Img.GetComponent<SpriteRenderer>().sprite = curImg;
+            cells[i,0].SetImgOrder(-1);
+            cells[i,0].type = GameStaticData.FieldType.EdgeSea;
             //TODO:后排换成纯水
             cells[width - 1, i].Img.GetComponent<SpriteRenderer>().sprite = curImg;
             cells[width - 1, i].SetImgOrder(-1);
+            cells[width - 1, i].type = GameStaticData.FieldType.EdgeSea;
             cells[i, width - 1].Img.GetComponent<SpriteRenderer>().sprite = curImg;
             cells[i, width - 1].SetImgOrder(-1);
+            cells[i, width - 1].type = GameStaticData.FieldType.EdgeSea;
         }
     }
 
@@ -128,7 +133,7 @@ public class MapManager : MonoBehaviour
     /// <param name="pos">在世界坐标中的位置.</param>
     private void CreateCell(int row, int col, Vector3 pos) {
         //按坐标新建每一个cell(数组下标按坐标,而非行列,所以row和col位置互换)
-        cells[col, row] = new HexCell(new Vector2(row, col), Instantiate(cellPrefab));
+        cells[col, row] = new HexCell(new Vector2Int(col, row), Instantiate(cellPrefab));
         //将cell加入Hash表,保证寻路时射线获取GameObject时,可按照Hash与cell对应
         CellObjects.Add(cells[col, row].cell.GetHashCode(), cells[col, row]);
         // 随机地形及显示Tile
@@ -150,4 +155,5 @@ public class MapManager : MonoBehaviour
         label.text = col.ToString() + "," + row.ToString();
         label.name = "(" + col.ToString() + "," + row.ToString() + ")";
     }
+
 }
