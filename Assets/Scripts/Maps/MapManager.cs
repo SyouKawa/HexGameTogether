@@ -31,6 +31,7 @@ public class MapManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        ObjectManager.AddPool(typeof(HexCell), cellPrefab);
 
         gridCanvas = GetComponentInChildren<Canvas>();
         CellObjects = new Dictionary<int, HexCell>();
@@ -133,7 +134,8 @@ public class MapManager : MonoBehaviour
     /// <param name="pos">在世界坐标中的位置.</param>
     private void CreateCell(int row, int col, Vector3 pos) {
         //按坐标新建每一个cell(数组下标按坐标,而非行列,所以row和col位置互换)
-        cells[col, row] = new HexCell(new Vector2Int(col, row), Instantiate(cellPrefab));
+        cells[col, row] = new HexCell(new Vector2Int(col, row));
+        //cells[col, row] = new HexCell(new Vector2Int(col, row), Instantiate(cellPrefab));
         //将cell加入Hash表,保证寻路时射线获取GameObject时,可按照Hash与cell对应
         CellObjects.Add(cells[col, row].cell.GetHashCode(), cells[col, row]);
         // 随机地形及显示Tile

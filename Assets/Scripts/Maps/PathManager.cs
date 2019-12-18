@@ -32,8 +32,11 @@ public class PathManager : MonoBehaviour
 
         if (hit.collider != null){
             //collider处于Img上,而存储的是Img的父节点的Hash
-            int tempHash = hit.collider.transform.parent.gameObject.GetHashCode();
-            HexCell curCell = MapManager.Instance.CellObjects[tempHash];
+            //int tempHash = hit.collider.transform.parent.gameObject.GetHashCode();
+            //HexCell curCell = MapManager.Instance.CellObjects[tempHash];
+
+            HexCell curCell = ObjectManager.GetClass<HexCell>(hit.collider.transform.parent.gameObject);
+
 
             if (Input.GetMouseButtonDown(0)) {
                 AddPathPoint(curCell);

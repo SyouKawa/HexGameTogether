@@ -11,6 +11,21 @@ public class HexCell
     public GameStaticData.FieldType type;
     public int passCost;
 
+    public HexCell(Vector2Int _MapPos) {
+        MapPos = _MapPos;
+        CreateGameObject();
+    }
+
+    public void CreateGameObject() {
+        cell = ObjectManager.GetInstantiate(this);
+        Img = cell.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
+        SetFieldType(GameStaticData.FieldType.EdgeSea);//默认不可行动
+    }
+
+    public void DeleteGameObject() {
+        ObjectManager.ReturnInstantiate<HexCell>(cell);
+    }
+
     public HexCell(Vector2Int _MapPos,GameObject _cell) 
     {
         MapPos = _MapPos;

@@ -29,7 +29,7 @@ public static class ObjectManager {
     /// <summary>
     /// 对象池新建的根节点,仍在屏幕外面.
     /// </summary>
-    public static Transform poolRootTransform = BattleMode.Instance.transform;
+    public static Transform poolRootTransform = Global.Instance.transform;
 
     /// <summary>
     /// 建立对象池,对象池通过框架类的类型绑定
