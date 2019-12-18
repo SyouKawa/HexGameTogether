@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[AddPool("Prefabs/Map/BasicHexCell")]
 public class HexCell
 {
     public Vector3 pos;
     public Vector2Int MapPos;
     public GameObject cell;
     public SpriteRenderer Img;
+    public UnityEngine.UI.Text text;
     public GameStaticData.FieldType type;
     public int passCost;
 
@@ -42,5 +44,9 @@ public class HexCell
 
     public void SetImgOrder(int order) {
         Img.sortingOrder = order;
+    }
+
+    public void SetText(string str) {
+        text.text = text.text + "\n" + str;
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEditor.SceneManagement;
 
 public class PathManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class PathManager : MonoBehaviour
 
     //存放目的地列表
     public List<HexCell> DestPoints;
+    public HexCell Begin;
     public Dictionary<int,HexCell> loadingPath;
     public Dictionary<int,HexCell> closed;
     public Dictionary<HexCell, float> open;
@@ -21,10 +23,6 @@ public class PathManager : MonoBehaviour
         open = new Dictionary<HexCell, float>();
     }
 
-    private void Start()
-    {
-        
-    }
 
     public void Update()
     {
@@ -39,21 +37,24 @@ public class PathManager : MonoBehaviour
 
 
             if (Input.GetMouseButtonDown(0)) {
-                AddPathPoint(curCell);
+                Begin = curCell;
+                Begin.Img.color = new Color(0, 0, 1);
              }
             if (Input.GetMouseButtonDown(1)) {
-                CancelPathPoint(curCell);
-             }
+                AddDestPoint(curCell);
+            }
+            if (Input.GetMouseButtonDown(2)) {
+                UnityEngine.SceneManagement.SceneManager.LoadScene("TestSc");
+            }
         }
     }
 
     /// <summary>
     /// 将点击选中Tile作为下一个目的地
     /// </summary>
-    public void AddPathPoint(HexCell cell) {
+    public void AddDestPoint(HexCell cell) {
         DestPoints.Add(cell);
-        var pos = MapManager.Instance.testFrom;
-        AStarFindPath(MapManager.Instance.cells[pos.x,pos.y], cell, FindNextCell);
+        AStarFindPath(Begin, cell, FindNextCell);
      }
     /// <summary>
     /// 取消选中的目的地
@@ -73,6 +74,8 @@ public class PathManager : MonoBehaviour
         }
         //从该点到最新目的地的曼哈顿距离,充当H值
         float eva = Vector2Int.Distance(cur.MapPos, DestPoints[DestPoints.Count-1].MapPos);
+        //G+H的值
+        pathcost += eva;
 
         return pathcost;
       }
@@ -81,8 +84,10 @@ public class PathManager : MonoBehaviour
     /// 寻路
     /// </summary>
     public void AStarFindPath(HexCell from,HexCell dest,Func<HexCell,HexCell>Judge) {
-        //将路径起点加入loadingPath
-        loadingPath.Add(from.GetHashCode(),from);
+        //将除了起点的节点加入loadingPath
+        if (from != Begin){
+            loadingPath.Add(from.GetHashCode(), from);
+        }
         Debug.Log(from.GetHashCode() + "-=-" + from.MapPos);
         HexCell nextCell = Judge(from);
 
@@ -107,6 +112,7 @@ public class PathManager : MonoBehaviour
         for(int i=0;i<adj.Count ;i++) {
             adj[i].Img.color = new Color(0, 1, 0);
             float cost = SumCost(adj[i]);
+            adj[i].SetText(cost.ToString());
             //检查在open列表中是否存在该节点,不存在则添加.
             if (!open.ContainsKey(adj[i]))
             {
@@ -120,14 +126,18 @@ public class PathManager : MonoBehaviour
         }
         //TODO:如果open列表中有很靠前的前置节点比这个更优要怎么办.
         //如果open中的该节点的消耗比当前的值要小,说明前面有节点通过更少的消耗抵达当前点,要更新路径
+        for (int i = 0;i<open.Count ;i++ ) {
+            
+        }
         if (open[adj[minIndex]]<minCost) {
             //去除路径中的当前节点,并更新open列表中的值
             loadingPath.Remove(cur.GetHashCode());
             open[cur] = SumCost(cur);
+            //adj[i].SetText(cost.ToString());
             //将更小的前继节点作为路径值,并将其放入closed列表中  的  工作是在下一个递归做的
         }
 
-        adj[minIndex].Img.color = new Color(0, 0, 0);
+        adj[minIndex].Img.color = new Color(0, 0, 1);
         return adj[minIndex];
     }
 

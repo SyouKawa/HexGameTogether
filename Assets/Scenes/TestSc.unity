@@ -193,8 +193,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   testFrom: {x: 1, y: 1}
-  width: 50
-  height: 50
+  width: 10
+  height: 10
   cellPrefab: {fileID: 513429583732160728, guid: 54e67766eecff442ab9af52caddb2323,
     type: 3}
   cellLabelPrefab: {fileID: 8127834133512285192, guid: 13ae8819807544cf2a06cb3ce9c528fa,

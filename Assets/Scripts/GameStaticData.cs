@@ -10,7 +10,7 @@ public class GameStaticData{
 
     public const int EdgeNum = 6;//Tile环绕边数
     public const float infinite = 99999f;
-    public static System.Random random = new System.Random(1000);
+    public static System.Random random = new System.Random(1);
 
     public static Dictionary<string, float> FieldGenRate = new Dictionary<string, float> {
         {"Moun",30},{"Lake",10},{"Forest",60},{"Plain",100}
