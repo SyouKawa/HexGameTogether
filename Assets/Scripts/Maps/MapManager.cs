@@ -151,6 +151,7 @@ public class MapManager : MonoBehaviour
 
         //显示cell的游戏坐标
         Text label = Instantiate(cellLabelPrefab);
+        cells[col, row].text = label;
         label.rectTransform.SetParent(gridCanvas.transform, false);
         label.rectTransform.anchoredPosition = new Vector2(cells[col, row].cell.transform.position.x, cells[col, row].cell.transform.position.y);
         label.text = col.ToString() + "," + row.ToString();
