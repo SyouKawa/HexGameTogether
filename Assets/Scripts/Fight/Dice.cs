@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -27,39 +28,30 @@ public enum DiceSide {
     灰火炮,
     灰重力锤,
 
-
-    炮弹,
-    建材,
+    绿空,
+    绿炮弹,
+    绿建材,
 }
-
-// ObjectManager.AddPool(typeof(Dice), Resources.Load<GameObject>("Prefabs/Fight/DiceObj"));
 
 
 /// <summary>
 /// 骰子 包含六个面
 /// </summary>
-[AddPool("Prefabs/Fight/DiceObj")]
-public class Dice  {
-    public class DiceObj {
-        private Dice dice;
+public class Dice {
+    [AddPool("Prefabs/Fight/DiceObj")]
+    public class DiceObj : ObjectBinding {
+        public Dice Dice;
 
-        public GameObject sourceObj;
         public SpriteRenderer image;
         public SpriteRenderer redImage;
         public SpriteRenderer greenImage;
 
-        public Transform transform { get => sourceObj.transform; }
 
         public DiceObj(Dice dice) {
-            this.dice = dice;
-            sourceObj = ObjectManager.GetInstantiate(dice);
-            redImage = sourceObj.transform.GetChild(0).GetComponent<SpriteRenderer>();
-            greenImage = sourceObj.transform.GetChild(1).GetComponent<SpriteRenderer>();
-            image = sourceObj.transform.GetChild(2).GetComponent<SpriteRenderer>();
-        }
-
-        ~DiceObj() {
-            ObjectManager.ReturnInstantiate<Dice>(sourceObj);
+            this.Dice = dice;
+            redImage = Source.transform.GetChild(0).GetComponent<SpriteRenderer>();
+            greenImage = Source.transform.GetChild(1).GetComponent<SpriteRenderer>();
+            image = Source.transform.GetChild(2).GetComponent<SpriteRenderer>();
         }
 
     }
@@ -70,6 +62,7 @@ public class Dice  {
         obj = new DiceObj(this);
     }
     public void DeleteGameObj() {
+        obj._Delete();
         obj = null;
     }
 
@@ -80,11 +73,12 @@ public class Dice  {
     public DiceSide TopSide {
         set {
             topSide = value;
-            if(obj != null)
+            if (obj != null) {
                 obj.image.sprite = BattleMode.Instance.LoadSprite(topSide);
-        } get {
-            return topSide;
-        } }
+            }
+        }
+        get => topSide;
+    }
 
 
     public enum Type {
@@ -98,11 +92,13 @@ public class Dice  {
     /// 边框模式,更改它会自动更改边框
     /// </summary>
     public Type SelectType {
-        get { return selectType; }
+        get => selectType;
         set {
             selectType = value;
-            if (obj == null)
+            if (obj == null) {
                 return;
+            }
+
             switch (selectType) {
                 case Type.Available:
                     obj.redImage.enabled = false;
@@ -132,7 +128,7 @@ public class Dice  {
             return TopSide;
         }
         TopSide = sides[UnityEngine.Random.Range(0, 5)];
-        
+
         return TopSide;
     }
 

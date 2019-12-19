@@ -65,7 +65,15 @@ public class BattleMode : MonoBehaviour {
         UnSelectedSidesCount = Dices.Count;
     }
 
+    /// <summary>
+    /// 当选择一个骰子时触发的事件
+    /// </summary>
     public System.Action OnChangeDiceEvent;
+
+    public System.Action OnBattleStartEvent;
+    
+    public Transform SkillPanelTrans;
+
 
     public static BattleMode Instance;
     private void Awake() {
@@ -76,20 +84,24 @@ public class BattleMode : MonoBehaviour {
         Caster = new SkillCaster();
         //角色拥有的测试技能
         TotalSkills = GetTestSkills();
+
+    }
+
+    private void Start() {
+
         //拥有的测试骰子
         BeginSides = GetTestDices();
 
         Dices = new List<Dice>();
         Dices.AddRange(BeginSides);
 
-    }
-
-    private void Start() {
         OnChangeDiceEvent?.Invoke();
 
         foreach (Dice dice in Dices) {
             dice.Random();
         }
+
+        OnBattleStartEvent.Invoke();
     }
 
     #region LoadIcon
@@ -126,25 +138,25 @@ public class BattleMode : MonoBehaviour {
             new Skill() {
                 name = "火炮开火",
                 discrition = "2伤 炮+弹",
-                needSides = new List<DiceSide>() { DiceSide.灰火炮, DiceSide.炮弹 },
+                needSides = new List<DiceSide>() { DiceSide.灰火炮, DiceSide.绿炮弹 },
                 logic = "Attack(2);"
             },
             new Skill() {
                 name = "迅速射击",
                 discrition = "2伤 炮+弹+红技巧 射击后获得炮*1",
-                needSides = new List<DiceSide>() { DiceSide.灰火炮, DiceSide.炮弹, DiceSide.红技巧},
+                needSides = new List<DiceSide>() { DiceSide.灰火炮, DiceSide.绿炮弹, DiceSide.红技巧},
                 logic = "Attack(2); AddDice();"
             },
             new Skill() {
                 name = "强力射击",
                 discrition = "4伤 炮+弹+能量1",
-                needSides = new List<DiceSide>() { DiceSide.灰火炮, DiceSide.炮弹, DiceSide.紫能量I},
+                needSides = new List<DiceSide>() { DiceSide.灰火炮, DiceSide.绿炮弹, DiceSide.紫能量I},
                 logic = "Attack(4);"
             },
             new Skill() {
                 name = "爆炸射击",
                 discrition = "4伤 炮+弹+红力量",
-                needSides = new List<DiceSide>() { DiceSide.灰火炮, DiceSide.炮弹, DiceSide.红力量},
+                needSides = new List<DiceSide>() { DiceSide.灰火炮, DiceSide.绿炮弹, DiceSide.红力量},
                 logic = "Attack(4);"
             },
             new Skill() {
@@ -168,7 +180,7 @@ public class BattleMode : MonoBehaviour {
             new Skill() {
                 name = "强效路障",
                 discrition = "路障+建材",
-                needSides = new List<DiceSide>() {  DiceSide.灰工程路障, DiceSide.建材},
+                needSides = new List<DiceSide>() {  DiceSide.灰工程路障, DiceSide.绿建材},
                 logic = "Shield(4);"
             },
             new Skill() {
@@ -209,8 +221,8 @@ public class BattleMode : MonoBehaviour {
         result.Add(new Dice(DiceSide.灰火炮, 4).AddSide(DiceSide.灰空));
         result.Add(new Dice(DiceSide.灰火炮, 4).AddSide(DiceSide.灰空));
 
-        result.Add(new Dice(DiceSide.炮弹));
-        result.Add(new Dice(DiceSide.建材));
+        result.Add(new Dice(DiceSide.绿炮弹));
+        result.Add(new Dice(DiceSide.绿建材));
 
         foreach (Dice dice in result) {
             dice.CreateGameObj();
