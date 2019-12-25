@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[AddPool("Prefabs/Map/PlayerInMap")]
-public class PlayerInMap : ObjectBinding
+/// <summary>
+/// 常用数据操作静态类
+/// </summary>
+public static class Utils
 {
 
 }

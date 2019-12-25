@@ -13,17 +13,12 @@ public class HexCell
     public GameStaticData.FieldType type;
 
     public int fieldcost;//通过该节点本身的消耗
-    public float dynamicost;//G值:从起点到该节点的消耗(pre+filed之和)
-    public float destdis;//H值:估计值,用该点到终点的曼哈顿距离充当
-    public HexCell prepathcell;//前继节点
 
     public HexCell(Vector2Int _MapPos) {
         MapPos = _MapPos;
         cell = ObjectManager.GetInstantiate(this);
         Img = cell.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
         SetFieldType(GameStaticData.FieldType.EdgeSea);//默认不可行动
-        //初始化所有寻路相关变量
-        ResetFindPathData();
     }
 
     ~HexCell() {
@@ -59,13 +54,4 @@ public class HexCell
         text.text = text.text + "\n" + str;
     }
 
-    /// <summary>
-    /// 重置寻路时所需要的数据
-    /// </summary>
-    public void ResetFindPathData() {
-        fieldcost = 0;
-        dynamicost = 0;
-        destdis = 0;
-        prepathcell = null;
-    }
 }

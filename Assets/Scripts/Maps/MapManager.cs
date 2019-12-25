@@ -5,6 +5,10 @@ using UnityEngine.UI;
 public class MapManager : MonoBehaviour
 {
     public static MapManager Instance { get; private set; }
+    
+
+    public PlayerInMap player;
+    public PathManager pathManager;
 
     public Vector2Int testFrom;
     //地图大小
@@ -35,6 +39,7 @@ public class MapManager : MonoBehaviour
         gridCanvas = GetComponentInChildren<Canvas>();
         CellObjects = new Dictionary<int, HexCell>();
         cells = new HexCell[height , width];
+        pathManager = new PathManager();
 
         LoadRes();
 
@@ -42,6 +47,29 @@ public class MapManager : MonoBehaviour
         SetEdgeSea();
 
     }
+
+    public void Update()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+
+        if (hit.collider != null)
+        {
+            //TODO:更改为玩家所在地作为起始地点
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (hit.collider.tag == "MapCell")
+                {
+                    //TODO:点击cell显示cell信息
+                    HexCell curCell = ObjectManager.GetClass<HexCell>(hit.collider.transform.parent.gameObject);
+                }
+                if (hit.collider.tag == "Player")
+                {
+                    //点击玩家进入寻路模式
+                }
+            }
+        }
+    }
+
     /// <summary>
     /// 加载游戏需要的资源
     /// </summary>

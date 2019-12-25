@@ -8,9 +8,29 @@ public static class PathHelper{
     /// <summary>
     /// 获取寻路结果
     /// </summary>
-    public static FpResult GetFindPathResult() {
+    public static FpResult GetFindPathResult(HexCell from,HexCell dest) {
 
-        return null;
+        FpResult result = new FpResult();
+        //获取PathMapnager实例
+        PathManager tempManager = Global.Instance.mapManager.pathManager;
+       
+        //按照对应的权重方式寻路
+        tempManager.AStarFindPath(from, dest, tempManager.FindNextCell);
+        //获取对应路径
+        List<HexCell> finalPath = tempManager.GetPath(from, dest);
+        //释放当前寻路所用的临时数据
+        tempManager.FreeFindPathData();
+
+        //获取寻路结果类
+        if (finalPath == null) {
+            result.isfinded = false;
+        }
+        else {
+            result.isfinded = true;
+            result.path = finalPath;
+            //TODO:补上总消耗
+        }
+        return result;
     }
 }
 
@@ -41,79 +61,30 @@ public class PathManager {
         }
     }
 
-    public class CellsData {
-        private Dictionary<HexCell, FpData> data;
-        public CellsData() {
-            data = new Dictionary<HexCell, FpData>();
-        }
-
-        public void Add(HexCell _cell,FpData _fpdata) {
-            data.Add(_cell, _fpdata);
-        }
-
-        public FpData this[HexCell cell]{
-            get { 
-                    if (!data.ContainsKey(cell)) {
-                        data[cell] = new FpData();
-                    }
-                    return data[cell]; 
-                }
-
-            set { data[cell] = value; }
-        }
-
-        public void Remove(HexCell cell) {
-            data.Remove(cell);
-        }
-    }
-
-    //存放目的地列表
-    public List<HexCell> DestPoints;
-    public HexCell Begin;
     public HashSet<HexCell> closed;
     public HashSet<HexCell>open;
-    private CellsData cellsdata;
+    private Dictionary<HexCell,FpData> cellsdata;
 
     public PathManager(){
-        DestPoints = new List<HexCell>();
         closed = new HashSet<HexCell>();
         open = new HashSet<HexCell>();
-        cellsdata = new CellsData();
-    }
-
-    /// <summary>
-    /// 将点击选中Tile作为下一个目的地
-    /// </summary>
-    public void GoDestPoint(HexCell cell) {
-        DestPoints.Add(cell);
-        AStarFindPath(Begin, cell, FindNextCell);
-        GetPath();
-        ResetFindPathData();
-     }
-    /// <summary>
-    /// 取消选中的目的地
-    /// </summary>
-    public void CancelPathPoint(HexCell cell) {
-        //已经作为前置移动目标,且显示过路径的,不可以移除(需要一步一步移除)
-        if(cell == DestPoints[DestPoints.Count - 1]) {
-            DestPoints.Remove(cell);
-        }
+        cellsdata = new Dictionary<HexCell, FpData>();
     }
 
     /// <summary>
     /// 显示路径
     /// </summary>
-    public List<HexCell> GetPath() {
+    public List<HexCell> GetPath(HexCell from,HexCell dest) {
         //TODO:取消颜色显示,使用路线sprite或shader显示
-        HexCell cur = DestPoints[DestPoints.Count - 1];
+        HexCell cur = dest;
         List<HexCell> finalpath = new List<HexCell>();
-        while(cur != Begin) {
+        while(cur != from) {
             Debug.Log(cellsdata[cur]+" "+cellsdata[cur].prepathcell);
             cur.Img.color = new Color(1,0,0);
             finalpath.Add(cur);
             cur = cellsdata[cur].prepathcell;
         }
-        finalpath.Add(Begin);
+        finalpath.Add(from);
         finalpath.Reverse();
         return finalpath;
     }
@@ -157,7 +128,7 @@ public class PathManager {
     /// <summary>
     /// 计算传入位置在当前选择路径中的G+H(G和H权重相等)消耗,并返回
     /// </summary>
-    public float BalanceSumCost(HexCell cur) {
+    public float BalanceSumCost(HexCell cur,HexCell dest) {
         // G = 从起点走到当前节点的地形消耗
         float pathcost = 0f;
         if (cellsdata[cur].prepathcell == null) {
@@ -167,7 +138,7 @@ public class PathManager {
             cellsdata[cur].fromcost = cellsdata[cellsdata[cur].prepathcell].fromcost + cur.fieldcost;
         }
         //H = 从该点到最新目的地的曼哈顿距离
-        cellsdata[cur].destdis = Vector2Int.Distance(cur.MapPos, DestPoints[DestPoints.Count-1].MapPos);
+        cellsdata[cur].destdis = Vector2Int.Distance(cur.MapPos, dest.MapPos);
 
         //G+H的值
         pathcost = cellsdata[cur].fromcost + cellsdata[cur].destdis;
@@ -177,16 +148,14 @@ public class PathManager {
     /// <summary>
     /// A*寻路接口
     /// </summary>
-    public void AStarFindPath(HexCell from,HexCell dest,Func<HexCell,HexCell>FindFunc) {
-
-        //处理当前节点
-        float curCost = BalanceSumCost(from);
-        if (!open.Contains(from)) {
+    public void AStarFindPath(HexCell from,HexCell dest,Func<HexCell,HexCell,HexCell>FindFunc) {
+        //开始处理当前节点
+        if (!open.Contains(from)){
             open.Add(from);
-           //cellsdata.Add(from,new FpData());
+            cellsdata.Add(from, new FpData());
         }
         //寻找下一个节点
-        HexCell nextCell = FindFunc(from);
+        HexCell nextCell = FindFunc(from,dest);
 
         //如果未找到则递归调用寻找
         if(nextCell!= dest) {
@@ -199,47 +168,47 @@ public class PathManager {
     /// <summary>
     /// 根据新传入当前节点及其邻接节点列表,更新openList
     /// </summary>
-    public void UpdateOpenList(HexCell cur ,List<HexCell> adj) {
+    public void UpdateOpenList(HexCell cur,HexCell dest ,List<HexCell> adj) {
         //先算出当前邻接列表中的消耗最少的前进节点,并将所有节点加入open的待机节点
         for (int i = 0; i < adj.Count; i++)
         {
-
-            //检查在open列表中是否存在该节点,不存在则添加.
+            //检查在open列表中是否存在该节点,不存在则添加.(因为之前是直接存在HexCell里,但现在是新建FpData,所以要对应)
             if (!open.Contains(adj[i]))
             {
                 open.Add(adj[i]);
-                //cellsdata.Add(adj[i], new FpData());
+                cellsdata.Add(adj[i], new FpData());
                 cellsdata[adj[i]].prepathcell = cur;//直接为新临界点添加前继节点
             }
             else
             {//检查以新节点作为临时前继节点,是否消耗更低
-                float newcost = adj[i].fieldcost + cellsdata[cur].fromcost + Vector2Int.Distance(adj[i].MapPos, DestPoints[DestPoints.Count - 1].MapPos);
+                float newcost = adj[i].fieldcost + cellsdata[cur].fromcost + Vector2Int.Distance(adj[i].MapPos, dest.MapPos);
                 if (cellsdata[adj[i]].fromcost > newcost) //沿其他路径到该点的消耗比从此路径要大,则更新open中的路径(该节点的前继节点)
                 {
                     //更新前继节点,保证路径的更新
                     cellsdata[adj[i]].prepathcell = cur;
-                    BalanceSumCost(adj[i]);
+                    BalanceSumCost(adj[i],dest);
                 }
             }
             //TODO:将辅助染色显示变更为上浮显示路径
             adj[i].Img.color = new Color(0, 1, 0);
-            adj[i].SetText(BalanceSumCost(adj[i]).ToString());
+            adj[i].SetText(BalanceSumCost(adj[i],dest).ToString());
         }
     }
 
     /// <summary>
     /// 由当前节点选择出最优的下一个节点
     /// </summary>
-    public HexCell FindNextCell(HexCell cur) {
+    public HexCell FindNextCell(HexCell cur,HexCell dest) {
         //获取入参cell的邻接cells(不包括水行区域及loadingPath,两者已被放入closed并在传入之前剔除)
         open.Remove(cur);
-        cellsdata.Remove(cur);
+        //cellsdata.Remove(cur);这里不能移除celldata的内容,因为要获取前驱节点
+
         //只要作为过一次路径节点,则会被归入closed,防止纠错路径时再次回到该点
         closed.Add(cur);
 
         //获取邻接节点,并更新open列表
         List<HexCell> adj = AdjacentHex(cur);
-        UpdateOpenList(cur, adj);
+        UpdateOpenList(cur, dest, adj);
 
         //选择路径:选择open中的最小消耗节点,并沿其寻找新的路径
         float minCost = GameStaticData.infinite;
@@ -258,11 +227,10 @@ public class PathManager {
     /// <summary>
     /// 重置每次寻路使用的存储数据
     /// </summary>
-    public void ResetFindPathData(){
-        //TODO:在清空open和closed之前,应该把列表中的cells的动态cost都清除掉
+    public void FreeFindPathData(){
         closed = new HashSet<HexCell>();
         open = new HashSet<HexCell>();
-        cellsdata = new CellsData();
+        cellsdata = new Dictionary<HexCell, FpData>();
     }
 
 }
