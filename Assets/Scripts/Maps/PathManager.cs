@@ -15,7 +15,7 @@ public static class PathHelper{
         PathManager tempManager = Global.Instance.mapManager.pathManager;
        
         //按照对应的权重方式寻路
-        tempManager.AStarFindPath(from, dest, tempManager.FindNextCell);
+        tempManager.AStarFindPath(from, dest);
         //获取对应路径
         List<HexCell> finalPath = tempManager.GetPath(from, dest);
         //释放当前寻路所用的临时数据
@@ -145,21 +145,23 @@ public class PathManager {
         return pathcost;
       }
 
+    //Func<HexCell,int>
+
     /// <summary>
     /// A*寻路接口
     /// </summary>
-    public void AStarFindPath(HexCell from,HexCell dest,Func<HexCell,HexCell,HexCell>FindFunc) {
+    public void AStarFindPath(HexCell from,HexCell dest) {
         //开始处理当前节点
         if (!open.Contains(from)){
             open.Add(from);
             cellsdata.Add(from, new FpData());
         }
         //寻找下一个节点
-        HexCell nextCell = FindFunc(from,dest);
+        HexCell nextCell = FindNextCell(from,dest);
 
         //如果未找到则递归调用寻找
         if(nextCell!= dest) {
-            AStarFindPath(nextCell, dest, FindNextCell);
+            AStarFindPath(nextCell, dest);
          }
         //找到时,返回到上层递归
         return;

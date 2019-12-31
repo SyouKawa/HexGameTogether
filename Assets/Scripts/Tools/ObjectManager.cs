@@ -36,21 +36,21 @@ public static class ObjectManager {
     /// 会自动识别类型返回需要的GameObject
     /// </summary>
     public static GameObject GetInstantiate(object con) {
-        return Global.Instance.objectManager.GetInstantiate(con);
+        return ObjectPoolData.Instance.GetInstantiate(con);
     }
 
     /// <summary>
     /// 需要提供框架类型,还回对象
     /// </summary>
     public static void ReturnInstantiate<T>(GameObject obj) {
-        Global.Instance.objectManager.ReturnInstantiate<T>(obj);
+        ObjectPoolData.Instance.ReturnInstantiate<T>(obj);
     }
 
     /// <summary>
     /// 需要提供框架类型,还回对象
     /// </summary>
     public static void ReturnInstantiate(GameObject obj, System.Type type) {
-        Global.Instance.objectManager.ReturnInstantiate(obj, type);
+        ObjectPoolData.Instance.ReturnInstantiate(obj, type);
     }
 
     /// <summary>
@@ -60,7 +60,7 @@ public static class ObjectManager {
     /// <param name="gameObject"></param>
     /// <returns></returns>
     public static T GetClass<T>(GameObject gameObject) where T : class {
-        return Global.Instance.objectManager.GetClass<T>(gameObject);
+        return ObjectPoolData.Instance.GetClass<T>(gameObject);
     }
 }
 
@@ -84,20 +84,37 @@ public class ObjectPoolData {
     /// </summary>
     public Transform poolRootTransform;
 
+    public static ObjectPoolData Instance;
+
     /// <summary>
     /// 将AddPool特性的类自动建池
     /// </summary>
-    public void InitPool() {
+    public static void InitPool(Transform rootTrans) {
+        if (Instance != null)
+            return;
+        Instance = new ObjectPoolData() { poolRootTransform = rootTrans };
         //Type[] entryTypes = Assembly.GetEntryAssembly().GetTypes();
         Type[] currentTypes = Assembly.GetExecutingAssembly().GetTypes();
 
         List<Type> allTypes = currentTypes.ToList();
         //allTypes.AddRange();
 
-        foreach (Type type in allTypes) {
+        foreach (Type type in allTypes)
+        {
             AddPool poolAtr = type.GetCustomAttribute<AddPool>();
-            if (poolAtr != null) {
-                AddPool(type, Resources.Load<GameObject>(poolAtr.path));
+            if (poolAtr != null)
+            {
+                GameObject obj = Resources.Load<GameObject>(poolAtr.path);
+                if (obj == null)
+                {
+                    Debug.LogError("未找到目标Prefeb,type:" + type.Name + " path:" + poolAtr.path);
+                }
+                else
+                {
+                    //Debug.Log("已建立对象池,type:" + type.Name + " path:" + poolAtr.path);
+                    Instance.AddPool(type, Resources.Load<GameObject>(poolAtr.path));
+                }
+
             }
         }
     }
@@ -111,6 +128,7 @@ public class ObjectPoolData {
         if (PoolDic.ContainsKey(type)) {
             Debug.LogError("这个池子已经被建立过了,不能重复建立." + type.ToString());
         }
+
         //1 在这个节点底下创建一个节点,用于保存未激活的池对象
         Transform node = new GameObject(gameObject.name).transform;
         node.SetParent(poolRootTransform);

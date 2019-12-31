@@ -1,6 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
+[AddPool("Prefabs/Map/CellDebugText")]
+public class CellDebugText : ObjectBinding {
+    public Text textCom;
+
+    public CellDebugText() {
+        textCom = Source.GetComponent<Text>();
+    }
+
+    /// <summary>
+    /// (辅助)在标签上显示信息
+    /// </summary>
+    public void SetText(string str){
+        textCom.text = textCom.text + "\n" + str;
+    }
+}
 
 [AddPool("Prefabs/Map/BasicHexCell")]
 public class HexCell
@@ -9,7 +26,7 @@ public class HexCell
     public Vector2Int MapPos;
     public GameObject cell;
     public SpriteRenderer Img;
-    public UnityEngine.UI.Text text;
+    public CellDebugText debugtext;
     public GameStaticData.FieldType type;
 
     public int fieldcost;//通过该节点本身的消耗
@@ -47,11 +64,13 @@ public class HexCell
         Img.sortingOrder = order;
     }
 
-    /// <summary>
-    /// (辅助)在标签上显示信息
-    /// </summary>
-    public void SetText(string str) {
-        text.text = text.text + "\n" + str;
+    private void ShowPos() {
+        //显示cell的游戏坐标
+        debugtext = new CellDebugText();
+        debugtext.rectTransform.SetParent(gridCanvas.transform, false);
+        debugtext.rectTransform.anchoredPosition = new Vector2(cells[col, row].cell.transform.position.x, cells[col, row].cell.transform.position.y);
+        debugtext.text = col.ToString() + "," + row.ToString();
+        debugtext.name = "(" + col.ToString() + "," + row.ToString() + ")";
     }
 
 }

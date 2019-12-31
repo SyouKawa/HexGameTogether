@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MapManager : MonoBehaviour
+public class MapManager
 {
     public static MapManager Instance { get; private set; }
     
@@ -19,10 +19,7 @@ public class MapManager : MonoBehaviour
     //基本六边形Prfb
     public GameObject cellPrefab;
     //坐标显示Prfb
-    public Text cellLabelPrefab;
-
-    //加载显示的Tile数组
-    private List<Object[]> FieldTiles = new List<Object[]>();
+    public Text celldebugtextPrefab;
 
     ///功能子组件
     //显示坐标图层
@@ -41,7 +38,7 @@ public class MapManager : MonoBehaviour
         cells = new HexCell[height , width];
         pathManager = new PathManager();
 
-        LoadRes();
+        //LoadRes();
 
         SpawnMap();
         SetEdgeSea();
@@ -67,17 +64,6 @@ public class MapManager : MonoBehaviour
                     //点击玩家进入寻路模式
                 }
             }
-        }
-    }
-
-    /// <summary>
-    /// 加载游戏需要的资源
-    /// </summary>
-    private void LoadRes() {
-        //加载显示的Tile数组
-        int length = System.Enum.GetValues(typeof(GameStaticData.FieldType)).Length;
-        for(int i=0;i<length ;i++ ) {
-            FieldTiles.Add(Resources.LoadAll("Sprites/tiles_"+((GameStaticData.FieldType)i).ToString()+"_colored", typeof(Sprite)));
         }
     }
 
@@ -176,14 +162,6 @@ public class MapManager : MonoBehaviour
         cells[col, row].cell.name = "cell:" + col.ToString() + "," + row.ToString();
         //按照倍率调节图片缩放
         cells[col, row].Img.transform.localScale = new Vector3(GameStaticData.Rates, GameStaticData.Rates, 0f);
-
-        //显示cell的游戏坐标
-        Text label = Instantiate(cellLabelPrefab);
-        cells[col, row].text = label;
-        label.rectTransform.SetParent(gridCanvas.transform, false);
-        label.rectTransform.anchoredPosition = new Vector2(cells[col, row].cell.transform.position.x, cells[col, row].cell.transform.position.y);
-        label.text = col.ToString() + "," + row.ToString();
-        label.name = "(" + col.ToString() + "," + row.ToString() + ")";
     }
 
 }
