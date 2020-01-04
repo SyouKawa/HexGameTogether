@@ -12,14 +12,14 @@ public static class PathHelper{
 
         FpResult result = new FpResult();
         //获取PathMapnager实例
-        PathManager tempManager = Global.Instance.mapManager.pathManager;
+        PathManager manager = Global.Instance.pathManager;
        
         //按照对应的权重方式寻路
-        tempManager.AStarFindPath(from, dest);
+        manager.AStarFindPath(from, dest);
         //获取对应路径
-        List<HexCell> finalPath = tempManager.GetPath(from, dest);
+        List<HexCell> finalPath = manager.GetPath(from, dest);
         //释放当前寻路所用的临时数据
-        tempManager.FreeFindPathData();
+        manager.FreeFindPathData();
 
         //获取寻路结果类
         if (finalPath == null) {
@@ -44,7 +44,7 @@ public class FpResult
     public int sumcost { get; set; }
 }
 
-public class PathManager {
+public class PathManager : Singleton<PathManager> {
 
     public class FpData {
         public float fromcost;//G值:从起点到该节点的消耗(pre+filed之和)
@@ -96,7 +96,7 @@ public class PathManager {
     {
         int x = centercell.MapPos.x;
         int y = centercell.MapPos.y;
-        HexCell[,] cells = MapManager.Instance.cells;
+        HexCell[,] cells = MapManager.GetInstance().map.cells;
         List<HexCell> adj = new List<HexCell> {
             cells[x + 1,y + 1],
             cells[x - 1, y - 1],
@@ -193,7 +193,7 @@ public class PathManager {
             }
             //TODO:将辅助染色显示变更为上浮显示路径
             adj[i].Img.color = new Color(0, 1, 0);
-            adj[i].SetText(BalanceSumCost(adj[i],dest).ToString());
+            adj[i].debugtext.SetText(BalanceSumCost(adj[i],dest).ToString());
         }
     }
 

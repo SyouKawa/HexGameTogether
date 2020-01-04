@@ -20,11 +20,9 @@ public class CellDebugText : ObjectBinding {
 }
 
 [AddPool("Prefabs/Map/BasicHexCell")]
-public class HexCell
-{
+public class HexCell : ObjectBinding{
     public Vector3 pos;
     public Vector2Int MapPos;
-    public GameObject cell;
     public SpriteRenderer Img;
     public CellDebugText debugtext;
     public GameStaticData.FieldType type;
@@ -33,21 +31,18 @@ public class HexCell
 
     public HexCell(Vector2Int _MapPos) {
         MapPos = _MapPos;
-        cell = ObjectManager.GetInstantiate(this);
-        Img = cell.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
+        Img = Transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
         SetFieldType(GameStaticData.FieldType.EdgeSea);//默认不可行动
     }
 
     ~HexCell() {
-        ObjectManager.ReturnInstantiate<HexCell>(cell);
+        ObjectManager.ReturnInstantiate<HexCell>(Source);
     }
-
 
     public HexCell(Vector2Int _MapPos,GameObject _cell) 
     {
         MapPos = _MapPos;
-        cell = _cell;
-        Img = cell.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
+        Img = Transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
         SetFieldType(GameStaticData.FieldType.EdgeSea);//默认不可行动
     }
 
@@ -64,13 +59,12 @@ public class HexCell
         Img.sortingOrder = order;
     }
 
-    private void ShowPos() {
-        //显示cell的游戏坐标
+    public void ShowPos() {
         debugtext = new CellDebugText();
-        debugtext.rectTransform.SetParent(gridCanvas.transform, false);
-        debugtext.rectTransform.anchoredPosition = new Vector2(cells[col, row].cell.transform.position.x, cells[col, row].cell.transform.position.y);
-        debugtext.text = col.ToString() + "," + row.ToString();
-        debugtext.name = "(" + col.ToString() + "," + row.ToString() + ")";
+        //显示cell的游戏坐标
+        debugtext.textCom.rectTransform.SetParent(Global.Instance.mapManager.helperCanvas.transform, false);
+        debugtext.textCom.rectTransform.anchoredPosition = new Vector2(Transform.position.x,Transform.position.y);
+        debugtext.textCom.text = MapPos.ToString();
+        debugtext.textCom.transform.parent.name = MapPos.ToString();
     }
-
 }
