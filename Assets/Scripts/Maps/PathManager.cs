@@ -233,11 +233,10 @@ public class PathManager : Singleton<PathManager> {
     /// 重置每次寻路使用的存储数据
     /// </summary>
     public void FreeFindPathData(){
-        //TODO: 需要加一个开关来避免Debug内容的显示.
-        foreach(var cell in cellsdata.Keys) {
-            cell.Img.color = new Color(1, 1, 1);
-            cell.debugtext._Delete();
-        }
+        //foreach(var cell in cellsdata.Keys) {
+        //    cell.Img.color = new Color(1, 1, 1);
+        //    cell.debugtext._Delete();
+        //}
 
         closed = new HashSet<HexCell>();
         open = new HashSet<HexCell>();
