@@ -12,7 +12,7 @@ using UnityEngine;
 /// 3.使用ReturnInstantiate删除实例
 /// 4.使用GetClass通过实例反向获取框架对象
 /// </summary>
-public static class ObjectManager {
+public static class ObjectHelper {
     /// <summary>
     /// 从对象池中获取需要提供框架类的对象来进行双向绑定
     /// 会自动识别类型返回需要的GameObject
@@ -79,14 +79,9 @@ public class ObjectPoolData {
         }
 
         Instance = new ObjectPoolData() { poolRootTransform = rootTrans };
-        //Type[] entryTypes = Assembly.GetEntryAssembly().GetTypes();
-        Type[] currentTypes = Assembly.GetExecutingAssembly().GetTypes();
 
-        List<Type> allTypes = currentTypes.ToList();
-        //allTypes.AddRange();
 
-        foreach (Type type in allTypes) {
-
+        foreach (Type type in Utils.AllTypes) {
             PrefabPath poolAtr = type.GetCustomAttribute<PrefabPath>();
 
             if (type.IsSubclassOf(typeof(ObjectBinding)) && poolAtr == null) {

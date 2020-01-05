@@ -7,6 +7,10 @@ public class ResManager : Singleton<ResManager>{
     //加载显示的Tile数组
     public List<Object[]> FieldTiles { get; private set; }
 
+    public override void Start(EventHelper helper) {
+        helper.OnGameLoadEvent += LoadRes;
+    }
+
     /// <summary>
     /// 加载游戏需要的资源
     /// </summary>

@@ -58,9 +58,13 @@ public class HexCell : ObjectBinding{
     public void ShowPos() {
         debugtext = new CellDebugText();
         //显示cell的游戏坐标
-        debugtext.textCom.rectTransform.SetParent(Global.Instance.mapManager.helperCanvas.transform, false);
+        debugtext.textCom.rectTransform.SetParent(MapManager.GetInstance().helperCanvas.transform, false);
         debugtext.textCom.rectTransform.anchoredPosition = new Vector2(Transform.position.x,Transform.position.y);
         debugtext.textCom.text = MapPos.ToString();
         debugtext.textCom.transform.parent.name = MapPos.ToString();
+    }
+
+    public void ReleasePos() {
+        debugtext._Delete();
     }
 }

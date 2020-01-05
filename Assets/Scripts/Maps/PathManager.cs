@@ -12,7 +12,7 @@ public static class PathHelper{
 
         FpResult result = new FpResult();
         //获取PathMapnager实例
-        PathManager manager = Global.Instance.pathManager;
+        PathManager manager = PathManager.GetInstance();
        
         //按照对应的权重方式寻路
         manager.AStarFindPath(from, dest);
@@ -69,6 +69,9 @@ public class PathManager : Singleton<PathManager> {
         closed = new HashSet<HexCell>();
         open = new HashSet<HexCell>();
         cellsdata = new Dictionary<HexCell, FpData>();
+    }
+
+    public override void Start(EventHelper helper) {
     }
 
     /// <summary>

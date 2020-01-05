@@ -151,6 +151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 10
   height: 10
+  checkState: 0
 --- !u!4 &93872400
 Transform:
   m_ObjectHideFlags: 0
@@ -249,7 +250,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 90
+  orthographic size: 30
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

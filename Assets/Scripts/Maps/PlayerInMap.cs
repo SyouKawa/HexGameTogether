@@ -8,14 +8,16 @@ public class PlayerInMap : ObjectBinding
     private HexCell curCell;
 
     public PlayerInMap() {
-        //Source.transform.position = new Vector3(curCell.MapPos.x,curCell.MapPos.y, 0f);
-        //Transform.SetParent(curCell.Transform);
-        //Transform.localPosition = Vector3.zero;
     }
-    /// <summary>
-    /// 获取当前站立的Cell
-    /// </summary>
-    public HexCell GetCurPosCell() {
-        return curCell;
+
+    public HexCell CurCell {
+        get { return curCell; }
+        set {
+            Transform.SetParent(value.Transform);
+            Transform.localPosition = Vector3.zero;
+            curCell = value;
+            CameraController.GetInstance().SetPosition(curCell.Transform);
+        }
     }
+
 }

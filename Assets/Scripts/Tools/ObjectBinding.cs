@@ -6,6 +6,14 @@ using System.Threading.Tasks;
 using UnityEngine;
 
 /// <summary>
+/// 初始化的时候,挂这个的会在最开始执行
+/// </summary>
+[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
+public class EventBinding : Attribute {
+
+}
+
+/// <summary>
 /// 一种新的初始化方式,通过挂载这个特性来对某个类进行建池
 /// </summary>
 [AttributeUsage(AttributeTargets.Class)]
@@ -36,14 +44,14 @@ public abstract class ObjectBinding {
     /// 构造的时候从对象池获取数据源
     /// </summary>
     public ObjectBinding() {
-        Source = ObjectManager.GetInstantiate(this);
+        Source = ObjectHelper.GetInstantiate(this);
     }
 
     /// <summary>
     /// 删除的时候还回数据源 一定要手动释放对象
     /// </summary>
     public virtual void _Delete() {
-        ObjectManager.ReturnInstantiate(Source, GetType());
+        ObjectHelper.ReturnInstantiate(Source, GetType());
     }
 
     /// <summary>
