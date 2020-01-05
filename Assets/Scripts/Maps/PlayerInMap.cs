@@ -62,7 +62,7 @@ public class PlayerInMap : ObjectBinding {
     }
 
 
-    private readonly HexCell lastCell;
+    private HexCell lastCell;
 
     /// <summary>
     /// 寻路模式下的点击检测
@@ -74,6 +74,7 @@ public class PlayerInMap : ObjectBinding {
                 Debug.Log("Set dest");
                 //寻路
                 PathHelper.GetFindPathResult(CurCell, cell);
+                lastCell = cell;
             }
         }
     }
