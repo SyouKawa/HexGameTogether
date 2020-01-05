@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[AddPool("Prefabs/Map/CellDebugText")]
+[PrefabPath("Prefabs/Map/CellDebugText")]
 public class CellDebugText : ObjectBinding {
     public Text textCom;
 
@@ -19,7 +19,7 @@ public class CellDebugText : ObjectBinding {
     }
 }
 
-[AddPool("Prefabs/Map/BasicHexCell")]
+[PrefabPath("Prefabs/Map/BasicHexCell")]
 public class HexCell : ObjectBinding{
     public Vector3 pos;
     public Vector2Int MapPos;
@@ -33,10 +33,6 @@ public class HexCell : ObjectBinding{
         MapPos = _MapPos;
         Img = Transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
         SetFieldType(GameStaticData.FieldType.EdgeSea);//默认不可行动
-    }
-
-    ~HexCell() {
-        ObjectManager.ReturnInstantiate<HexCell>(Source);
     }
 
     public HexCell(Vector2Int _MapPos,GameObject _cell) 

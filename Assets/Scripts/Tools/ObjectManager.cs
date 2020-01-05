@@ -4,28 +4,10 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
-/*
- * 
- */
-
-
-/// <summary>
-/// 一种新的初始化方式,通过挂载这个特性来对某个类进行建池
-/// </summary>
-[AttributeUsage(AttributeTargets.Class)]
-public class AddPool : Attribute {
-    public string path;
-
-    public AddPool(string path) {
-        this.path = path;
-    }
-}
-
-
 /// <summary>
 /// 对象池接口
 /// 使用说明: 
-/// 1.使用[AddPool]特性添加和绑定对象池
+/// 1.使用[PrefabPath]特性绑定一个Prefeb路径和初始化对象池
 /// 2.使用GetInstantiate获取实例
 /// 3.使用ReturnInstantiate删除实例
 /// 4.使用GetClass通过实例反向获取框架对象
@@ -62,6 +44,8 @@ public static class ObjectManager {
     public static T GetClass<T>(GameObject gameObject) where T : class {
         return ObjectPoolData.Instance.GetClass<T>(gameObject);
     }
+
+
 }
 
 
@@ -90,8 +74,10 @@ public class ObjectPoolData {
     /// 将AddPool特性的类自动建池
     /// </summary>
     public static void InitPool(Transform rootTrans) {
-        if (Instance != null)
+        if (Instance != null) {
             return;
+        }
+
         Instance = new ObjectPoolData() { poolRootTransform = rootTrans };
         //Type[] entryTypes = Assembly.GetEntryAssembly().GetTypes();
         Type[] currentTypes = Assembly.GetExecutingAssembly().GetTypes();
@@ -99,18 +85,20 @@ public class ObjectPoolData {
         List<Type> allTypes = currentTypes.ToList();
         //allTypes.AddRange();
 
-        foreach (Type type in allTypes)
-        {
-            AddPool poolAtr = type.GetCustomAttribute<AddPool>();
-            if (poolAtr != null)
-            {
+        foreach (Type type in allTypes) {
+
+            PrefabPath poolAtr = type.GetCustomAttribute<PrefabPath>();
+
+            if (type.IsSubclassOf(typeof(ObjectBinding)) && poolAtr == null) {
+                Utils.LogError("{0}类继承了ObjectBinding,但是却缺少PrefabPath特性标签,请检查是否合理",type.Name);
+            }
+
+            if (poolAtr != null) {
                 GameObject obj = Resources.Load<GameObject>(poolAtr.path);
-                if (obj == null)
-                {
-                    Debug.LogError("未找到目标Prefeb,type:" + type.Name + " path:" + poolAtr.path);
+                if (obj == null) {
+                    Utils.LogError("未找到目标Prefeb,type:{0}, path:{1}", type.Name, poolAtr.path);
                 }
-                else
-                {
+                else {
                     //Debug.Log("已建立对象池,type:" + type.Name + " path:" + poolAtr.path);
                     Instance.AddPool(type, Resources.Load<GameObject>(poolAtr.path));
                 }
@@ -135,7 +123,7 @@ public class ObjectPoolData {
         node.localPosition = Vector3.zero;
         node.gameObject.SetActive(false);
         //2 新建对象池
-        ObjectPool pool = new ObjectPool(type, gameObject, node,this);
+        ObjectPool pool = new ObjectPool(type, gameObject, node, this);
         PoolDic.Add(type, pool);
         //3 添加新的反向绑定词典
         data.Add(type, new Dictionary<GameObject, object>());
@@ -159,7 +147,7 @@ public class ObjectPoolData {
     /// <summary>
     /// 需要提供框架类型,还回对象
     /// </summary>
-    public void ReturnInstantiate(GameObject obj,System.Type type) {
+    public void ReturnInstantiate(GameObject obj, System.Type type) {
         PoolDic[type].ReturnInstantiate(obj);
     }
 
@@ -211,7 +199,7 @@ public class ObjectPoolData {
         public Transform PoolNode;
 
         private ObjectPoolData manager;
-        public ObjectPool(System.Type type, GameObject obj, Transform node,ObjectPoolData objectManager) {
+        public ObjectPool(System.Type type, GameObject obj, Transform node, ObjectPoolData objectManager) {
             this.type = type;
             this.GamePrefeb = obj;
             this.PoolNode = node;

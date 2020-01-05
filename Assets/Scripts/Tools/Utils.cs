@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 /// <summary>
@@ -7,5 +8,13 @@ using UnityEngine;
 /// </summary>
 public static class Utils
 {
+    public static void LogError(string msg,params object[] objs) {
+        StringBuilder sb = new StringBuilder();
+        sb.AppendFormat(msg, objs);
+        Debug.LogError(sb.ToString());
+    }
+}
+
+public class testjkasjfg : ObjectBinding {
 
 }

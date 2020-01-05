@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[AddPool("Prefabs/Map/PlayerInMap")]
+[PrefabPath("Prefabs/Map/PlayerInMap")]
 public class PlayerInMap : ObjectBinding
 {
     private HexCell curCell;

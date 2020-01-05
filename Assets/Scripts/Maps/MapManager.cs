@@ -48,7 +48,7 @@ public class MapManager : Singleton<MapManager>
     }
 }
 
-[AddPool("Prefabs/Map/MapBaseNode")]
+[PrefabPath("Prefabs/Map/MapBaseNode")]
 public class Map : ObjectBinding
 {
     public HexCell[,] cells;

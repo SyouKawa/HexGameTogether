@@ -38,7 +38,7 @@ public enum DiceSide {
 /// 骰子 包含六个面
 /// </summary>
 public class Dice {
-    [AddPool("Prefabs/Fight/DiceObj")]
+    [PrefabPath("Prefabs/Fight/DiceObj")]
     public class DiceObj : ObjectBinding {
         public Dice Dice;
 
