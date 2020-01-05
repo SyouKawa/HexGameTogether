@@ -21,7 +21,7 @@ public class Global : MonoBehaviour {
     public float defaultCameraSize = 70f;
     public float cameraRollSpeed = 5f;
     
-    private EventHelper eventHelper;
+    public EventHelper eventHelper;
 
     private void Awake() {
         Instance = this;

@@ -23,13 +23,13 @@ public class CameraController : Singleton<CameraController>{
     }
 
     private void Update() {
-        if(Input.GetAxis("Mouse ScrollWheel") < -0.01f) {
+        if(Input.GetAxis("Mouse ScrollWheel") > 0.01f) {
             camera.orthographicSize -= 1f * GameStaticData.CameraRollSpeed;
             if(camera.orthographicSize < minSize) {
                 camera.orthographicSize = minSize;
             }
         }
-        if (Input.GetAxis("Mouse ScrollWheel") > 0.01f) {
+        if (Input.GetAxis("Mouse ScrollWheel") < -0.01f) {
             camera.orthographicSize += 1f * GameStaticData.CameraRollSpeed;
             if (camera.orthographicSize > maxSize) {
                 camera.orthographicSize = maxSize;
