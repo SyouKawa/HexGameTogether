@@ -8,26 +8,28 @@ public class PlayerInMap : ObjectBinding
     public int supply = 40;
     private HexCell lastCell;
     private FpResult curpath;
-    private bool isMoving = false;
     private HexCell curCell;
     public CheckState checkState = CheckState.InMap;
-    private MonoBehaviour tempMono = new MonoBehaviour();
+    private int index = 1;
+     
 
     public PlayerInMap()
     {
         Global.Instance.EventHelper.OnUpdateEvent += CheckClickInMap;
     }
 
-    public HexCell CurCell
-    {
+    public HexCell CurCell{
         get => curCell;
-        set
-        {
-            Transform.SetParent(value.Transform);
-            Transform.localPosition = Vector3.zero;
-            curCell = value;
-            CameraController.GetInstance().SetPosition(curCell.Transform);
-        }
+        set => SetPlayer(value);
+    }
+    /// <summary>
+    /// 由入参Cell设置玩家在地图中的位置
+    /// </summary>
+    void SetPlayer(HexCell cell) {
+        Transform.SetParent(cell.Transform);
+        Transform.localPosition = Vector3.zero;
+        curCell = cell;
+        CameraController.GetInstance().SetPosition(curCell.Transform);
     }
 
     /// <summary>
@@ -56,10 +58,7 @@ public class PlayerInMap : ObjectBinding
                             break;
                         case CheckState.InMoving:
                             Debug.Log("Moving");
-                            if(isMoving == false) {
-                                isMoving = true;
-                                tempMono.StartCoroutine("UpdateMoving");
-                            }
+                            UpdateMoving();
                             break;
                     }
                 }
@@ -96,7 +95,6 @@ public class PlayerInMap : ObjectBinding
         if (hit.collider.tag == "MapCell")
         {
             HexCell cell = GetClass<HexCell>(hit.collider.transform.parent.gameObject);
-            FpResult result = null;
             //非寻路区域直接返回
             if (cell.type == FieldType.EdgeSea || cell.type == FieldType.Lake)
             {
@@ -108,8 +106,8 @@ public class PlayerInMap : ObjectBinding
                 //清空Debug显示
                 PathManager.GetInstance().FreeFindPathData();
                 //开始寻路
-                result = PathHelper.GetFindPathResult(CurCell, cell);
-                if (!result.isfinded)
+                curpath = PathHelper.GetFindPathResult(CurCell, cell);
+                if (!curpath.isfinded)
                 {
                     Debug.Log("Cant Catch.");
                 }
@@ -120,27 +118,27 @@ public class PlayerInMap : ObjectBinding
             {
                 PathManager.GetInstance().FreeFindPathData();
                 checkState = CheckState.InMoving;
-                curpath = result;
+                Debug.Log(curpath);
                 return;
             }
         }
     }
 
-    IEnumerator UpdateMovingC() {
-        if (curpath != null) {
-            for (int i = 0;i < curpath.path.Count ;i++ ) {
-                while (Vector2.Distance(curpath.path[i].Transform.position,Transform.position) > 0.01f) {
-                    Transform.position = Vector2.Lerp(Transform.position,curpath.path[i].Transform.position, Time.deltaTime);
-                    yield return null;
-                }
-            }
-            Debug.Log("Ending");
-            checkState = CheckState.InMap;
-            isMoving = false;
-        }
-    }
-
     void UpdateMoving() {
-
+        float dis = Vector2.Distance(curpath.path[index].Transform.position, Transform.position);
+        if(dis > 1f) {
+            Transform.Translate(0.5f*(curpath.path[index].Transform.position-Transform.position).normalized, Space.Self);
+        }
+        else {
+            if (index < curpath.path.Count-1) {
+                index++;
+            }
+            else {
+                Debug.Log("Ending");
+                SetPlayer(curpath.path[index]);
+                index = 1;//重置辅助标记
+                checkState = CheckState.InMap;
+            }
+        }
     }
 }
