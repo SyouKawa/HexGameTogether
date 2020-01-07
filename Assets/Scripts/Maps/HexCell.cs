@@ -1,44 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-
-[PrefabPath("Prefabs/Map/CellDebugText")]
-public class CellDebugText : ObjectBinding {
-    public Text textCom;
-
-    public CellDebugText() {
-        textCom = Source.GetComponent<Text>();
-    }
-
-    /// <summary>
-    /// (辅助)在标签上显示信息
-    /// </summary>
-    public void SetText(string str){
-        textCom.text = textCom.text + "\n" + str;
-    }
-}
+using TMPro;
 
 [PrefabPath("Prefabs/Map/BasicHexCell")]
 public class HexCell : ObjectBinding{
     public Vector3 pos;
     public Vector2Int MapPos;
     public SpriteRenderer Img;
-    public CellDebugText debugtext;
     public GameStaticData.FieldType type;
 
     public int fieldcost;//通过该节点本身的消耗
 
     public HexCell(Vector2Int _MapPos) {
         MapPos = _MapPos;
-        Img = Transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
+        Img = Nodes["Img"].GetComponent<SpriteRenderer>();
         SetFieldType(GameStaticData.FieldType.EdgeSea);//默认不可行动
     }
 
     public HexCell(Vector2Int _MapPos,GameObject _cell) 
     {
         MapPos = _MapPos;
-        Img = Transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
+        Img = Nodes["Img"].GetComponent<SpriteRenderer>();
         SetFieldType(GameStaticData.FieldType.EdgeSea);//默认不可行动
     }
 
@@ -51,20 +34,20 @@ public class HexCell : ObjectBinding{
         }
     }
 
+    /// <summary>
+    /// (辅助)在标签上显示信息
+    /// </summary>
+    public void SetDebugInfo(string str){
+        TextMesh debuger = Source.GetComponentInChildren<TextMesh>();
+        debuger.text = debuger.text + "\n" + str;
+    }
+
     public void SetImgOrder(int order) {
         Img.sortingOrder = order;
     }
 
-    public void ShowPos() {
-        debugtext = new CellDebugText();
-        //显示cell的游戏坐标
-        debugtext.textCom.rectTransform.SetParent(MapManager.GetInstance().helperCanvas.transform, false);
-        debugtext.textCom.rectTransform.anchoredPosition = new Vector2(Transform.position.x,Transform.position.y);
-        debugtext.textCom.text = MapPos.ToString();
-        debugtext.textCom.transform.parent.name = MapPos.ToString();
-    }
-
-    public void ReleasePos() {
-        debugtext._Delete();
+    public void SetPos() {
+        TextMeshPro debuger = Nodes["DebugText"].GetComponent<TextMeshPro>();
+        debuger.text = MapPos.ToString();
     }
 }

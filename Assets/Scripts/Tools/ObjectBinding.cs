@@ -39,12 +39,32 @@ public abstract class ObjectBinding {
     /// Unity Transform
     /// </summary>
     public Transform Transform { get => Source.transform; }
+    /// <summary>
+    /// 根据子节点名称存储所有节点
+    /// </summary>
+    public Dictionary<string,GameObject> Nodes { get; private set; }
 
     /// <summary>
     /// 构造的时候从对象池获取数据源
     /// </summary>
     public ObjectBinding() {
         Source = ObjectHelper.GetInstantiate(this);
+        //递归地存储节点
+        Nodes = new Dictionary<string, GameObject>();
+        RecursiveNode(Transform);
+        //foreach(KeyValuePair<string,GameObject> v in Nodes) { Debug.Log(v.Key); }
+    }
+    /// <summary>
+    /// 递归地获得所有子节点
+    /// </summary>
+    /// <param name="trans">Trans.</param>
+    private void RecursiveNode(Transform trans) {
+        foreach (Transform child in trans) {
+            Nodes.Add(child.name, child.gameObject);
+            if(child.childCount != 0) {
+                RecursiveNode(child);
+            }
+        }
     }
 
     /// <summary>

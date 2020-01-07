@@ -90,7 +90,7 @@ public class Map : ObjectBinding {
 
         //按照倍率调节图片缩放
         cells[col, row].Img.transform.localScale = new Vector3(Rates, Rates, 0f);
-        cells[col, row].ShowPos();
+        cells[col, row].SetPos();
     }
 
     /// <summary>

@@ -20,6 +20,7 @@ public class Global : MonoBehaviour {
     public int height = 10;
     public float defaultCameraSize = 70f;
     public float cameraRollSpeed = 5f;
+    public bool isDebug = true;
     
     public EventHelper eventHelper;
 

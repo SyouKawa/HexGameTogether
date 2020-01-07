@@ -151,7 +151,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 10
   height: 10
-  checkState: 0
+  defaultCameraSize: 70
+  cameraRollSpeed: 5
 --- !u!4 &93872400
 Transform:
   m_ObjectHideFlags: 0

@@ -195,8 +195,8 @@ public class PathManager : Singleton<PathManager> {
                 }
             }
             //TODO:将辅助染色显示变更为上浮显示路径
-            adj[i].Img.color = new Color(0, 1, 0);
-            adj[i].debugtext.SetText(BalanceSumCost(adj[i],dest).ToString());
+            adj[i].Nodes["DebugImg"].GetComponent<SpriteRenderer>().color = new Color(0, 1, 0,0.3f);
+            adj[i].SetDebugInfo(BalanceSumCost(adj[i],dest).ToString());
         }
     }
 
@@ -225,7 +225,7 @@ public class PathManager : Singleton<PathManager> {
                 minCost = cellsdata[cell].sumCost;
             }
         }
-        next.Img.color = new Color(0, 0, 1);
+        next.Nodes["DebugImg"].GetComponent<SpriteRenderer>().color = new Color(0, 0, 1,0.3f);
         return next;
     }
 
@@ -233,15 +233,12 @@ public class PathManager : Singleton<PathManager> {
     /// 重置每次寻路使用的存储数据
     /// </summary>
     public void FreeFindPathData(){
-        //foreach(var cell in cellsdata.Keys) {
-        //    cell.Img.color = new Color(1, 1, 1);
-        //    cell.debugtext._Delete();
-        //}
-
+        //清空寻路数据
         closed = new HashSet<HexCell>();
         open = new HashSet<HexCell>();
         cellsdata = new Dictionary<HexCell, FpData>();
-
+        //TODO:清空Debug信息
+        //TODO:清空上次寻路Token
     }
 
 }

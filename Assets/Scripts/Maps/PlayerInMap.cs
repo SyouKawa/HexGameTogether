@@ -3,7 +3,9 @@ using static GameStaticData;
 
 [PrefabPath("Prefabs/Map/PlayerInMap")]
 public class PlayerInMap : ObjectBinding {
+
     private HexCell curCell;
+    public CheckState checkState = CheckState.InMap;
 
     public PlayerInMap() {
         Global.Instance.eventHelper.OnUpdateEvent += CheckClickInMap;
@@ -19,8 +21,6 @@ public class PlayerInMap : ObjectBinding {
         }
     }
 
-    public CheckState checkState = CheckState.InMap;
-
     /// <summary>
     /// 检测地图界面的点击
     /// </summary>
@@ -31,6 +31,7 @@ public class PlayerInMap : ObjectBinding {
             foreach (RaycastHit2D hit in hits) {
                 if (hit.collider != null) {
                     Debug.Log("Checking");
+                    Debug.Log(hit.collider.name);
                     switch (checkState) {
                         case CheckState.InMap:
                             UpdateMap(hit);
