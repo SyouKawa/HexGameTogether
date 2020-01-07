@@ -8,7 +8,7 @@ public class PlayerInMap : ObjectBinding {
     public CheckState checkState = CheckState.InMap;
 
     public PlayerInMap() {
-        Global.Instance.eventHelper.OnUpdateEvent += CheckClickInMap;
+        Global.Instance.EventHelper.OnUpdateEvent += CheckClickInMap;
     }
 
     public HexCell CurCell {
@@ -52,7 +52,7 @@ public class PlayerInMap : ObjectBinding {
         if (Input.GetMouseButtonDown(0)) {
             if (hit.collider.tag == "MapCell") {
                 //TODO:显示点击Cell的详细信息
-                HexCell curCell = ObjectHelper.GetClass<HexCell>(hit.collider.transform.parent.gameObject);
+                HexCell curCell = GetClass<HexCell>(hit.collider.transform.parent.gameObject);
                 Debug.Log(curCell.MapPos);
             }
             if (hit.collider.tag == "Player") {
@@ -70,7 +70,7 @@ public class PlayerInMap : ObjectBinding {
     /// </summary>
     private void UpdateFind(RaycastHit2D hit) {
         if (hit.collider.tag == "MapCell") {
-            HexCell cell = ObjectHelper.GetClass<HexCell>(hit.collider.transform.parent.gameObject);
+            HexCell cell = GetClass<HexCell>(hit.collider.transform.parent.gameObject);
             if(cell != lastCell && cell != curCell) {
                 Debug.Log("Set dest");
                 //寻路

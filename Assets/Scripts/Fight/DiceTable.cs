@@ -93,7 +93,7 @@ public class DiceTable : MonoBehaviour {
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
             if (hit.collider != null) {
-                Dice hitDice = ObjectHelper.GetClass<Dice.DiceObj>(hit.collider.gameObject).Dice;
+                Dice hitDice = ObjectBinding.GetClass<Dice.DiceObj>(hit.collider.gameObject).Dice;
                 Selected(hitDice);
             }
         }
