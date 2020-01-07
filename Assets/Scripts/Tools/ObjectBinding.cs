@@ -6,15 +6,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 
 /// <summary>
-/// 初始化的时候,挂这个的会在最开始执行
-/// </summary>
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
-public class EventBinding : Attribute {
-
-}
-
-/// <summary>
-/// 一种新的初始化方式,通过挂载这个特性来对某个类进行建池
+/// 通过挂载这个特性来对某个类进行建池,必须挂载这个特性来进行类型对象绑定操作
 /// </summary>
 [AttributeUsage(AttributeTargets.Class)]
 public class PrefabPath : Attribute {
@@ -26,9 +18,7 @@ public class PrefabPath : Attribute {
 }
 
 /// <summary>
-/// 一个暂定的Unity对象控制类的模板
-/// 这个模板不可以直接被实例化,一定要被继承. 绑定的数据类型是子类的类型
-/// API暂定,待整理
+/// Unity对象控制类的模板,继承这个类来和UnityObj绑定
 /// </summary>
 public abstract class ObjectBinding {
     /// <summary>
@@ -44,14 +34,14 @@ public abstract class ObjectBinding {
     /// 构造的时候从对象池获取数据源
     /// </summary>
     public ObjectBinding() {
-        Source = ObjectHelper.GetInstantiate(this);
+        Source = ObjectPoolData.Instance.GetInstantiate(this);
     }
 
     /// <summary>
     /// 删除的时候还回数据源 一定要手动释放对象
     /// </summary>
     public virtual void _Delete() {
-        ObjectHelper.ReturnInstantiate(Source, GetType());
+        ObjectPoolData.Instance.ReturnInstantiate(Source, GetType());
     }
 
     /// <summary>
@@ -62,5 +52,15 @@ public abstract class ObjectBinding {
             obj._Delete();
         }
         list.Clear();
+    }
+
+    /// <summary>
+    /// 通过对象获取类型
+    /// </summary>
+    /// <typeparam name="T">要获取的框架类型</typeparam>
+    /// <param name="gameObject"></param>
+    /// <returns></returns>
+    public static T GetClass<T>(GameObject gameObject) where T : class {
+        return ObjectPoolData.Instance.GetClass<T>(gameObject);
     }
 }

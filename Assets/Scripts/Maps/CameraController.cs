@@ -10,7 +10,6 @@ public class CameraController : Singleton<CameraController>{
     public Camera camera { get => Camera.main; }
 
     public override void Start(EventHelper helper) {
-        Debug.Log("Binding Success");
         helper.OnUpdateEvent += Update;
         helper.OnWorldLoadEvent += Init;
     }

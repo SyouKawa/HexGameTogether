@@ -5,52 +5,11 @@ using System.Reflection;
 using UnityEngine;
 
 /// <summary>
-/// 对象池接口
-/// 使用说明: 
+/// 现在通常建议使用ObjectBinding来进行对象池绑定,不推荐使用这个api
 /// 1.使用[PrefabPath]特性绑定一个Prefeb路径和初始化对象池
 /// 2.使用GetInstantiate获取实例
 /// 3.使用ReturnInstantiate删除实例
 /// 4.使用GetClass通过实例反向获取框架对象
-/// </summary>
-public static class ObjectHelper {
-    /// <summary>
-    /// 从对象池中获取需要提供框架类的对象来进行双向绑定
-    /// 会自动识别类型返回需要的GameObject
-    /// </summary>
-    public static GameObject GetInstantiate(object con) {
-        return ObjectPoolData.Instance.GetInstantiate(con);
-    }
-
-    /// <summary>
-    /// 需要提供框架类型,还回对象
-    /// </summary>
-    public static void ReturnInstantiate<T>(GameObject obj) {
-        ObjectPoolData.Instance.ReturnInstantiate<T>(obj);
-    }
-
-    /// <summary>
-    /// 需要提供框架类型,还回对象
-    /// </summary>
-    public static void ReturnInstantiate(GameObject obj, System.Type type) {
-        ObjectPoolData.Instance.ReturnInstantiate(obj, type);
-    }
-
-    /// <summary>
-    /// 通过对象获取类型
-    /// </summary>
-    /// <typeparam name="T">要获取的框架类型</typeparam>
-    /// <param name="gameObject"></param>
-    /// <returns></returns>
-    public static T GetClass<T>(GameObject gameObject) where T : class {
-        return ObjectPoolData.Instance.GetClass<T>(gameObject);
-    }
-
-
-}
-
-
-/// <summary>
-/// 对象池数据源通常不操作这个类
 /// </summary>
 public class ObjectPoolData {
     /// <summary>
@@ -71,7 +30,7 @@ public class ObjectPoolData {
     public static ObjectPoolData Instance;
 
     /// <summary>
-    /// 将AddPool特性的类自动建池
+    /// 将AddPool特性的类自动建池,初始化构造函数
     /// </summary>
     public static void InitPool(Transform rootTrans) {
         if (Instance != null) {
@@ -80,12 +39,12 @@ public class ObjectPoolData {
 
         Instance = new ObjectPoolData() { poolRootTransform = rootTrans };
 
-
         foreach (Type type in Utils.AllTypes) {
             PrefabPath poolAtr = type.GetCustomAttribute<PrefabPath>();
 
             if (type.IsSubclassOf(typeof(ObjectBinding)) && poolAtr == null) {
-                Utils.LogError("{0}类继承了ObjectBinding,但是却缺少PrefabPath特性标签,请检查是否合理",type.Name);
+                Utils.LogError("{0}类继承了ObjectBinding,请为其添加PrefabPath特性来绑定一个对象", type.Name);
+                return;
             }
 
             if (poolAtr != null) {
@@ -94,7 +53,7 @@ public class ObjectPoolData {
                     Utils.LogError("未找到目标Prefeb,type:{0}, path:{1}", type.Name, poolAtr.path);
                 }
                 else {
-                    //Debug.Log("已建立对象池,type:" + type.Name + " path:" + poolAtr.path);
+                    Utils.LogData("已建立对象池,type:{0} path:{1}" , type.Name , poolAtr.path);
                     Instance.AddPool(type, Resources.Load<GameObject>(poolAtr.path));
                 }
 
@@ -109,7 +68,8 @@ public class ObjectPoolData {
     /// <param name="path">要建池的对象</param>
     public void AddPool(System.Type type, GameObject gameObject) {
         if (PoolDic.ContainsKey(type)) {
-            Debug.LogError("这个池子已经被建立过了,不能重复建立." + type.ToString());
+            Utils.LogError("类型{0},已经被建立过对象池了,不要重复建立.",type.ToString());
+            return;
         }
 
         //1 在这个节点底下创建一个节点,用于保存未激活的池对象
