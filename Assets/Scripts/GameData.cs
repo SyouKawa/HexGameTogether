@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public static class GameData{
+
+    public const int MaxSupply = 200;
+
     public const float Rates = 10f;
     public const float MaxOuterRadius = 1.7f * Rates;//最大外径
     public const float MinInnerRadius = 0.68f * Rates;//最小内径
@@ -39,5 +42,6 @@ public static class GameData{
         InMap,//在大地图
         InBattle,//在战斗中
         InFind,//在寻路
+        InMoving,//在行进
     }
 }

@@ -11,19 +11,15 @@ public class MapManager : Singleton<MapManager> {
     public Canvas helperCanvas => map.Source.GetComponentInChildren<Canvas>();
 
     public MapManager() {
-        //TODO:UnityDebug时地图大小从Global取,
+        //TODO:UnityDebug时地图大小从Global取
         //Update: 已经改为从StaticData中读取了
     }
-
-
-
     public PlayerInMap player;
 
     public override void Start(EventHelper helper) {
         helper.OnWorldLoadEvent += SpawnMap;
+        helper.OnValueChanged += null;
     }
-
-    
 
     /// <summary>
     /// 生成菱形地图坐标
@@ -48,8 +44,20 @@ public class MapManager : Singleton<MapManager> {
 
         //生成Player
         player = new PlayerInMap {
-            CurCell = map.cells[2, 2]
+            CurCell = map.cells[7, 4]
         };
+    }
+
+    /// <summary>
+    /// 调整Debug信息的显示状态
+    /// </summary>
+    public void SwitchDebugInfoState(bool state)
+    {
+        for(int i=0; i < GameData.MapHeight; i++) {
+            for(int j = 0; j < GameData.MapWidth; j++) {
+                map.cells[j, i].EnableDebugData(state);
+            }
+        }
     }
 }
 

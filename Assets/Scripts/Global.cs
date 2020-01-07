@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
@@ -8,8 +9,8 @@ public class EventHelper {
     public GameAction OnGameLoadEvent = new GameAction();
     public GameAction OnWorldLoadEvent = new GameAction();
     public GameAction OnUpdateEvent = new GameAction();
+    public GameAction OnValueChanged = new GameAction();
 }
-
 
 public class Global : MonoBehaviour {
     public static Global Instance { get; private set; }
@@ -19,7 +20,8 @@ public class Global : MonoBehaviour {
     public int MapHeight = 10;
     public float DefaultCameraSize = 70f;
     public float CameraRollSpeed = 5f;
-    public bool isDebug = true;
+
+    public bool ShowMapDebugInfo;
 
     public EventHelper EventHelper { get; set; }
     
@@ -39,6 +41,8 @@ public class Global : MonoBehaviour {
         EventHelper.OnGameLoadEvent.Invoke();
         //触发事件2
         EventHelper.OnWorldLoadEvent.Invoke();
+
+        MapManager.GetInstance().SwitchDebugInfoState(ShowMapDebugInfo);
     }
 
 
@@ -96,6 +100,4 @@ public class Global : MonoBehaviour {
             }
         }
     }
-
-
 }

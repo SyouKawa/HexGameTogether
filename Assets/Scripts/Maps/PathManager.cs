@@ -10,26 +10,16 @@ public static class PathHelper{
     /// </summary>
     public static FpResult GetFindPathResult(HexCell from,HexCell dest) {
 
-        FpResult result = new FpResult();
         //获取PathMapnager实例
         PathManager manager = PathManager.GetInstance();
        
         //按照对应的权重方式寻路
         manager.AStarFindPath(from, dest);
         //获取对应路径
-        List<HexCell> finalPath = manager.GetPath(from, dest);
+        FpResult result = manager.GetPath(from, dest);
         //释放当前寻路所用的临时数据
-        manager.FreeFindPathData();
+        //manager.FreeFindPathData();
 
-        //获取寻路结果类
-        if (finalPath == null) {
-            result.isfinded = false;
-        }
-        else {
-            result.isfinded = true;
-            result.path = finalPath;
-            //TODO:补上总消耗
-        }
         return result;
     }
 }
@@ -42,6 +32,22 @@ public class FpResult
     public bool isfinded { get; set; }
     public List<HexCell> path { get; set; }
     public int sumcost { get; set; }
+
+    public FpResult() { }
+
+    public FpResult(bool _isfinded,List<HexCell> _path,int _sumCost) {
+        sumcost = _sumCost;
+        path = _path;
+        isfinded = _isfinded;
+    }
+    /// <summary>
+    /// 仅在失败时方便调用
+    /// </summary>
+    public FpResult(bool fail) {
+        isfinded = false;
+        path = null;
+        sumcost = 0;
+    }
 }
 
 public class PathManager : Singleton<PathManager> {
@@ -77,19 +83,26 @@ public class PathManager : Singleton<PathManager> {
     /// <summary>
     /// 显示路径
     /// </summary>
-    public List<HexCell> GetPath(HexCell from,HexCell dest) {
+    public FpResult GetPath(HexCell from,HexCell dest) {
         //TODO:取消颜色显示,使用路线sprite或shader显示
         HexCell cur = dest;
+        int sumCost = 0;
+
         List<HexCell> finalpath = new List<HexCell>();
         while(cur != from) {
             Debug.Log(cellsdata[cur]+" "+cellsdata[cur].prepathcell);
-            cur.Img.color = new Color(1,0,0);
+            cur.Nodes["DebugImg"].GetComponent<SpriteRenderer>().color = new Color(1, 0, 0, 0.3f);
             finalpath.Add(cur);
+            sumCost += cur.fieldcost;
+            if(sumCost > MapManager.GetInstance().player.supply) {
+                return new FpResult(false);
+            }
             cur = cellsdata[cur].prepathcell;
         }
         finalpath.Add(from);
         finalpath.Reverse();
-        return finalpath;
+
+        return new FpResult(true, finalpath, sumCost);
     }
 
     /// <summary>
@@ -233,12 +246,13 @@ public class PathManager : Singleton<PathManager> {
     /// 重置每次寻路使用的存储数据
     /// </summary>
     public void FreeFindPathData(){
+        //清空Debug信息
+        foreach(HexCell cell in closed) { cell.RestDebugData(); }
+        foreach (HexCell cell in open) { cell.RestDebugData(); }
         //清空寻路数据
         closed = new HashSet<HexCell>();
         open = new HashSet<HexCell>();
         cellsdata = new Dictionary<HexCell, FpData>();
-        //TODO:清空Debug信息
-        //TODO:清空上次寻路Token
     }
 
 }

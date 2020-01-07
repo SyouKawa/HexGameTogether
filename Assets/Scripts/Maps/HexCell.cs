@@ -38,8 +38,10 @@ public class HexCell : ObjectBinding{
     /// (辅助)在标签上显示信息
     /// </summary>
     public void SetDebugInfo(string str){
-        TextMesh debuger = Source.GetComponentInChildren<TextMesh>();
-        debuger.text = debuger.text + "\n" + str;
+        TextMeshPro debuger = Source.GetComponentInChildren<TextMeshPro>();
+        if(debuger != null) {
+            debuger.text = MapPos.ToString() + "\n" + str;
+        }
     }
 
     public void SetImgOrder(int order) {
@@ -48,6 +50,17 @@ public class HexCell : ObjectBinding{
 
     public void SetPos() {
         TextMeshPro debuger = Nodes["DebugText"].GetComponent<TextMeshPro>();
-        debuger.text = MapPos.ToString();
+        if (debuger != null){
+            debuger.text = MapPos.ToString();
+        }
+    }
+
+    public void RestDebugData() {
+        Nodes["DebugImg"].GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0);
+        Nodes["DebugText"].GetComponent<TextMeshPro>().text = MapPos.ToString();
+    }
+
+    public void EnableDebugData(bool state) {
+        Nodes["Debuger"].SetActive(state);
     }
 }
