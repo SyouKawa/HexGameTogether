@@ -8,29 +8,29 @@ public class HexCell : ObjectBinding{
     public Vector3 pos;
     public Vector2Int MapPos;
     public SpriteRenderer Img;
-    public GameStaticData.FieldType type;
+    public GameData.FieldType type;
 
     public int fieldcost;//通过该节点本身的消耗
 
     public HexCell(Vector2Int _MapPos) {
         MapPos = _MapPos;
         Img = Nodes["Img"].GetComponent<SpriteRenderer>();
-        SetFieldType(GameStaticData.FieldType.EdgeSea);//默认不可行动
+        SetFieldType(GameData.FieldType.EdgeSea);//默认不可行动
     }
 
     public HexCell(Vector2Int _MapPos,GameObject _cell) 
     {
         MapPos = _MapPos;
         Img = Nodes["Img"].GetComponent<SpriteRenderer>();
-        SetFieldType(GameStaticData.FieldType.EdgeSea);//默认不可行动
+        SetFieldType(GameData.FieldType.EdgeSea);//默认不可行动
     }
 
-    public void SetFieldType(GameStaticData.FieldType _type) {
+    public void SetFieldType(GameData.FieldType _type) {
         type = _type;
         switch (type) {
-            case GameStaticData.FieldType.Forest : fieldcost = 5; break;
-            case GameStaticData.FieldType.Mountain: fieldcost = 10; break;
-            case GameStaticData.FieldType.Plain: fieldcost = 1; break;
+            case GameData.FieldType.Forest : fieldcost = 5; break;
+            case GameData.FieldType.Mountain: fieldcost = 10; break;
+            case GameData.FieldType.Plain: fieldcost = 1; break;
         }
     }
 

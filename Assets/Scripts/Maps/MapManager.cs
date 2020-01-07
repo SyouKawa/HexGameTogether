@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using static GameStaticData;
+using static GameData;
 
 //TODO:添加MapHelper存放对外接口
 
@@ -123,7 +123,7 @@ public class Map : ObjectBinding {
     /// <summary>
     /// 随机产生一个地形类型
     /// </summary>
-    public GameStaticData.FieldType RandomFieldByRates() {
+    public GameData.FieldType RandomFieldByRates() {
         int roll = random.Next(0, 100);
 
         if (roll <= FieldGenRate["Lake"]) {

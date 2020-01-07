@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class GameStaticData{
+public static class GameData{
     public const float Rates = 10f;
     public const float MaxOuterRadius = 1.7f * Rates;//最大外径
     public const float MinInnerRadius = 0.68f * Rates;//最小内径

@@ -20,10 +20,10 @@ public class ResManager : Singleton<ResManager>{
          FieldTiles = new List<Object[]>();
 
         //加载显示的Tile数组
-        int length = System.Enum.GetValues(typeof(GameStaticData.FieldType)).Length;
+        int length = System.Enum.GetValues(typeof(GameData.FieldType)).Length;
         for (int i = 0; i < length; i++)
         {
-            FieldTiles.Add(Resources.LoadAll("Sprites/tiles_" + ((GameStaticData.FieldType)i).ToString() + "_colored", typeof(Sprite)));
+            FieldTiles.Add(Resources.LoadAll("Sprites/tiles_" + ((GameData.FieldType)i).ToString() + "_colored", typeof(Sprite)));
         }
     }
 }

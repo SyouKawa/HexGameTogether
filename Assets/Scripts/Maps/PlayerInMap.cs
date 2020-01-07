@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using static GameStaticData;
+using static GameData;
 
 [PrefabPath("Prefabs/Map/PlayerInMap")]
 public class PlayerInMap : ObjectBinding {

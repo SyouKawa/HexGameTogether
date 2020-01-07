@@ -55,7 +55,7 @@ public class Global : MonoBehaviour {
         FieldInfo[] infos = GetType().GetFields();
         foreach (FieldInfo info in infos) {
             //2.查找Data类中是否有同名的此变量
-            FieldInfo dataInfo = typeof(GameStaticData).GetField(info.Name);
+            FieldInfo dataInfo = typeof(GameData).GetField(info.Name);
             if (dataInfo != null) {
                 try {
                     //3.同步二者的数值

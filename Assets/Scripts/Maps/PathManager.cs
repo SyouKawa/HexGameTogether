@@ -118,7 +118,7 @@ public class PathManager : Singleton<PathManager> {
             else//如果本身不在,closed,再接着判别
             {
                 //如果属于不能在当前载具情况下行动的边境海,就将其剔除,并加入closed列表
-                if (adj[i].type == GameStaticData.FieldType.EdgeSea || adj[i].type == GameStaticData.FieldType.Lake)
+                if (adj[i].type == GameData.FieldType.EdgeSea || adj[i].type == GameData.FieldType.Lake)
                 {
                     closed.Add(adj[i]);
                     adj.Remove(adj[i]);
@@ -216,7 +216,7 @@ public class PathManager : Singleton<PathManager> {
         UpdateOpenList(cur, dest, adj);
 
         //选择路径:选择open中的最小消耗节点,并沿其寻找新的路径
-        float minCost = GameStaticData.infinite;
+        float minCost = GameData.infinite;
         HexCell next = null;
         foreach(HexCell cell in open) {
             //选择消耗最小的作为next

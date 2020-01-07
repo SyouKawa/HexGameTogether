@@ -18,18 +18,18 @@ public class CameraController : Singleton<CameraController>{
     public float maxSize = 100;
 
     private void Init() {
-        camera.orthographicSize = GameStaticData.DefaultCameraSize;
+        camera.orthographicSize = GameData.DefaultCameraSize;
     }
 
     private void Update() {
         if(Input.GetAxis("Mouse ScrollWheel") > 0.01f) {
-            camera.orthographicSize -= 1f * GameStaticData.CameraRollSpeed;
+            camera.orthographicSize -= 1f * GameData.CameraRollSpeed;
             if(camera.orthographicSize < minSize) {
                 camera.orthographicSize = minSize;
             }
         }
         if (Input.GetAxis("Mouse ScrollWheel") < -0.01f) {
-            camera.orthographicSize += 1f * GameStaticData.CameraRollSpeed;
+            camera.orthographicSize += 1f * GameData.CameraRollSpeed;
             if (camera.orthographicSize > maxSize) {
                 camera.orthographicSize = maxSize;
             }
