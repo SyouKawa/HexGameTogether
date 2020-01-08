@@ -21,11 +21,14 @@ public static class GameData{
     public static int MapHeight = 10;
     public static float DefaultCameraSize = 70f;
     public static float CameraRollSpeed = 5f;
+
+    public static bool ShowMapDebugInfo = true;
     
+    //环境配置比例
     public static Dictionary<string, float> FieldGenRate = new Dictionary<string, float> {
         {"Moun",30},{"Lake",10},{"Forest",60},{"Plain",100}
      };
-
+    public static int WaveRate = 15;
 
     /// <summary>
     /// 地形分类

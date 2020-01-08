@@ -3,6 +3,9 @@ using UnityEngine;
 using static GameData;
 
 //TODO:添加MapHelper存放对外接口
+public static class MapHelper{
+
+}
 
 public class MapManager : Singleton<MapManager> {
     //管理的地图
@@ -10,10 +13,7 @@ public class MapManager : Singleton<MapManager> {
     //辅助Canvas
     public Canvas helperCanvas => map.Source.GetComponentInChildren<Canvas>();
 
-    public MapManager() {
-        //TODO:UnityDebug时地图大小从Global取
-        //Update: 已经改为从StaticData中读取了
-    }
+    public MapManager() {}
     public PlayerInMap player;
 
     public override void Start(EventHelper helper) {
@@ -64,9 +64,10 @@ public class MapManager : Singleton<MapManager> {
 [PrefabPath("Prefabs/Map/MapBaseNode")]
 public class Map : ObjectBinding {
     public HexCell[,] cells;
+    public delegate void RowColOperater(int rowOrcol);
 
     public Map(int width, int height) {
-        cells = new HexCell[height, width];
+        cells = new HexCell[width, height];
     }
 
     /// <summary>
@@ -105,26 +106,37 @@ public class Map : ObjectBinding {
     /// (每次生成固定调用)生成地图时修剪边境位置为海洋
     /// </summary>
     public void SetEdgeSea() {
-        //int width = Global.Instance.mapManager.width;
         int width = MapWidth;
+        int height  = MapHeight;
 
         List<Object[]> Tiles = ResManager.GetInstance().FieldTiles;
-        for (int i = 0; i < width; i++) {
-            Sprite curImg = (Sprite)(Tiles[3][Random.Range(0, Tiles[3].Length)]);
-            cells[0, i].Img.GetComponent<SpriteRenderer>().sprite = curImg;
-            cells[0, i].SetImgOrder(-1);
+        //局部函数
+        void SetWaterCell(HexCell cell){
+            //配置浪海比例
+            bool isWave = Random.Range(0,100)>WaveRate?false:true;
+            Sprite curImg = null;
+            if(isWave){
+                curImg = (Sprite)(Tiles[3][Random.Range(0, Tiles[3].Length)]);
+            }else{
+                curImg = (Sprite)(Tiles[1][Random.Range(0, Tiles[1].Length)]);
+            }
+            
+            cell.Img.GetComponent<SpriteRenderer>().sprite = curImg;
+            cell.SetImgOrder(-1);
+            cell.type = FieldType.EdgeSea;
+        }
 
-            cells[0, i].type = FieldType.EdgeSea;
-            cells[i, 0].Img.GetComponent<SpriteRenderer>().sprite = curImg;
-            cells[i, 0].SetImgOrder(-1);
-            cells[i, 0].type = FieldType.EdgeSea;
-            //TODO:后排换成纯水
-            cells[width - 1, i].Img.GetComponent<SpriteRenderer>().sprite = curImg;
-            cells[width - 1, i].SetImgOrder(-1);
-            cells[width - 1, i].type = FieldType.EdgeSea;
-            cells[i, width - 1].Img.GetComponent<SpriteRenderer>().sprite = curImg;
-            cells[i, width - 1].SetImgOrder(-1);
-            cells[i, width - 1].type = FieldType.EdgeSea;
+        for (int i = 0; i < width; i++) {
+            //下宽
+            SetWaterCell(cells[i,0]);
+            //上宽
+            SetWaterCell(cells[i, height - 1]);
+        }
+        for(int i = 0;i<height;i++){
+            //左高
+            SetWaterCell(cells[0, i]);
+            //右高
+            SetWaterCell(cells[width - 1, i]);
         }
     }
 

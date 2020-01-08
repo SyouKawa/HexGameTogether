@@ -194,7 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a74b7bff5bb5348289a534f73bc6b312, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MapWidth: 10
+  MapWidth: 20
   MapHeight: 10
   DefaultCameraSize: 70
   CameraRollSpeed: 5
