@@ -36,7 +36,7 @@ public static class Log {
         StringBuilder sb = new StringBuilder();
         sb.Append("[FrameWarning:]");
         sb.AppendFormat(msg, objs);
-        UnityEngine.Debug.LogError(sb.ToString());
+        UnityEngine.Debug.LogWarning(sb.ToString());
     }
 
 

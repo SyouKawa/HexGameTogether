@@ -39,6 +39,8 @@ public class ObjectPoolData {
 
         Instance = new ObjectPoolData() { poolRootTransform = rootTrans };
 
+        int count = 0;
+
         foreach (Type type in Utils.AllTypes) {
             PrefabPath poolAtr = type.GetCustomAttribute<PrefabPath>();
 
@@ -57,12 +59,14 @@ public class ObjectPoolData {
                     Log.Error("未找到目标Prefeb,type:{0}, path:{1}", type.Name, poolAtr.path);
                 }
                 else {
-                    Log.Info("已建立对象池,type:{0} path:{1}" , type.Name , poolAtr.path);
+                    count++;
+                    //Log.Info("已建立对象池,type:{0} path:{1}" , type.Name , poolAtr.path);
                     Instance.AddPool(type, Resources.Load<GameObject>(poolAtr.path));
                 }
-
             }
         }
+
+        Log.Info("对象池初始化完成，共建立对象池{0}个", count);
     }
 
     /// <summary>

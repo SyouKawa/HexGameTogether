@@ -71,7 +71,7 @@ public class Global : MonoBehaviour {
                 }
             }
             else {
-                Log.Warning("未同步变量:{0},GameData无此变量", info.Name);
+                Log.Info("未同步变量:{0},GameData无此变量", info.Name);
             }
         }
         Log.Info("同步Inspector完成,成功同步了{0}个变量", count);
@@ -101,8 +101,7 @@ public class Global : MonoBehaviour {
                 count++;
                 Log.Info("脚本已加载:{0}", type.FullName);
             }
-
-            Log.Info("加载完成,本次共加载{0}", count);
         }
+        Log.Info("加载完成,本次共加载{0}", count);
     }
 }
