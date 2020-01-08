@@ -43,17 +43,21 @@ public class ObjectPoolData {
             PrefabPath poolAtr = type.GetCustomAttribute<PrefabPath>();
 
             if (type.IsSubclassOf(typeof(ObjectBinding)) && poolAtr == null) {
-                Utils.LogError("{0}类继承了ObjectBinding,请为其添加PrefabPath特性来绑定一个对象", type.Name);
+                Log.Warning("{0}类继承了ObjectBinding,请为其添加PrefabPath特性来绑定一个对象", type.Name);
                 return;
             }
 
             if (poolAtr != null) {
+                if (!type.IsSubclassOf(typeof(ObjectBinding))) {
+                    Log.Warning("{0}类不是ObjectBinding的子类,PrefabPath特性无效", type.Name);
+                    return;
+                }
                 GameObject obj = Resources.Load<GameObject>(poolAtr.path);
                 if (obj == null) {
-                    Utils.LogError("未找到目标Prefeb,type:{0}, path:{1}", type.Name, poolAtr.path);
+                    Log.Error("未找到目标Prefeb,type:{0}, path:{1}", type.Name, poolAtr.path);
                 }
                 else {
-                    Utils.LogData("已建立对象池,type:{0} path:{1}" , type.Name , poolAtr.path);
+                    Log.Info("已建立对象池,type:{0} path:{1}" , type.Name , poolAtr.path);
                     Instance.AddPool(type, Resources.Load<GameObject>(poolAtr.path));
                 }
 
@@ -68,7 +72,7 @@ public class ObjectPoolData {
     /// <param name="path">要建池的对象</param>
     public void AddPool(System.Type type, GameObject gameObject) {
         if (PoolDic.ContainsKey(type)) {
-            Utils.LogError("类型{0},已经被建立过对象池了,不要重复建立.",type.ToString());
+            Log.Warning("类型{0},已经被建立过对象池了,不要重复建立.",type.ToString());
             return;
         }
 
@@ -124,9 +128,8 @@ public class ObjectPoolData {
     }
 
     /// <summary>
-    /// 一个对象池,可能不是那么好用
+    /// 单个对象池
     /// </summary>
-    /// <typeparam name="T">对象池绑定的框架类的类型</typeparam>
     private class ObjectPool {
         /// <summary>
         /// 绑定的框架类的类型

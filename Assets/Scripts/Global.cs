@@ -67,37 +67,42 @@ public class Global : MonoBehaviour {
                     count++;
                 }
                 catch {
-                    Utils.Log("同步Inspector到GameData出错,请检查二者类型是否有误:{0}", info.Name);
+                    Log.Error("{0}同步Inspector到GameData出错,类型{1}->{2}", info.Name,info.FieldType.Name,dataInfo.FieldType.Name);
                 }
             }
             else {
-                Utils.Log("未同步变量:{0},GameData无此变量", info.Name);
+                Log.Warning("未同步变量:{0},GameData无此变量", info.Name);
             }
         }
-        Utils.Log("同步Inspector完成,成功同步了{0}个变量", count);
+        Log.Info("同步Inspector完成,成功同步了{0}个变量", count);
     }
 
 
     private void InvokeManager() {
+        int count = 0;
         foreach (Type type in Utils.AllTypes) {
+            Type superType;
+            //1判断是否是Singleton子类
             try {
-                //1判断是否是Singleton子类
-                Type superType = typeof(Singleton<>).MakeGenericType(type);
-                if (type.IsSubclassOf(superType)) {
-                    //2获取单例并创建出这个单例对象
-                    MethodInfo info = superType.GetMethod("GetInstance");
-                    object Instance = info.Invoke(null, info.GetParameters());
-                    //3调用其Start方法
-                    MethodInfo info2 = type.GetMethod("Start");
-                    object[] objs = new object[1] { EventHelper };
-                    info2.Invoke(Instance, objs);
-                    Utils.Log("脚本已加载:{0}", type.FullName);
-                }
+                superType = typeof(Singleton<>).MakeGenericType(type);
             }
             catch {
-                //Utils.LogError("初始化脚本绑定出错,脚本类型:{0}", type.FullName);
                 continue;
             }
+
+            if (type.IsSubclassOf(superType)) {
+                //2获取单例并创建出这个单例对象
+                MethodInfo info = superType.GetMethod("GetInstance");
+                object Instance = info.Invoke(null, info.GetParameters());
+                //3调用其Start方法
+                MethodInfo info2 = type.GetMethod("Start");
+                object[] objs = new object[1] { EventHelper };
+                info2.Invoke(Instance, objs);
+                count++;
+                Log.Info("脚本已加载:{0}", type.FullName);
+            }
+
+            Log.Info("加载完成,本次共加载{0}", count);
         }
     }
 }
