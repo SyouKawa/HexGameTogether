@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,6 +22,7 @@ public class PrefabPath : Attribute {
 /// Unity对象控制类的模板,继承这个类来和UnityObj绑定
 /// </summary>
 public abstract class ObjectBinding {
+    
     /// <summary>
     /// Unity对象的数据源
     /// </summary>
@@ -72,6 +74,14 @@ public abstract class ObjectBinding {
             obj._Delete();
         }
         list.Clear();
+
+    }
+
+    /// <summary>
+    /// 这个调用策略自己编写的函数需要返回IEnumerator
+    /// </summary>
+    public void Startcoroutine(IEnumerator routine) {
+        Global.Instance.StartCoroutine(routine);
     }
 
     /// <summary>
