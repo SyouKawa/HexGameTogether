@@ -10,6 +10,7 @@ public abstract class Singleton<T> where T : class,new() {
     public abstract void Start(EventHelper helper);
 
     private static T _instance;
+    //TODO： GetInstance()-> Instance{get}
     public static T GetInstance() {
 
         if (_instance == null) {

@@ -63,4 +63,21 @@ public class HexCell : ObjectBinding{
     public void EnableDebugData(bool state) {
         Nodes["Debuger"].SetActive(state);
     }
+
+    //TODO: 仅供建议，未测试，可能有逻辑错误
+    //通常来说 只要方法名出现了GetXXX SetXXX 都可以改用属性. 比如这里的很多Set Get
+    private bool debugMode = false;
+    public bool DebugMode {
+        get {
+            return debugMode;
+        }
+        set {
+            debugMode = value;
+            Nodes["Debuger"].SetActive(value);
+            if (!debugMode) {
+                Nodes["DebugImg"].GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0);
+                Nodes["DebugText"].GetComponent<TextMeshPro>().text = MapPos.ToString();
+            }
+        }
+    }
 }
