@@ -45,15 +45,15 @@ public class PlayerInMap : ObjectBinding
             {
                 if (hit.collider != null)
                 {
-                    Debug.Log("Checking");
-                    Debug.Log(hit.collider.name);
+                    //Debug.Log("Checking");
+                    //Debug.Log(hit.collider.name);
                     switch (checkState)
                     {
                         case CheckState.InMap:
                             UpdateMap(hit);
                             break;
                         case CheckState.InFind:
-                            Debug.Log("Finding");
+                            //Debug.Log("Finding");
                             UpdateFind(hit);
                             break;
                         case CheckState.InMoving:
@@ -108,6 +108,7 @@ public class PlayerInMap : ObjectBinding
                 //开始寻路
                 curpath = PathHelper.GetFindPathResult(CurCell, cell);
                 Debug.Log("sumCost = "+curpath.sumcost);
+                MapManager.GetInstance().PlayerInfoUI.PreviewSupply(curpath.sumcost);
                 if (!curpath.isfinded)
                 {
                     Debug.Log("Cant Catch.");
@@ -117,6 +118,8 @@ public class PlayerInMap : ObjectBinding
             //左键选中目的地（不是当前所在地)
             if (Input.GetMouseButtonDown(0) && curCell!= cell)
             {
+                //减去此次的消耗
+                supply -= curpath.sumcost;
                 PathManager.GetInstance().FreeFindPathData();
                 checkState = CheckState.InMoving;
                 return;
@@ -127,7 +130,12 @@ public class PlayerInMap : ObjectBinding
     void UpdateMoving() {
         float dis = Vector2.Distance(curpath.path[index].Transform.position, Transform.position);
         if(dis > 1f) {
+            //仿匀速移动
             Transform.Translate(0.5f*(curpath.path[index].Transform.position-Transform.position).normalized, Space.Self);
+            //TODO:Supply符合路径消耗地逐渐减少
+            if(MapManager.GetInstance().PlayerInfoUI.SupplyBar.fillAmount>MapManager.GetInstance().PlayerInfoUI.PreviewBar.fillAmount){
+                MapManager.GetInstance().PlayerInfoUI.SupplyBar.fillAmount -= 0.001f;
+            }
         }
         else {
             if (index < curpath.path.Count-1) {

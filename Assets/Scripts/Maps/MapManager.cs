@@ -15,6 +15,7 @@ public class MapManager : Singleton<MapManager> {
 
     public MapManager() {}
     public PlayerInMap player;
+    public CameraUI PlayerInfoUI;
 
     public override void Start(EventHelper helper) {
         helper.OnWorldLoadEvent += SpawnMap;
@@ -46,6 +47,8 @@ public class MapManager : Singleton<MapManager> {
         player = new PlayerInMap {
             CurCell = map.cells[7, 4]
         };
+        //生成显示Player信息的CameraUI层
+        PlayerInfoUI = new CameraUI();
     }
 
     /// <summary>
@@ -64,7 +67,6 @@ public class MapManager : Singleton<MapManager> {
 [PrefabPath("Prefabs/Map/MapBaseNode")]
 public class Map : ObjectBinding {
     public HexCell[,] cells;
-    public delegate void RowColOperater(int rowOrcol);
 
     public Map(int width, int height) {
         cells = new HexCell[width, height];

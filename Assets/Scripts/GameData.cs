@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class GameData{
 
-    public const int MaxSupply = 200;
+    public const int MaxSupply = 100;
 
     public const float Rates = 10f;
     public const float MaxOuterRadius = 1.7f * Rates;//最大外径
