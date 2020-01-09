@@ -143,7 +143,7 @@ public class Map : ObjectBinding {
     /// <summary>
     /// 随机产生一个地形类型
     /// </summary>
-    public GameData.FieldType RandomFieldByRates() {
+    public FieldType RandomFieldByRates() {
         int roll = random.Next(0, 100);
 
         if (roll <= FieldGenRate["Lake"]) {

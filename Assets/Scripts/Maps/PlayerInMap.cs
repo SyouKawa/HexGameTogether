@@ -5,7 +5,7 @@ using static GameData;
 [PrefabPath("Prefabs/Map/PlayerInMap")]
 public class PlayerInMap : ObjectBinding
 {
-    public int supply = 40;
+    public int supply = 100;
     private HexCell lastCell;
     private FpResult curpath;
     private HexCell curCell;
@@ -107,6 +107,7 @@ public class PlayerInMap : ObjectBinding
                 PathManager.GetInstance().FreeFindPathData();
                 //开始寻路
                 curpath = PathHelper.GetFindPathResult(CurCell, cell);
+                Debug.Log("sumCost = "+curpath.sumcost);
                 if (!curpath.isfinded)
                 {
                     Debug.Log("Cant Catch.");
@@ -118,7 +119,6 @@ public class PlayerInMap : ObjectBinding
             {
                 PathManager.GetInstance().FreeFindPathData();
                 checkState = CheckState.InMoving;
-                Debug.Log(curpath);
                 return;
             }
         }

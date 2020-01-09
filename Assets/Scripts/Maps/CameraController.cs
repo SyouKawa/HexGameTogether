@@ -39,6 +39,5 @@ public class CameraController : Singleton<CameraController>{
     public void SetPosition(Transform trans) {
         camera.transform.position = new Vector3(trans.position.x, trans.position.y, -100f);
     }
-
 }
 

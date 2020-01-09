@@ -90,7 +90,6 @@ public class PathManager : Singleton<PathManager> {
 
         List<HexCell> finalpath = new List<HexCell>();
         while(cur != from) {
-            Debug.Log(cellsdata[cur]+" "+cellsdata[cur].prepathcell);
             cur.Nodes["DebugImg"].GetComponent<SpriteRenderer>().color = new Color(1, 0, 0, 0.3f);
             finalpath.Add(cur);
             sumCost += cur.fieldcost;
@@ -131,7 +130,7 @@ public class PathManager : Singleton<PathManager> {
             else//如果本身不在,closed,再接着判别
             {
                 //如果属于不能在当前载具情况下行动的边境海,就将其剔除,并加入closed列表
-                if (adj[i].type == GameData.FieldType.EdgeSea || adj[i].type == GameData.FieldType.Lake)
+                if (adj[i].type == FieldType.EdgeSea || adj[i].type == FieldType.Lake)
                 {
                     closed.Add(adj[i]);
                     adj.Remove(adj[i]);
