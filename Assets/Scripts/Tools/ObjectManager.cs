@@ -4,6 +4,10 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
+//TODO:: ObjectPoolData->ObjectPool
+//ObjectPool -> SinglePool
+//ObjectBinding增加Find方法
+
 /// <summary>
 /// 现在通常建议使用ObjectBinding来进行对象池绑定,不推荐使用这个api
 /// 1.使用[PrefabPath]特性绑定一个Prefeb路径和初始化对象池

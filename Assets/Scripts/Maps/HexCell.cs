@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 
 [PrefabPath("Prefabs/Map/BasicHexCell")]
-public class HexCell : ObjectBinding{
+public partial class HexCell : ObjectBinding{
     public Vector3 pos;
     public Vector2Int MapPos;
     public SpriteRenderer Img;
@@ -80,4 +80,8 @@ public class HexCell : ObjectBinding{
             }
         }
     }
+}
+
+public partial class HexCell{
+    
 }
