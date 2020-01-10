@@ -9,7 +9,7 @@ public class EventHelper {
     public GameAction OnGameLoadEvent = new GameAction();
     public GameAction OnWorldLoadEvent = new GameAction();
     public GameAction OnUpdateEvent = new GameAction();
-    public GameAction OnValueChanged = new GameAction();
+    public GameAction AfterWorldLoadEvent = new GameAction();
 }
 
 public class Global : MonoBehaviour {
@@ -41,8 +41,8 @@ public class Global : MonoBehaviour {
         EventHelper.OnGameLoadEvent.Invoke();
         //触发事件2
         EventHelper.OnWorldLoadEvent.Invoke();
-
-        MapManager.GetInstance().SwitchDebugInfoState(ShowMapDebugInfo);
+        //3
+        EventHelper.AfterWorldLoadEvent.Invoke();
     }
 
 
@@ -82,9 +82,9 @@ public class Global : MonoBehaviour {
         int count = 0;
         foreach (Type type in Utils.AllTypes) {
             Type superType;
-            //1判断是否是Singleton子类
+            //1判断是否是Manager子类
             try {
-                superType = typeof(Singleton<>).MakeGenericType(type);
+                superType = typeof(Manager<>).MakeGenericType(type);
             }
             catch {
                 continue;
@@ -92,8 +92,9 @@ public class Global : MonoBehaviour {
 
             if (type.IsSubclassOf(superType)) {
                 //2获取单例并创建出这个单例对象
-                MethodInfo info = superType.GetMethod("GetInstance");
-                object Instance = info.Invoke(null, info.GetParameters());
+                PropertyInfo info = typeof(Singleton<>).MakeGenericType(type).GetProperty("Instance");
+                object Instance = info.GetValue(null);
+                
                 //3调用其Start方法
                 MethodInfo info2 = type.GetMethod("Start");
                 object[] objs = new object[1] { EventHelper };

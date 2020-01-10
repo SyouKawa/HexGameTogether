@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class ResManager : Singleton<ResManager>{
+public class ResManager : Manager<ResManager>{
 
     //加载显示的Tile数组
     public List<Object[]> FieldTiles { get; private set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 
 
-public class CameraController : Singleton<CameraController>{
+public class CameraController : Manager<CameraController>{
     public Camera camera { get => Camera.main; }
 
     public override void Start(EventHelper helper) {

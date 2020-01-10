@@ -22,7 +22,6 @@ public class PrefabPath : Attribute {
 /// Unity对象控制类的模板,继承这个类来和UnityObj绑定
 /// </summary>
 public abstract class ObjectBinding {
-    
     /// <summary>
     /// Unity对象的数据源
     /// </summary>
@@ -34,7 +33,20 @@ public abstract class ObjectBinding {
     /// <summary>
     /// 根据子节点名称存储所有节点
     /// </summary>
-    public Dictionary<string,GameObject> Nodes { get; private set; }
+    private Dictionary<string,GameObject> nodes;
+
+    /// <summary>
+    /// 通过字符串获取GameObject 加入异常处理
+    /// </summary>
+    public GameObject Find(string name){
+        if(nodes.ContainsKey(name)){
+            return nodes[name];
+        }
+        else{
+            Log.Error("当前对象{0} 未找到节点:{1}",Source.name,name);
+            return null;
+        }
+    }
 
     /// <summary>
     /// 构造的时候从对象池获取数据源
@@ -42,7 +54,7 @@ public abstract class ObjectBinding {
     public ObjectBinding() {
         Source = ObjectPoolData.Instance.GetInstantiate(this);
         //递归地存储节点
-        Nodes = new Dictionary<string, GameObject>();
+        nodes = new Dictionary<string, GameObject>();
         RecursiveNode(Transform);
         //foreach(KeyValuePair<string,GameObject> v in Nodes) { Debug.Log(v.Key); }
     }
@@ -52,7 +64,12 @@ public abstract class ObjectBinding {
     /// <param name="trans">Trans.</param>
     private void RecursiveNode(Transform trans) {
         foreach (Transform child in trans) {
-            Nodes.Add(child.name, child.gameObject);
+            //避免重名添加
+            if(nodes.ContainsKey(child.name)){
+                Log.Warning("当前对象{0} 重复添加了节点:{1}",Source.name,child.name);
+            }
+            else
+                nodes.Add(child.name, child.gameObject);
             if(child.childCount != 0) {
                 RecursiveNode(child);
             }

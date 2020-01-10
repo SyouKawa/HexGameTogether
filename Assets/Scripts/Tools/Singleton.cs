@@ -2,20 +2,22 @@
 using System.Collections.Generic;
 
 /// <summary>
-/// 通用泛型单例类 
-/// 使用形式 class Type : Singleton<Type>{}
+/// Manager基类
+/// 保持单例,且有默认的初始化等方法
 /// </summary>
-public abstract class Singleton<T> where T : class,new() {
-
+public abstract class Manager<T> : Singleton<T> where T : class, new(){
     public abstract void Start(EventHelper helper);
+}
 
+public abstract class Singleton<T> where T : class, new() {
     private static T _instance;
-    //TODO： GetInstance()-> Instance{get}
-    public static T GetInstance() {
 
-        if (_instance == null) {
-            _instance = new T();
+    public static T Instance {
+        get {
+            if (_instance == null) {
+                _instance = new T();
+            }
+            return _instance;
         }
-        return _instance;
     }
 }

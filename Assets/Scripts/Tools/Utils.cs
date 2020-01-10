@@ -72,7 +72,11 @@ public static class Log {
 /// </summary>
 public static class Utils
 {
-
+    public static string FormatString(string msg, params object[] objs){
+        StringBuilder sb = new StringBuilder();
+        sb.AppendFormat(msg, objs);
+        return sb.ToString();
+    }
 
     private static List<Type> allTypes;
     /// <summary>

@@ -1,87 +1,84 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
+/*
+HexCell:
+    Img -> CellImg
+    type -> fieldType
 
+public变量和属性均使用首字母大写了
+
+ObjectBinding:
+   Nodes -> Find
+
+MapManager: 
+    最好没有返回值不要用Get 有返回值的用Get,正好是反过来的
+    同理 有参数的可能会用Set,没有参数的肯定不能是Set
+    SetEdgeSea -> SpawnEdgeSea 
+    SetWaterCell -> CreatWaterCell 
+    RandomFieldByRates-> GetRandomField 
+
+CameraUI -> HUD
+
+Path:
+    FpResult(bool fail) -> FpResult.FailResult
+    FPHelper -> FPManager 清除怎么被注释掉了
+*/
 [PrefabPath("Prefabs/Map/BasicHexCell")]
-public partial class HexCell : ObjectBinding{
-    public Vector3 pos;
-    public Vector2Int MapPos;
-    public SpriteRenderer Img;
-    public FieldType type;
-
-    public int fieldcost;//通过该节点本身的消耗
+public partial class HexCell : ObjectBinding {
 
     public HexCell(Vector2Int _MapPos) {
         MapPos = _MapPos;
-        Img = Nodes["Img"].GetComponent<SpriteRenderer>();
-        SetFieldType(FieldType.EdgeSea);//默认不可行动
-    }
-
-    public HexCell(Vector2Int _MapPos,GameObject _cell) 
-    {
-        MapPos = _MapPos;
-        Img = Nodes["Img"].GetComponent<SpriteRenderer>();
-        SetFieldType(FieldType.EdgeSea);//默认不可行动
-    }
-
-    public void SetFieldType(FieldType _type) {
-        type = _type;
-        switch (type) {
-            case FieldType.Forest : fieldcost = 5; break;
-            case FieldType.Mountain: fieldcost = 10; break;
-            case FieldType.Plain: fieldcost = 1; break;
-        }
+        CellRenderer = Find("CellImg").GetComponent<SpriteRenderer>();
+        DebugTextMesh = Find("DebugText").GetComponent<TextMeshPro>();
+        DebugBGRenderer = Find("DebugImg").GetComponent<SpriteRenderer>();
     }
 
     /// <summary>
-    /// (辅助)在标签上显示信息
+    /// 对应的地图坐标
     /// </summary>
-    public void SetDebugInfo(string str){
-        TextMeshPro debuger = Source.GetComponentInChildren<TextMeshPro>();
-        if(debuger != null) {
-            debuger.text = MapPos.ToString() + "\n" + str;
-        }
-    }
+    public Vector2Int MapPos;
 
-    public void SetImgOrder(int order) {
-        Img.sortingOrder = order;
-    }
+    //图块组件
+    public SpriteRenderer CellRenderer;
 
-    public void SetPos() {
-        TextMeshPro debuger = Nodes["DebugText"].GetComponent<TextMeshPro>();
-        if (debuger != null){
-            debuger.text = MapPos.ToString();
-        }
-    }
+    /// <summary>
+    /// 地形的消耗
+    /// </summary>
+    public int FieldCost { get; set; }
 
-    public void RestDebugData() {
-        Nodes["DebugImg"].GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0);
-        Nodes["DebugText"].GetComponent<TextMeshPro>().text = MapPos.ToString();
-    }
-
-    public void EnableDebugData(bool state) {
-        Nodes["Debuger"].SetActive(state);
-    }
-
-    //TODO: 仅供建议，未测试，可能有逻辑错误
-    //通常来说 只要方法名出现了GetXXX SetXXX 都可以改用属性. 比如这里的很多Set Get
-    private bool debugMode = false;
-    public bool DebugMode {
+    private FieldType fieldType = FieldType.EdgeSea;
+    /// <summary>
+    /// 地形
+    /// </summary>
+    public FieldType FieldType {
         get {
-            return debugMode;
+            return fieldType;
         }
         set {
-            debugMode = value;
-            Nodes["Debuger"].SetActive(value);
-            if (!debugMode) {
-                Nodes["DebugImg"].GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0);
-                Nodes["DebugText"].GetComponent<TextMeshPro>().text = MapPos.ToString();
+            fieldType = value;
+            switch (value) {
+                case FieldType.Forest:
+                    FieldCost = 5;
+                    break;
+                case FieldType.Mountain:
+                    FieldCost = 10;
+                    break;
+                case FieldType.Plain:
+                    FieldCost = 1;
+                    break;
             }
         }
     }
+
+    public TextMeshPro DebugTextMesh{get;set;}
+
+    public SpriteRenderer DebugBGRenderer{get;set;}
 }
 
-public partial class HexCell{
-    
+public partial class HexCell {
+    public void InitBuilding() {
+
+    }
 }
