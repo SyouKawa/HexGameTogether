@@ -15,6 +15,10 @@ public static class GameData{
     public const float infinite = 99999f;
     public static System.Random random = new System.Random(1);
 
+    //斜向移动单位Cell消耗的帧数
+    public static int obliqueFrames = 23;
+    //纵向移动单位Cell消耗的帧数
+    public static int verticalFrames = 13;
 
     
     public static int MapWidth = 10;

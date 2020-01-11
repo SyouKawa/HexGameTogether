@@ -10,7 +10,7 @@ public class MapManager : Manager<MapManager> {
 
     public MapManager() { }
     public PlayerInMap playerInMap;
-    public HUD PlayerInfoUI;
+    public HUD infoHUD;
 
     public override void Start(EventHelper helper) {
         helper.OnWorldLoadEvent += SpawnMap;
@@ -38,12 +38,13 @@ public class MapManager : Manager<MapManager> {
         map.Transform.SetParent(Global.Instance.transform);
         map.Transform.name = "MapNode";
 
+        //Test使用
         //生成Player
         playerInMap = new PlayerInMap {
-            CurCell = map.cells[7, 4]
+            CurCell = map.cells[2, 2]
         };
         //生成显示Player信息的CameraUI层
-        PlayerInfoUI = new HUD();
+        infoHUD = new HUD();
     }
 
     /// <summary>
