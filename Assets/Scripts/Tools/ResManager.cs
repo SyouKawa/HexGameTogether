@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 public class ResManager : Manager<ResManager>{
 
-    //加载显示的Tile数组
-    public List<Object[]> FieldTiles { get; private set; }
-
+    public Dictionary<FieldType,List<Sprite>> FieldTiles{ get; private set; }
     public override void Start(EventHelper helper) {
         helper.OnGameLoadEvent += LoadRes;
     }
@@ -17,13 +17,19 @@ public class ResManager : Manager<ResManager>{
     public void LoadRes()
     {
         //初始化Tile使用的数组
-         FieldTiles = new List<Object[]>();
-
-        //加载显示的Tile数组
-        int length = System.Enum.GetValues(typeof(FieldType)).Length;
-        for (int i = 0; i < length; i++)
-        {
-            FieldTiles.Add(Resources.LoadAll("Sprites/tiles_" + ((FieldType)i).ToString() + "_colored", typeof(Sprite)));
+         FieldTiles = new Dictionary<FieldType, List<Sprite>>();
+        //优化后
+        foreach(FieldType field in System.Enum.GetValues(typeof(FieldType))){
+            string path = Utils.FormatString("Sprites/tiles_{0}_colored",field.ToString());
+            FieldTiles.Add(field,Resources.LoadAll<Sprite>(path).ToList());
         }
+
+        BuidingImg = Resources.LoadAll<Sprite>("Sprites/locations_colored").ToList();
     }
+
+    public Sprite GetRandomFieldImg(FieldType type){
+        return FieldTiles[type][GameData.random.Next(0, FieldTiles[type].Count)];
+    }
+    public List<Sprite> BuidingImg;
+
 }

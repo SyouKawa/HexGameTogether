@@ -26,6 +26,14 @@ public abstract class ObjectBinding {
     /// Unity对象的数据源
     /// </summary>
     public GameObject Source { get; set; }
+
+    public string Name{
+        get{return Source.name;}
+        set{
+            Source.name = value;
+        }
+    }
+
     /// <summary>
     /// Unity Transform
     /// </summary>

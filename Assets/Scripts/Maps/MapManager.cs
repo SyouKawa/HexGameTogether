@@ -2,11 +2,9 @@
 using UnityEngine;
 using static GameData;
 
-public class MapManager : Manager<MapManager> {
+public partial class MapManager : Manager<MapManager> {
     //管理的地图
     public Map map { get; private set; }
-    //辅助Canvas
-    public Canvas helperCanvas => map.Source.GetComponentInChildren<Canvas>();
 
     public MapManager() { }
     public PlayerInMap playerInMap;
@@ -15,33 +13,16 @@ public class MapManager : Manager<MapManager> {
     public override void Start(EventHelper helper) {
         helper.OnWorldLoadEvent += SpawnMap;
         helper.AfterWorldLoadEvent += SetDebugInfoState;
+        helper.AfterWorldLoadEvent += InitBuiding;
     }
 
-    /// <summary>
-    /// 生成菱形地图坐标
-    /// </summary>
     public void SpawnMap() {
-        //实例化Map节点
-        map = new Map(MapWidth, MapHeight);
-        //循环生成地形Cell
-        Vector3 pos;
-        for (int row = 0; row < MapHeight; row++) {
-            //当前行(每个col)的基准坐标
-            pos = new Vector3(-ConstHorizonDis * row, MinInnerRadius * row, 0f);
-            for (int col = 0; col < MapWidth; col++) {
-                map.CreateCell(row, col, pos);
-            }
-        }
-        //所有地图自动修整边界区域
-        map.SpawnEdgeSea();
-        //调整节点
-        map.Transform.SetParent(Global.Instance.transform);
-        map.Transform.name = "MapNode";
-
+        map = new Map();
         //生成Player
         playerInMap = new PlayerInMap {
             CurCell = map.cells[7, 4]
         };
+
         //生成显示Player信息的CameraUI层
         PlayerInfoUI = new HUD();
     }
@@ -61,8 +42,25 @@ public class MapManager : Manager<MapManager> {
     public class Map : ObjectBinding {
         public HexCell[, ] cells;
 
-        public Map(int width, int height) {
+        int width = GameData.MapWidth;
+        int height = GameData.MapHeight;
+
+        public Map() {
+            //调整节点
+            Transform.SetParent(Global.Instance.transform);
+            Transform.name = "MapNode";
+
             cells = new HexCell[width, height];
+            //循环生成地形Cell
+            for (int row = 0; row < MapHeight; row++) {
+                for (int col = 0; col < MapWidth; col++) {
+                    Vector2Int mapPos = new Vector2Int(col, row);
+                    cells[col, row] = new HexCell(mapPos);
+                    SetCell(mapPos, GetRandomField());
+                }
+            }
+            //所有地图自动修整边界区域
+            SetEdgeSea();
         }
 
         /// <summary>
@@ -70,57 +68,53 @@ public class MapManager : Manager<MapManager> {
         /// </summary>
         /// <param name="row">所在行(45度方向坐标系的Y值).</param>
         /// <param name="col">所在列(45度方向坐标系的X值).</param>
-        /// <param name="pos">在世界坐标中的位置.</param>
-        public void CreateCell(int row, int col, Vector3 pos) {
-            //按坐标新建每一个cell(数组下标按坐标,而非行列,所以row和col位置互换)
-            cells[col, row] = new HexCell(new Vector2Int(col, row));
+        public void SetCell(Vector2Int mapPos, FieldType type) {
+            int col = mapPos.x;
+            int row = mapPos.y;
+            //当前基准坐标
+            Vector3 pos = new Vector3(-ConstHorizonDis * row, MinInnerRadius * row, 0f);
 
-            // 随机地形及显示Tile
-            FieldType type = GetRandomField();
+            //按坐标新建每一个cell(数组下标按坐标,而非行列,所以row和col位置互换)
             cells[col, row].FieldType = type;
 
-            //TODO 整理这个
-            List<Object[]> Tiles = ResManager.Instance.FieldTiles;
             //为该地形roll一个显示Tile
-            Sprite curImg = (Sprite) (Tiles[(int) cells[col, row].FieldType][random.Next(0, Tiles[(int) cells[col, row].FieldType].Length)]);
+            var Tiles = ResManager.Instance.FieldTiles;
+            Sprite curImg = Tiles[cells[col, row].FieldType][random.Next(0, Tiles[cells[col, row].FieldType].Count)];
 
-            //cells[col, row].CellImg.GetComponent<SpriteRenderer>().sprite = curImg;
+            //设置cell贴图
             cells[col, row].CellRenderer.sprite = curImg;
 
             //调整坐标,并按照row+col之和修改z值保证屏幕远近的遮挡关系(如果为湖海,则调节orderinLayer为更低层级)
             cells[col, row].Source.transform.position = new Vector3(pos.x + ConstHorizonDis * col, pos.y + MinInnerRadius * col, col + row);
             if (cells[col, row].FieldType == FieldType.Lake) {
-                //cells[col, row].SetImgOrder(-1);
                 cells[col, row].CellRenderer.sortingOrder = -1;
             }
-            cells[col, row].Source.transform.SetParent(MapManager.Instance.map.Transform, false);
-            cells[col, row].Source.name = "cell:" + col.ToString() + "," + row.ToString();
+            cells[col, row].Transform.SetParent(Transform, false);
+            cells[col, row].Name = Utils.FormatString("Cell:{0},{1}", col.ToString() , row.ToString());
 
             //按照倍率调节图片缩放
-            cells[col, row].CellRenderer.transform.localScale = new Vector3(Rates, Rates, 0f);
-            //cells[col, row].SetPos();
+            cells[col, row].CellRenderer.transform.localScale = GameData.RatesV3;
+            //设置DebugText
             cells[col, row].DebugTextMesh.text = cells[col, row].MapPos.ToString();
         }
 
         /// <summary>
         /// (每次生成固定调用)生成地图时修剪边境位置为海洋
         /// </summary>
-        public void SpawnEdgeSea() {
+        public void SetEdgeSea() {
             int width = MapWidth;
             int height = MapHeight;
 
-            List<Object[]> Tiles = ResManager.Instance.FieldTiles;
             //局部函数
             void CreatWaterCell(HexCell cell) {
                 //配置浪海比例
                 bool isWave = Random.Range(0, 100) > WaveRate?false : true;
                 Sprite curImg = null;
                 if (isWave) {
-                    curImg = (Sprite) (Tiles[3][Random.Range(0, Tiles[3].Length)]);
+                    curImg = ResManager.Instance.GetRandomFieldImg(FieldType.EdgeSea);
                 } else {
-                    curImg = (Sprite) (Tiles[1][Random.Range(0, Tiles[1].Length)]);
+                    curImg = ResManager.Instance.GetRandomFieldImg(FieldType.Lake);
                 }
-
                 cell.CellRenderer.sprite = curImg;
                 cell.CellRenderer.sortingOrder = -1;
                 cell.FieldType = FieldType.EdgeSea;
@@ -160,6 +154,21 @@ public class MapManager : Manager<MapManager> {
             }
             return FieldType.EdgeSea; //默认值
         }
+    }
+
+}
+
+public partial class MapManager {
+
+    public void InitBuiding() {
+        map.SetCell(new Vector2Int(2, 2), FieldType.Plain);
+        map.SetCell(new Vector2Int(2, 3), FieldType.Plain);
+        map.SetCell(new Vector2Int(3, 3), FieldType.Plain);
+        map.SetCell(new Vector2Int(3, 2), FieldType.Plain);
+        map.cells[2, 2].ShowBuiding();
+        map.cells[2, 3].ShowBuiding();
+        map.cells[3, 3].ShowBuiding();
+        map.cells[3, 2].ShowBuiding();
     }
 
 }

@@ -33,6 +33,8 @@ public partial class HexCell : ObjectBinding {
         CellRenderer = Find("CellImg").GetComponent<SpriteRenderer>();
         DebugTextMesh = Find("DebugText").GetComponent<TextMeshPro>();
         DebugBGRenderer = Find("DebugImg").GetComponent<SpriteRenderer>();
+
+        InitBuilding();
     }
 
     /// <summary>
@@ -78,7 +80,14 @@ public partial class HexCell : ObjectBinding {
 }
 
 public partial class HexCell {
+    public SpriteRenderer BuildingRenderer;
     public void InitBuilding() {
+        BuildingRenderer = Find("Building").GetComponent<SpriteRenderer>();
+        BuildingRenderer.transform.localScale = GameData.RatesV3;
+    }
 
+    public void ShowBuiding(){
+        BuildingRenderer.gameObject.SetActive(true);
+        BuildingRenderer.sprite = ResManager.Instance.BuidingImg[1];
     }
 }

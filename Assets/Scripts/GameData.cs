@@ -7,6 +7,9 @@ public static class GameData{
     public const int MaxSupply = 100;
 
     public const float Rates = 10f;
+
+    public static Vector3 RatesV3 = new Vector3(Rates,Rates,0);
+    
     public const float MaxOuterRadius = 1.7f * Rates;//最大外径
     public const float MinInnerRadius = 0.68f * Rates;//最小内径
     public const float ConstHorizonDis = 2.2f * Rates;//固定水平间距
