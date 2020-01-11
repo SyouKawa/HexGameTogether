@@ -1,9 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using static GameData;
-
-
-//做了一点小改动 不跟随图块
+using System;
 
 [PrefabPath("Prefabs/Map/PlayerInMap")]
 public class PlayerInMap : ObjectBinding {
@@ -23,11 +21,15 @@ public class PlayerInMap : ObjectBinding {
         get => curCell;
         set {
             curCell = value;
-            //Transform.SetParent(value.Transform);
-            //Transform.localPosition = Vector3.zero;
             Transform.position = value.Transform.position;
-            CameraController.Instance.SetPosition(curCell.Transform);
         }
+    }
+
+    public void PlayerGoTo(HexCell Dest){
+        //获得移动方向的单位向量
+        Vector2 dir = (Vector2)(Dest.Transform.position - CurCell.Transform.position).normalized;
+        //以单位向量各轴的分量距离为每帧增量，移动Player
+        Transform.position = new Vector3(Transform.position.x+dir.x,Transform.position.y+dir.y,0f);
     }
 
     /// <summary>
@@ -50,7 +52,7 @@ public class PlayerInMap : ObjectBinding {
                             UpdateFind(hit);
                             break;
                         case CheckState.InMoving:
-                            Debug.Log("Moving");
+                            //Debug.Log("Moving");
                             UpdateMoving();
                             break;
                     }
@@ -87,15 +89,16 @@ public class PlayerInMap : ObjectBinding {
                 return;
             }
             if (cell != lastCell && cell != curCell) {
-                Debug.Log("Set dest");
+                //Debug.Log("Set dest");
                 //清空Debug显示
                 PathManager.Instance.FreeFindPathData();
                 //开始寻路
                 curpath = PathManager.Instance.GetPath(CurCell, cell);
-                Debug.Log("sumCost = " + curpath.Sumcost);
-                MapManager.Instance.PlayerInfoUI.PreviewSupply(curpath.Sumcost);
+                //Debug.Log("sumCost = " + curpath.Sumcost);
+                MapManager.Instance.infoHUD.PreviewSupply(curpath.Sumcost);
                 if (!curpath.IsFinded) {
                     Debug.Log("Cant Catch.");
+                    return;
                 }
                 lastCell = cell;
             }
@@ -111,23 +114,35 @@ public class PlayerInMap : ObjectBinding {
     }
 
     void UpdateMoving() {
+        //获取离下一Cell的距离
         float dis = Vector2.Distance(curpath.Path[index].Transform.position, Transform.position);
+        
         if (dis > 1f) {
-            //仿匀速移动
-            Transform.Translate(0.5f * (curpath.Path[index].Transform.position - Transform.position).normalized, Space.Self);
-            //TODO:Supply符合路径消耗地逐渐减少
-            if (MapManager.Instance.PlayerInfoUI.SupplyBar.fillAmount > MapManager.Instance.PlayerInfoUI.PreviewBar.fillAmount) {
-                MapManager.Instance.PlayerInfoUI.SupplyBar.fillAmount -= 0.001f;
+            //如果未抵达下一Cell，Player前进
+            PlayerGoTo(curpath.Path[index]);
+            Debug.Log("+1");
+            //判断是否需要缓慢减少的效果
+            if (MapManager.Instance.infoHUD.NeedReduceEffect()) {
+                //如果需要，则判断移动方向为垂直移动还是斜向移动（两者平均速度不同）
+                bool isOblique = false;
+                //Y轴没动说明是X轴向斜移动
+                if(curpath.Path[index].MapPos.y - CurCell.MapPos.y ==0){
+                    isOblique = true;
+                }
+                //获取每帧减少的量
+                float delta = MapManager.Instance.infoHUD.GetReduceNum(isOblique,curpath);
+                //缓慢减少
+                MapManager.Instance.infoHUD.ReduceEffectSupply(delta);
             }
         } else {
             if (index < curpath.Path.Count - 1) {
+                CurCell = curpath.Path[index];
                 index++;
             } else {
-                Debug.Log("Ending");
                 CurCell = curpath.Path[index];
-                //SetPlayer(curpath.Path[index]);
                 index = 1; //重置辅助标记
                 checkState = CheckState.InMap;
+                CameraController.Instance.SetPosition(curCell.Transform);
             }
         }
     }

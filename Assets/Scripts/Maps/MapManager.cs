@@ -8,7 +8,7 @@ public partial class MapManager : Manager<MapManager> {
 
     public MapManager() { }
     public PlayerInMap playerInMap;
-    public HUD PlayerInfoUI;
+    public HUD infoHUD;
 
     public override void Start(EventHelper helper) {
         helper.OnWorldLoadEvent += SpawnMap;
@@ -17,14 +17,31 @@ public partial class MapManager : Manager<MapManager> {
     }
 
     public void SpawnMap() {
-        map = new Map();
+        //实例化Map节点
+        map = new Map(MapWidth, MapHeight);
+        //循环生成地形Cell
+        Vector3 pos;
+        for (int row = 0; row < MapHeight; row++) {
+            //当前行(每个col)的基准坐标
+            pos = new Vector3(-ConstHorizonDis * row, MinInnerRadius * row, 0f);
+            for (int col = 0; col < MapWidth; col++) {
+                map.CreateCell(row, col, pos);
+            }
+        }
+        //所有地图自动修整边界区域
+        map.SpawnEdgeSea();
+        //调整节点
+        map.Transform.SetParent(Global.Instance.transform);
+        map.Transform.name = "MapNode";
+
+        //Test使用
         //生成Player
         playerInMap = new PlayerInMap {
-            CurCell = map.cells[7, 4]
+            CurCell = map.cells[2, 2]
         };
 
         //生成显示Player信息的CameraUI层
-        PlayerInfoUI = new HUD();
+        infoHUD = new HUD();
     }
 
     /// <summary>

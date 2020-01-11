@@ -14,7 +14,6 @@ public class EventHelper {
 
 public class Global : MonoBehaviour {
     public static Global Instance { get; private set; }
-
     //Inspector可直接测试数值
     public int MapWidth = 10;
     public int MapHeight = 10;
