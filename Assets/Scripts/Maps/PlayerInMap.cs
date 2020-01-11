@@ -106,6 +106,7 @@ public class PlayerInMap : ObjectBinding {
             if (Input.GetMouseButtonDown(0) && curCell != cell) {
                 //减去此次的消耗
                 supply -= curpath.Sumcost;
+                MapManager.Instance.infoHUD.SetSupplyText(HUD.TextMode.Normal,supply);
                 PathManager.Instance.FreeFindPathData();
                 checkState = CheckState.InMoving;
                 return;
