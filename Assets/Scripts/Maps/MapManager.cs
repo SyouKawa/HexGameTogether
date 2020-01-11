@@ -18,21 +18,7 @@ public partial class MapManager : Manager<MapManager> {
 
     public void SpawnMap() {
         //实例化Map节点
-        map = new Map(MapWidth, MapHeight);
-        //循环生成地形Cell
-        Vector3 pos;
-        for (int row = 0; row < MapHeight; row++) {
-            //当前行(每个col)的基准坐标
-            pos = new Vector3(-ConstHorizonDis * row, MinInnerRadius * row, 0f);
-            for (int col = 0; col < MapWidth; col++) {
-                map.CreateCell(row, col, pos);
-            }
-        }
-        //所有地图自动修整边界区域
-        map.SpawnEdgeSea();
-        //调整节点
-        map.Transform.SetParent(Global.Instance.transform);
-        map.Transform.name = "MapNode";
+        map = new Map();
 
         //Test使用
         //生成Player
