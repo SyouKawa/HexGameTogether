@@ -2,12 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Text;
 
 [PrefabPath("Prefabs/UI/MainUI")]
 public class HUD : ObjectBinding
 {
     public Image RealSupply;
     public Image EffectSupply;
+
+    public enum TextMode{
+        Preview,
+        Normal
+    }
 
     public HUD(){
         //激活节点
@@ -21,14 +27,30 @@ public class HUD : ObjectBinding
         //
         Find("SupplyText").GetComponent<Text>().text = "100/100";
     }
-    //一旦开始寻路是后面的颜色变浅，前面的颜色不变。
+
+    /// <summary>
+    /// 可变参数为：[0]当前Supply [1]当前previewSupply(预览消耗后的Supply)
+    /// </summary>
+    public void SetSupplyText(TextMode mode,params int[] nums){
+        
+        Text shower = Find("SupplyText").GetComponent<Text>();
+        
+        StringBuilder content = new StringBuilder();
+        switch (mode){
+            case TextMode.Preview:
+                content.AppendFormat("{0}-> {1}/{2}",nums[0],nums[1],GameData.MaxSupply);
+            break;
+            case TextMode.Normal:
+                content.AppendFormat("{0}/{1}",nums[0],GameData.MaxSupply);
+            break;
+        }
+        shower.text = content.ToString();
+    }
     public void PreviewSupply(int costSupply){
         int curSupply = MapManager.Instance.playerInMap.supply;
         int previewSupply = curSupply - costSupply;
-        Find("SupplyText").GetComponent<Text>().text = curSupply+"-> "+previewSupply+"/"+GameData.MaxSupply;
-        //Debug.Log("pre = " + previewSupply);
+        SetSupplyText(TextMode.Preview,curSupply,previewSupply);
         RealSupply.fillAmount = (float)previewSupply/(float)GameData.MaxSupply;
-        //Debug.Log("percent:"+SupplyBar.fillAmount);
     }
 
     /// <summary>
