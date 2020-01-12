@@ -36,6 +36,10 @@ public class Global : MonoBehaviour {
         //遍历程序集. 获取Singleton的子类,初始化Singleton
         InvokeManager();
 
+
+    }
+
+    private void Start(){
         //触发事件1
         EventHelper.OnGameLoadEvent.Invoke();
         //触发事件2

@@ -4,10 +4,27 @@ using static GameData;
 
 public partial class MapManager : Manager<MapManager> {
     //管理的地图
-    public Map map { get; private set; }
+    private MapObj map { get; set; }
+
+    /// <summary>
+    /// 通过这个接口来访问Cell避免越界
+    /// </summary>
+    public HexCell GetCell(int x, int y) {
+        if (x < 0 || x > MapWidth || y < 0 || y > MapHeight) {
+            Log.Warning("访问越界,试图访问坐标[{0},{1}]", x, y);
+        }
+        return map.Cells[x, y];
+    }
+    public HexCell GetCell(Vector2Int vec) {
+        return GetCell(vec.x, vec.y);
+    }
+    public void SetCell(Vector2Int mapPos, FieldType type){
+        map.SetCell(mapPos,type);
+    }
+
 
     public MapManager() { }
-    public PlayerInMap playerInMap;
+
     public HUD infoHUD;
 
     public override void Start(EventHelper helper) {
@@ -18,13 +35,7 @@ public partial class MapManager : Manager<MapManager> {
 
     public void SpawnMap() {
         //实例化Map节点
-        map = new Map();
-
-        //Test使用
-        //生成Player
-        playerInMap = new PlayerInMap {
-            CurCell = map.cells[2, 2]
-        };
+        map = new MapObj();
 
         //生成显示Player信息的CameraUI层
         infoHUD = new HUD();
@@ -36,19 +47,21 @@ public partial class MapManager : Manager<MapManager> {
     public void SetDebugInfoState() {
         for (int i = 0; i < GameData.MapHeight; i++) {
             for (int j = 0; j < GameData.MapWidth; j++) {
-                map.cells[j, i].Find("Debuger").SetActive(GameData.ShowMapDebugInfo);
+                map.Cells[j, i].Find("Debuger").SetActive(GameData.ShowMapDebugInfo);
             }
         }
     }
 
     [PrefabPath("Prefabs/Map/MapBaseNode")]
-    public class Map : PrefabBinding {
-        public HexCell[, ] cells;
+    private class MapObj : PrefabBinding {
+        private HexCell[, ] cells;
+
+        public HexCell[, ] Cells { get => cells; set => cells = value; }
 
         int width = GameData.MapWidth;
         int height = GameData.MapHeight;
 
-        public Map() {
+        public MapObj() {
             //调整节点
             Transform.SetParent(Global.Instance.transform);
             Transform.name = "MapNode";
@@ -93,7 +106,7 @@ public partial class MapManager : Manager<MapManager> {
                 cells[col, row].CellRenderer.sortingOrder = -1;
             }
             cells[col, row].Transform.SetParent(Transform, false);
-            cells[col, row].Name = Utils.FormatString("Cell:{0},{1}", col.ToString() , row.ToString());
+            cells[col, row].Name = Utils.FormatString("Cell:{0},{1}", col.ToString(), row.ToString());
 
             //按照倍率调节图片缩放
             cells[col, row].CellRenderer.transform.localScale = GameData.RatesV3;
@@ -164,14 +177,14 @@ public partial class MapManager : Manager<MapManager> {
 public partial class MapManager {
 
     public void InitBuiding() {
-        map.SetCell(new Vector2Int(2, 2), FieldType.Plain);
-        map.SetCell(new Vector2Int(2, 3), FieldType.Plain);
-        map.SetCell(new Vector2Int(3, 3), FieldType.Plain);
-        map.SetCell(new Vector2Int(3, 2), FieldType.Plain);
-        map.cells[2, 2].ShowBuiding();
-        map.cells[2, 3].ShowBuiding();
-        map.cells[3, 3].ShowBuiding();
-        map.cells[3, 2].ShowBuiding();
+        SetCell(new Vector2Int(2, 2), FieldType.Plain);
+        SetCell(new Vector2Int(2, 3), FieldType.Plain);
+        SetCell(new Vector2Int(3, 3), FieldType.Plain);
+        SetCell(new Vector2Int(3, 2), FieldType.Plain);
+        GetCell(2,2).ShowBuiding(HexCell.BuildingType.Portal);
+        GetCell(2,3).ShowBuiding(HexCell.BuildingType.Shop);
+        GetCell(3,2).ShowBuiding(HexCell.BuildingType.Station);
+        GetCell(3,3).ShowBuiding(HexCell.BuildingType.Union);
     }
 
 }

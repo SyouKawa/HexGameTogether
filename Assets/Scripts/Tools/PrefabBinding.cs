@@ -32,6 +32,10 @@ public abstract class ExtendPrefabBinding : PrefabBinding {
         // }
     }
 
+    public RectTransform FindRecTrans(string name){
+        return Find(name)?.transform as RectTransform;
+    }
+
     private void AddNode(Transform trans, string cur) {
         foreach (Transform child in trans) {
             string name;

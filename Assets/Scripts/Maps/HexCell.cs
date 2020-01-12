@@ -74,20 +74,52 @@ public partial class HexCell : PrefabBinding {
         }
     }
 
-    public TextMeshPro DebugTextMesh{get;set;}
+    public TextMeshPro DebugTextMesh { get; set; }
 
-    public SpriteRenderer DebugBGRenderer{get;set;}
+    public SpriteRenderer DebugBGRenderer { get; set; }
 }
 
 public partial class HexCell {
     public SpriteRenderer BuildingRenderer;
-    public void InitBuilding() {
-        BuildingRenderer = Find("Building").GetComponent<SpriteRenderer>();
-        BuildingRenderer.transform.localScale = GameData.RatesV3;
+
+    public bool HasBuilding = false;
+
+    public enum BuildingType {
+        Shop,
+        Portal,
+        Union,
+        Station
     }
 
-    public void ShowBuiding(){
+    public BuildingType buildingType;
+
+    public void InitBuilding() {
+        BuildingRenderer = Find("Building").GetComponent<SpriteRenderer>();
+        Find("BuildingRoot").transform.localScale = GameData.RatesV3;
+    }
+
+    public void ShowBuiding(BuildingType type) {
+        HasBuilding = true;
+        buildingType = type;
         BuildingRenderer.gameObject.SetActive(true);
-        BuildingRenderer.sprite = ResManager.Instance.BuidingImg[1];
+        Sprite img;
+        switch (type) {
+            case BuildingType.Portal:
+                img = ResourceHelper.Instance.PortalImg;
+                break;
+            case BuildingType.Shop:
+                img = ResourceHelper.Instance.ShopImg;
+                break;
+            case BuildingType.Station:
+                img = ResourceHelper.Instance.StationImg;
+                break;
+            case BuildingType.Union:
+                img = ResourceHelper.Instance.UnionImg;
+                break;
+            default:
+                img = ResourceHelper.Instance.PortalImg;
+                break;
+        }
+        BuildingRenderer.sprite = img;
     }
 }

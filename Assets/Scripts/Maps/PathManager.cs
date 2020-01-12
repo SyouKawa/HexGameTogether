@@ -72,8 +72,8 @@ public class PathManager : Manager<PathManager> {
             cur.Find("DebugImg").GetComponent<SpriteRenderer>().color = new Color(1, 0, 0, 0.3f);
             finalpath.Add(cur);
             sumCost += cur.FieldCost;
-            if (sumCost > MapManager.Instance.playerInMap.supply) {
-                return FpResult.Fail;
+            if (sumCost > PlayerManager.Instance.Player.supply) {
+                return FpResult.Fail;  
             }
             cur = cellsdata[cur].prepathcell;
         }
@@ -93,14 +93,15 @@ public class PathManager : Manager<PathManager> {
     public List<HexCell> FindAdjacentHex(HexCell centercell) {
         int x = centercell.MapPos.x;
         int y = centercell.MapPos.y;
-        HexCell[, ] cells = MapManager.Instance.map.cells;
+        MapManager map = MapManager.Instance;
+        //HexCell[, ] cells = MapManager.Instance.Map.Cells;
         List<HexCell> adj = new List<HexCell> {
-            cells[x + 1, y + 1],
-            cells[x - 1, y - 1],
-            cells[x, y + 1],
-            cells[x, y - 1],
-            cells[x + 1, y],
-            cells[x - 1, y]
+            map.GetCell(x+1,y+1),
+            map.GetCell(x - 1, y - 1),
+            map.GetCell(x, y + 1),
+            map.GetCell(x, y - 1),
+            map.GetCell(x + 1, y),
+            map.GetCell(x - 1, y),
         };
         for (int i = adj.Count - 1; i >= 0; i--) {
             //如果本身就属于closed,则在邻接表中删除该节点

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using System.Text;
 
 [PrefabPath("Prefabs/UI/MainUI")]
-public class HUD : ExtendPrefabBinding
+public partial class HUD : ExtendPrefabBinding
 {
     public Image RealSupply;
     public Image EffectSupply;
@@ -17,7 +17,7 @@ public class HUD : ExtendPrefabBinding
 
     public HUD(){
         //激活节点
-        Transform.SetParent(Global.Instance.transform);
+        Transform.SetParent(null);
         //初始化Var
         RealSupply = Find("SupplyBar.Supply").GetComponent<Image>();
         EffectSupply = Find("SupplyBar.EffectSupply").GetComponent<Image>();
@@ -26,6 +26,8 @@ public class HUD : ExtendPrefabBinding
         RealSupply.fillAmount = 1f;
         //
         Find("SupplyBar.SupplyText").GetComponent<Text>().text = "100/100";
+
+        InitBag();
     }
 
     /// <summary>
@@ -47,7 +49,7 @@ public class HUD : ExtendPrefabBinding
         shower.text = content.ToString();
     }
     public void PreviewSupply(int costSupply){
-        int curSupply = MapManager.Instance.playerInMap.supply;
+        int curSupply = PlayerManager.Instance.Player.supply;
         int previewSupply = curSupply - costSupply;
         SetSupplyText(TextMode.Preview,curSupply,previewSupply);
         RealSupply.fillAmount = (float)previewSupply/(float)GameData.MaxSupply;
