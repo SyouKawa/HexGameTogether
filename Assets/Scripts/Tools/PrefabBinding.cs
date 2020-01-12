@@ -18,44 +18,6 @@ public class PrefabPath : Attribute {
     }
 }
 
-/// 一个加强类.可以用于处理更复杂的UI层级问题
-// 首先把name -> parent.name
-public abstract class ExtendPrefabBinding : PrefabBinding {
-    /// <summary>
-    /// 递归地获得所有子节点
-    /// </summary>
-    /// <param name="trans">Trans.</param>
-    protected override void RecursiveNode(Transform trans) {
-        AddNode(trans, "");
-        // foreach(var str in  nodes.Keys){
-        //     Log.Warning(str);
-        // }
-    }
-
-    public RectTransform FindRecTrans(string name){
-        return Find(name)?.transform as RectTransform;
-    }
-
-    private void AddNode(Transform trans, string cur) {
-        foreach (Transform child in trans) {
-            string name;
-            if (cur != "") {
-                name = cur + "." + child.name;
-            } else {
-                name = child.name;
-            }
-            //避免重名添加
-            if (nodes.ContainsKey(name)) {
-                Log.Warning("当前对象{0} 重复添加了节点:{1}", Source.name, name);
-            } else
-                nodes.Add(name, child.gameObject);
-            if (child.childCount != 0) {
-                AddNode(child, name);
-            }
-        }
-    }
-}
-
 /// <summary>
 /// 继承这个类来Unity的Prefab
 /// 调用构造函数时,初始化这个Prefab
@@ -113,8 +75,9 @@ public abstract class PrefabBinding {
         foreach (Transform child in trans) {
             //避免重名添加
             if (nodes.ContainsKey(child.name)) {
-                Log.Warning("当前对象{0} 重复添加了节点:{1}", Source.name, child.name);
-            } else
+                //Log.Warning("当前对象{0} 重复添加了节点:{1}", Source.name, child.name);
+            } 
+            else
                 nodes.Add(child.name, child.gameObject);
             if (child.childCount != 0) {
                 RecursiveNode(child);

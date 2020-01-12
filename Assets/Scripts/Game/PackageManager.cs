@@ -8,18 +8,18 @@ using UnityEngine.UI;
 public partial class HUD {
     public RectTransform BagTrans;
     public void InitBag() {
-        BagTrans = FindRecTrans("Bag");
-        posBegin = BagTrans.anchoredPosition;
-        posEnd = BagTrans.anchoredPosition + new Vector2(0, 200);
+        // BagTrans = FindRecTrans("Bag");
+        // posBegin = BagTrans.anchoredPosition;
+        // posEnd = BagTrans.anchoredPosition + new Vector2(0, 200);
 
-        FindRecTrans("Bag.Button").GetComponent<Button>().onClick.AddListener(() => {
-            isExpand = !isExpand;
-            if (isExpand) {
-                Startcoroutine(UpBagHUD(posBegin, posEnd, new Vector2(0, 50)));
-            } else {
-                Startcoroutine(UpBagHUD(posEnd, posBegin, new Vector2(0, -50)));
-            }
-        });
+        // FindRecTrans("Bag.Button").GetComponent<Button>().onClick.AddListener(() => {
+        //     isExpand = !isExpand;
+        //     if (isExpand) {
+        //         Startcoroutine(UpBagHUD(posBegin, posEnd, new Vector2(0, 50)));
+        //     } else {
+        //         Startcoroutine(UpBagHUD(posEnd, posBegin, new Vector2(0, -50)));
+        //     }
+        // });
     }
     public bool isExpand = false;
 

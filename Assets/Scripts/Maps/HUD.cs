@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using System.Text;
 
 [PrefabPath("Prefabs/UI/MainUI")]
-public partial class HUD : ExtendPrefabBinding
+public partial class HUD : PrefabBinding
 {
     public Image RealSupply;
     public Image EffectSupply;
