@@ -8,7 +8,7 @@ using UnityEngine.UI;
 /// 下面控制类的一个子图片单元
 /// </summary>
 [PrefabPath("Prefabs/Fight/ImageHUD")]
-public class SkillReferenceItemIcon : ObjectBinding {
+public class SkillReferenceItemIcon : PrefabBinding {
     public Image image;
     public SkillReferenceItemIcon() {
         image = Source.GetComponent<Image>();
@@ -19,7 +19,7 @@ public class SkillReferenceItemIcon : ObjectBinding {
 /// 技能参考面板的单个对象控制类. 
 /// </summary>
 [PrefabPath("Prefabs/Fight/SkillHUD")]
-public class SkillReferenceItem : ObjectBinding {
+public class SkillReferenceItem : PrefabBinding {
     public Text text;
     public Transform abiliTrans;
     private List<SkillReferenceItemIcon> icons;

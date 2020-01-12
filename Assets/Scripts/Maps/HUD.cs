@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using System.Text;
 
 [PrefabPath("Prefabs/UI/MainUI")]
-public class HUD : ObjectBinding
+public class HUD : ExtendPrefabBinding
 {
     public Image RealSupply;
     public Image EffectSupply;
@@ -19,13 +19,13 @@ public class HUD : ObjectBinding
         //激活节点
         Transform.SetParent(Global.Instance.transform);
         //初始化Var
-        RealSupply = Find("Supply").GetComponent<Image>();
-        EffectSupply = Find("EffectSupply").GetComponent<Image>();
+        RealSupply = Find("SupplyBar.Supply").GetComponent<Image>();
+        EffectSupply = Find("SupplyBar.EffectSupply").GetComponent<Image>();
         //初始满补给槽
         EffectSupply.fillAmount = 1f;
         RealSupply.fillAmount = 1f;
         //
-        Find("SupplyText").GetComponent<Text>().text = "100/100";
+        Find("SupplyBar.SupplyText").GetComponent<Text>().text = "100/100";
     }
 
     /// <summary>
@@ -33,7 +33,7 @@ public class HUD : ObjectBinding
     /// </summary>
     public void SetSupplyText(TextMode mode,params int[] nums){
         
-        Text shower = Find("SupplyText").GetComponent<Text>();
+        Text shower = Find("SupplyBar.SupplyText").GetComponent<Text>();
         
         StringBuilder content = new StringBuilder();
         switch (mode){

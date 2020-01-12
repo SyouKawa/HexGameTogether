@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 
 /// <summary>
-/// 通过挂载这个特性来对某个类进行建池,必须挂载这个特性来进行类型对象绑定操作
+/// 指定类说绑定的Unity对应的Prefab的路径
 /// </summary>
 [AttributeUsage(AttributeTargets.Class)]
 public class PrefabPath : Attribute {
@@ -18,18 +18,55 @@ public class PrefabPath : Attribute {
     }
 }
 
+/// 一个加强类.可以用于处理更复杂的UI层级问题
+// 首先把name -> parent.name
+public abstract class ExtendPrefabBinding : PrefabBinding {
+    /// <summary>
+    /// 递归地获得所有子节点
+    /// </summary>
+    /// <param name="trans">Trans.</param>
+    protected override void RecursiveNode(Transform trans) {
+        AddNode(trans, "");
+        // foreach(var str in  nodes.Keys){
+        //     Log.Warning(str);
+        // }
+    }
+
+    private void AddNode(Transform trans, string cur) {
+        foreach (Transform child in trans) {
+            string name;
+            if (cur != "") {
+                name = cur + "." + child.name;
+            } else {
+                name = child.name;
+            }
+            //避免重名添加
+            if (nodes.ContainsKey(name)) {
+                Log.Warning("当前对象{0} 重复添加了节点:{1}", Source.name, name);
+            } else
+                nodes.Add(name, child.gameObject);
+            if (child.childCount != 0) {
+                AddNode(child, name);
+            }
+        }
+    }
+}
+
 /// <summary>
-/// Unity对象控制类的模板,继承这个类来和UnityObj绑定
+/// 继承这个类来Unity的Prefab
+/// 调用构造函数时,初始化这个Prefab
+/// 调用_Delete()函数来销毁这个Prefab
+/// 挂载PrefabPath特性来指定要绑定哪个Prefab
 /// </summary>
-public abstract class ObjectBinding {
+public abstract class PrefabBinding {
     /// <summary>
     /// Unity对象的数据源
     /// </summary>
     public GameObject Source { get; set; }
 
-    public string Name{
-        get{return Source.name;}
-        set{
+    public string Name {
+        get { return Source.name; }
+        set {
             Source.name = value;
         }
     }
@@ -41,17 +78,16 @@ public abstract class ObjectBinding {
     /// <summary>
     /// 根据子节点名称存储所有节点
     /// </summary>
-    private Dictionary<string,GameObject> nodes;
+    protected Dictionary<string, GameObject> nodes;
 
     /// <summary>
     /// 通过字符串获取GameObject 加入异常处理
     /// </summary>
-    public GameObject Find(string name){
-        if(nodes.ContainsKey(name)){
+    public GameObject Find(string name) {
+        if (nodes.ContainsKey(name)) {
             return nodes[name];
-        }
-        else{
-            Log.Error("当前对象{0} 未找到节点:{1}",Source.name,name);
+        } else {
+            Log.Error("当前对象{0} 未找到节点:{1}", Source.name, name);
             return null;
         }
     }
@@ -59,26 +95,24 @@ public abstract class ObjectBinding {
     /// <summary>
     /// 构造的时候从对象池获取数据源
     /// </summary>
-    public ObjectBinding() {
-        Source = ObjectPoolData.Instance.GetInstantiate(this);
+    public PrefabBinding() {
+        Source = ObjectPool.Instance.GetInstantiate(this);
         //递归地存储节点
         nodes = new Dictionary<string, GameObject>();
         RecursiveNode(Transform);
-        //foreach(KeyValuePair<string,GameObject> v in Nodes) { Debug.Log(v.Key); }
     }
     /// <summary>
     /// 递归地获得所有子节点
     /// </summary>
     /// <param name="trans">Trans.</param>
-    private void RecursiveNode(Transform trans) {
+    protected virtual void RecursiveNode(Transform trans) {
         foreach (Transform child in trans) {
             //避免重名添加
-            if(nodes.ContainsKey(child.name)){
-                Log.Warning("当前对象{0} 重复添加了节点:{1}",Source.name,child.name);
-            }
-            else
+            if (nodes.ContainsKey(child.name)) {
+                Log.Warning("当前对象{0} 重复添加了节点:{1}", Source.name, child.name);
+            } else
                 nodes.Add(child.name, child.gameObject);
-            if(child.childCount != 0) {
+            if (child.childCount != 0) {
                 RecursiveNode(child);
             }
         }
@@ -88,13 +122,13 @@ public abstract class ObjectBinding {
     /// 删除的时候还回数据源 一定要手动释放对象
     /// </summary>
     public virtual void _Delete() {
-        ObjectPoolData.Instance.ReturnInstantiate(Source, GetType());
+        ObjectPool.Instance.ReturnInstantiate(Source, GetType());
     }
 
     /// <summary>
     /// 释放一个列表
     /// </summary>
-    public static void DeleteList<T>(List<T> list) where T : ObjectBinding {
+    public static void DeleteList<T>(List<T> list) where T : PrefabBinding {
         foreach (T obj in list) {
             obj._Delete();
         }
@@ -116,6 +150,6 @@ public abstract class ObjectBinding {
     /// <param name="gameObject"></param>
     /// <returns></returns>
     public static T GetClass<T>(GameObject gameObject) where T : class {
-        return ObjectPoolData.Instance.GetClass<T>(gameObject);
+        return ObjectPool.Instance.GetClass<T>(gameObject);
     }
 }

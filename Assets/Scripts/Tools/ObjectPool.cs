@@ -15,11 +15,11 @@ using UnityEngine;
 /// 3.使用ReturnInstantiate删除实例
 /// 4.使用GetClass通过实例反向获取框架对象
 /// </summary>
-public class ObjectPoolData {
+public class ObjectPool {
     /// <summary>
     /// 通过类型找到对应的ObjectPool
     /// </summary>
-    private Dictionary<System.Type, ObjectPool> PoolDic = new Dictionary<System.Type, ObjectPool>();
+    private Dictionary<System.Type, SinglePool> PoolDic = new Dictionary<System.Type, SinglePool>();
 
     /// <summary>
     /// 将GameObject翻译成类型
@@ -31,7 +31,7 @@ public class ObjectPoolData {
     /// </summary>
     public Transform poolRootTransform;
 
-    public static ObjectPoolData Instance;
+    public static ObjectPool Instance;
 
     /// <summary>
     /// 将AddPool特性的类自动建池,初始化构造函数
@@ -41,22 +41,25 @@ public class ObjectPoolData {
             return;
         }
 
-        Instance = new ObjectPoolData() { poolRootTransform = rootTrans };
+        Instance = new ObjectPool() { poolRootTransform = rootTrans };
 
         int count = 0;
 
         foreach (Type type in Utils.AllTypes) {
             PrefabPath poolAtr = type.GetCustomAttribute<PrefabPath>();
 
-            if (type.IsSubclassOf(typeof(ObjectBinding)) && poolAtr == null) {
+            if(type == typeof(ExtendPrefabBinding)){
+                continue;
+            }
+            if (type.IsSubclassOf(typeof(PrefabBinding)) && poolAtr == null) {
                 Log.Warning("{0}类继承了ObjectBinding,请为其添加PrefabPath特性来绑定一个对象", type.Name);
-                return;
+                continue;
             }
 
             if (poolAtr != null) {
-                if (!type.IsSubclassOf(typeof(ObjectBinding))) {
+                if (!type.IsSubclassOf(typeof(PrefabBinding))) {
                     Log.Warning("{0}类不是ObjectBinding的子类,PrefabPath特性无效", type.Name);
-                    return;
+                    continue;
                 }
                 GameObject obj = Resources.Load<GameObject>(poolAtr.path);
                 if (obj == null) {
@@ -90,7 +93,7 @@ public class ObjectPoolData {
         node.localPosition = Vector3.zero;
         node.gameObject.SetActive(false);
         //2 新建对象池
-        ObjectPool pool = new ObjectPool(type, gameObject, node, this);
+        SinglePool pool = new SinglePool(type, gameObject, node, this);
         PoolDic.Add(type, pool);
         //3 添加新的反向绑定词典
         data.Add(type, new Dictionary<GameObject, object>());
@@ -138,7 +141,7 @@ public class ObjectPoolData {
     /// <summary>
     /// 单个对象池
     /// </summary>
-    private class ObjectPool {
+    private class SinglePool {
         /// <summary>
         /// 绑定的框架类的类型
         /// </summary>
@@ -164,8 +167,8 @@ public class ObjectPoolData {
         /// </summary>
         public Transform PoolNode;
 
-        private ObjectPoolData manager;
-        public ObjectPool(System.Type type, GameObject obj, Transform node, ObjectPoolData objectManager) {
+        private ObjectPool manager;
+        public SinglePool(System.Type type, GameObject obj, Transform node, ObjectPool objectManager) {
             this.type = type;
             this.GamePrefeb = obj;
             this.PoolNode = node;

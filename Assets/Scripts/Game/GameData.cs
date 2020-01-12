@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class GameData{
+public static partial class GameData{
 
     public const int MaxSupply = 100;
 
@@ -28,6 +28,7 @@ public static class GameData{
     public static int MapHeight = 10;
     public static float DefaultCameraSize = 70f;
     public static float CameraRollSpeed = 5f;
+    public static float CameraDriveSpeed = 0.5f;
 
     public static bool ShowMapDebugInfo = true;
     

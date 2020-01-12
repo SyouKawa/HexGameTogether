@@ -26,7 +26,7 @@ Path:
     FPHelper -> FPManager 清除怎么被注释掉了
 */
 [PrefabPath("Prefabs/Map/BasicHexCell")]
-public partial class HexCell : ObjectBinding {
+public partial class HexCell : PrefabBinding {
 
     public HexCell(Vector2Int _MapPos) {
         MapPos = _MapPos;

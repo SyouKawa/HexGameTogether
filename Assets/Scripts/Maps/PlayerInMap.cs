@@ -4,7 +4,7 @@ using static GameData;
 using System;
 
 [PrefabPath("Prefabs/Map/PlayerInMap")]
-public class PlayerInMap : ObjectBinding {
+public class PlayerInMap : PrefabBinding {
     public int supply = 100;
     private HexCell lastCell;
     private FpResult curpath;

@@ -39,7 +39,7 @@ public enum DiceSide {
 /// </summary>
 public class Dice {
     [PrefabPath("Prefabs/Fight/DiceObj")]
-    public class DiceObj : ObjectBinding {
+    public class DiceObj : PrefabBinding {
         public Dice Dice;
 
         public SpriteRenderer image;

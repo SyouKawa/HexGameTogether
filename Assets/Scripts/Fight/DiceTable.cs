@@ -71,7 +71,7 @@ public class DiceTable : MonoBehaviour {
         //}
         //objs.Clear();
 
-        ObjectBinding.DeleteList(objs);
+        PrefabBinding.DeleteList(objs);
 
         if(battle.Caster.PrepareSkill != null) {
             SkillReferenceItem skillObj = new SkillReferenceItem(battle.Caster.PrepareSkill);
@@ -93,7 +93,7 @@ public class DiceTable : MonoBehaviour {
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
             if (hit.collider != null) {
-                Dice hitDice = ObjectBinding.GetClass<Dice.DiceObj>(hit.collider.gameObject).Dice;
+                Dice hitDice = PrefabBinding.GetClass<Dice.DiceObj>(hit.collider.gameObject).Dice;
                 Selected(hitDice);
             }
         }

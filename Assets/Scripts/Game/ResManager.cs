@@ -17,7 +17,7 @@ public class ResManager : Manager<ResManager>{
     public void LoadRes()
     {
         //初始化Tile使用的数组
-         FieldTiles = new Dictionary<FieldType, List<Sprite>>();
+        FieldTiles = new Dictionary<FieldType, List<Sprite>>();
         //优化后
         foreach(FieldType field in System.Enum.GetValues(typeof(FieldType))){
             string path = Utils.FormatString("Sprites/tiles_{0}_colored",field.ToString());

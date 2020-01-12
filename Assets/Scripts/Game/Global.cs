@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
-
 public class EventHelper {
     //Actions
     public GameAction OnGameLoadEvent = new GameAction();
@@ -19,18 +18,19 @@ public class Global : MonoBehaviour {
     public int MapHeight = 10;
     public float DefaultCameraSize = 70f;
     public float CameraRollSpeed = 5f;
+    public float CameraDriveSpeed = 0.5f;
 
     public bool ShowMapDebugInfo;
 
     public EventHelper EventHelper { get; set; }
-    
+
     private void Awake() {
         Instance = this;
 
         //用Inspector变量初始化静态变量
         SetConfigData();
         //对象池建立
-        ObjectPoolData.InitPool(transform.GetChild(0));
+        ObjectPool.InitPool(transform.GetChild(0));
         //初始化事件集
         EventHelper = new EventHelper();
         //遍历程序集. 获取Singleton的子类,初始化Singleton
@@ -43,7 +43,6 @@ public class Global : MonoBehaviour {
         //3
         EventHelper.AfterWorldLoadEvent.Invoke();
     }
-
 
     public void Update() {
         EventHelper.OnUpdateEvent.Invoke();
@@ -64,18 +63,15 @@ public class Global : MonoBehaviour {
                     //3.同步二者的数值
                     dataInfo.SetValue(null, info.GetValue(this));
                     count++;
+                } catch {
+                    Log.Error("{0}同步Inspector到GameData出错,类型{1}->{2}", info.Name, info.FieldType.Name, dataInfo.FieldType.Name);
                 }
-                catch {
-                    Log.Error("{0}同步Inspector到GameData出错,类型{1}->{2}", info.Name,info.FieldType.Name,dataInfo.FieldType.Name);
-                }
-            }
-            else {
+            } else {
                 Log.Info("未同步变量:{0},GameData无此变量", info.Name);
             }
         }
         Log.Info("同步Inspector完成,成功同步了{0}个变量", count);
     }
-
 
     private void InvokeManager() {
         int count = 0;
@@ -84,8 +80,7 @@ public class Global : MonoBehaviour {
             //1判断是否是Manager子类
             try {
                 superType = typeof(Manager<>).MakeGenericType(type);
-            }
-            catch {
+            } catch {
                 continue;
             }
 
@@ -93,7 +88,7 @@ public class Global : MonoBehaviour {
                 //2获取单例并创建出这个单例对象
                 PropertyInfo info = typeof(Singleton<>).MakeGenericType(type).GetProperty("Instance");
                 object Instance = info.GetValue(null);
-                
+
                 //3调用其Start方法
                 MethodInfo info2 = type.GetMethod("Start");
                 object[] objs = new object[1] { EventHelper };

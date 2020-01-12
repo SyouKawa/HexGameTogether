@@ -42,7 +42,7 @@ public partial class MapManager : Manager<MapManager> {
     }
 
     [PrefabPath("Prefabs/Map/MapBaseNode")]
-    public class Map : ObjectBinding {
+    public class Map : PrefabBinding {
         public HexCell[, ] cells;
 
         int width = GameData.MapWidth;
