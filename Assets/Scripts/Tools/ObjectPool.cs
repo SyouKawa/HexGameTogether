@@ -48,9 +48,9 @@ public class ObjectPool {
         foreach (Type type in Utils.AllTypes) {
             PrefabPath poolAtr = type.GetCustomAttribute<PrefabPath>();
 
-            // if(type == typeof(ExtendPrefabBinding)){
-            //     continue;
-            // }
+            if(type == typeof(ExtendPrefabBinding)){
+                continue;
+            }
             if (type.IsSubclassOf(typeof(PrefabBinding)) && poolAtr == null) {
                 Log.Warning("{0}类继承了ObjectBinding,请为其添加PrefabPath特性来绑定一个对象", type.Name);
                 continue;
