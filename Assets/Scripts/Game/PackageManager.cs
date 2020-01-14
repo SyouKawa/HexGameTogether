@@ -7,38 +7,51 @@ using UnityEngine.UI;
 
 public partial class HUD {
     public RectTransform BagTrans;
+
+    public bool IsExpand = false;
+
     public void InitBag() {
         BagTrans = FindRecTrans("Bag");
-        posBegin = BagTrans.anchoredPosition;
-        posEnd = BagTrans.anchoredPosition + new Vector2(0, 200);
+        Vector2 posBegin = BagTrans.anchoredPosition;
+        Vector2 posEnd = BagTrans.anchoredPosition + new Vector2(0, 200);
 
-        FindRecTrans("Bag.Button").GetComponent<Button>().onClick.AddListener(() => {
-            isExpand = !isExpand;
-            if (isExpand) {
-                Startcoroutine(UpBagHUD(posBegin, posEnd, new Vector2(0, 50)));
-            } else {
-                Startcoroutine(UpBagHUD(posEnd, posBegin, new Vector2(0, -50)));
-            }
+        FindRecTrans("Bag.ButtonUp").GetComponent<Button>().onClick.AddListener(() => {
+            IsExpand = !IsExpand;
+            FindRecTrans("Bag.ButtonUp").gameObject.SetActive(false);
+            FindRecTrans("Bag.ButtonDown").gameObject.SetActive(true);
+            Startcoroutine(Tween(posBegin, posEnd));
         });
+
+        FindRecTrans("Bag.ButtonDown").GetComponent<Button>().onClick.AddListener(() => {
+            IsExpand = !IsExpand;
+            FindRecTrans("Bag.ButtonUp").gameObject.SetActive(true);
+            FindRecTrans("Bag.ButtonDown").gameObject.SetActive(false);
+            Startcoroutine(Tween(posEnd, posBegin));
+        });
+
+        GameObject obj1 = FindRecTrans("Bag.PanelMain.Icon1").gameObject;
+        EventTriggerListener.Get( obj1).onClick += ()=>{Log.Debug("Click1");};
+
+                GameObject obj2 = FindRecTrans("Bag.PanelMain.Icon2").gameObject;
+        EventTriggerListener.Get( obj2).onClick += ()=>{Log.Debug("Click2");};
     }
-    public bool isExpand = false;
 
-    private Vector2 posBegin;
-    private Vector2 posEnd;
-
-    private float BagUpDownSpeed = 5f;
-
-    public IEnumerator UpBagHUD(Vector2 begin, Vector2 end, Vector2 over) {
+    /// UI弹出效果的补间动画
+    public IEnumerator Tween(Vector2 begin, Vector2 end) {
+        //播放倍速 5 -> 1/5 -> 0.2s完成动画
+        float TweenMoveSpeed = 5f;
+        //默认回弹 1/4距离 回弹速度是弹出速度的5倍
+        Vector2 over = (end - begin)/4;
         float step = 0;
         while (step < 1f) {
             BagTrans.anchoredPosition = Vector2.Lerp(begin, end + over, step);
-            step += Time.deltaTime * BagUpDownSpeed;
+            step += Time.deltaTime * TweenMoveSpeed;
             yield return null;
         }
         step = 0;
         while (step < 1f) {
             BagTrans.anchoredPosition = Vector2.Lerp(end + over, end, step);
-            step += Time.deltaTime * BagUpDownSpeed * 5;
+            step += Time.deltaTime * TweenMoveSpeed * 5;
             yield return null;
         }
     }
@@ -66,8 +79,7 @@ public class PackageItem {
     }
 
     //对应的Icon 使用时将其绑定到对应的Transform上
-    [PrefabPath("")]
-    private class ItemIcon : PrefabBinding {
+    private class ItemIcon {
         public ItemIcon() {
 
         }
