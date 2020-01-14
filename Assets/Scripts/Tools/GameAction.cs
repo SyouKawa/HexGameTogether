@@ -28,7 +28,9 @@ public class GameAction {
                 //使用堆栈获取函数位置，使用空格分割后，出错位置信息位于倒数第二个string中
                 System.String ErrorAddress = e.StackTrace;
                 string[] con = ErrorAddress.Split(' ');
-                Log.Warning("{0}中的{1}函数执行异常,已跳过\n,错误位于:{2}",action.Target,e.TargetSite,con[con.Length-2]);
+                //获取函数信息
+                MethodInfo info = action.GetMethodInfo();
+                Log.Warning("{0}中的{1}函数执行异常,已跳过\n,错误位于:{2}",action.Target,info,con[con.Length-2]);
             }
         }
     }
