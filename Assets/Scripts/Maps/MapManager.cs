@@ -100,6 +100,8 @@ public partial class MapManager : Manager<MapManager> {
 
             //设置cell贴图
             cells[col, row].CellRenderer.sprite = curImg;
+            //设置cell边缘BgImg颜色
+            cells[col,row].Find("BGImg").GetComponent<SpriteRenderer>().color = GameData.orange;
 
             //调整坐标,并按照row+col之和修改z值保证屏幕远近的遮挡关系(如果为湖海,则调节orderinLayer为更低层级)
             cells[col, row].Source.transform.position = new Vector3(pos.x + ConstHorizonDis * col, pos.y + MinInnerRadius * col, col + row);
@@ -133,6 +135,7 @@ public partial class MapManager : Manager<MapManager> {
                     curImg = ResManager.Instance.GetRandomFieldImg(FieldType.Lake);
                 }
                 cell.CellRenderer.sprite = curImg;
+                cell.Find("BGImg").GetComponent<SpriteRenderer>().color = GameData.gray;
                 cell.CellRenderer.sortingOrder = -1;
                 cell.FieldType = FieldType.EdgeSea;
             }

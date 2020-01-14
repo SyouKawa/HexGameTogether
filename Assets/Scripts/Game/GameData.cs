@@ -22,6 +22,11 @@ public static partial class GameData{
     public static int obliqueFrames = 23;
     //纵向移动单位Cell消耗的帧数
     public static int verticalFrames = 13;
+    
+    //地面背景色
+    public static Color32 orange = new Color32(255,197,101,255);
+    //水面背景色
+    public static Color32 gray = new Color32(66,69,65,255);
 
     
     public static int MapWidth = 10;
