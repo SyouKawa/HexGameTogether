@@ -248,7 +248,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 12
+  m_Text: 2
 --- !u!1 &8675897310383438657
 GameObject:
   m_ObjectHideFlags: 0
@@ -390,7 +390,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: -761132944162832127, guid: e107854be01ed694a88936db412338b6,
+  m_Sprite: {fileID: -4525973682060953631, guid: 0efe6d1cf28c5f548a76be2055f34b4b,
     type: 3}
   m_Type: 0
   m_PreserveAspect: 0
