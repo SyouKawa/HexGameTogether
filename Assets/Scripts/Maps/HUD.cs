@@ -24,9 +24,9 @@ public partial class HUD : ExtendPrefabBinding
         //初始满补给槽
         EffectSupply.fillAmount = 1f;
         RealSupply.fillAmount = 1f;
-        //
+        //初始化补给值的提示文字
         Find("SupplyBar.SupplyText").GetComponent<Text>().text = "100/100";
-
+        //初始化背包
         InitBag();
     }
 

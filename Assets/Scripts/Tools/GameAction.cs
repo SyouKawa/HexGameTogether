@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,14 @@ public class GameAction {
 
     public void Invoke() {
         foreach (var action in source) {
-            action.Invoke();
+            try{
+                action.Invoke();
+            }catch(SystemException e){
+                //使用堆栈获取函数位置，使用空格分割后，出错位置信息位于倒数第二个string中
+                System.String ErrorAddress = e.StackTrace;
+                string[] con = ErrorAddress.Split(' ');
+                Log.Warning("{0}中的{1}函数执行异常,已跳过\n,错误位于:{2}",action.Target,e.TargetSite,con[con.Length-2]);
+            }
         }
     }
 }

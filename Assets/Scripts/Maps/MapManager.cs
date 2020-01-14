@@ -26,9 +26,11 @@ public partial class MapManager : Manager<MapManager> {
     public MapManager() { }
 
     public HUD infoHUD;
+    public List<int> test;
 
     public override void Start(EventHelper helper) {
         helper.OnWorldLoadEvent += SpawnMap;
+        helper.OnGameLoadEvent += ErrorTest;
         helper.AfterWorldLoadEvent += SetDebugInfoState;
         helper.AfterWorldLoadEvent += InitBuiding;
     }
@@ -39,6 +41,11 @@ public partial class MapManager : Manager<MapManager> {
 
         //生成显示Player信息的CameraUI层
         infoHUD = new HUD();
+    }
+
+    public void ErrorTest(){
+        test.Add(3);
+        //Log.Error("Error Test.\n");
     }
 
     /// <summary>
