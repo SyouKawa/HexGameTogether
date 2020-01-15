@@ -200,7 +200,7 @@ MonoBehaviour:
   DefaultCameraSize: 70
   CameraRollSpeed: 5
   CameraDriveSpeed: 0.5
-  ShowMapDebugInfo: 1
+  ShowMapDebugInfo: 0
 --- !u!114 &644846343
 MonoBehaviour:
   m_ObjectHideFlags: 0

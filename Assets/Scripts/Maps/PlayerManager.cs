@@ -11,7 +11,7 @@ public class PlayerManager : Manager<PlayerManager> {
 
     public void CreatePlayer() {
         Player = new PlayerInMap();
-        Player.CurCell = MapManager.Instance.GetCell(2, 2);
+        Player.CurCell = MapManager.Instance.GetCell(7, 4);
     }
 
     [PrefabPath("Prefabs/Map/PlayerInMap")]
@@ -100,12 +100,10 @@ public class PlayerManager : Manager<PlayerManager> {
                     return;
                 }
                 if (cell != lastCell && cell != curCell) {
-                    //Debug.Log("Set dest");
                     //清空Debug显示
                     PathManager.Instance.FreeFindPathData();
                     //开始寻路
                     curpath = PathManager.Instance.GetPath(CurCell, cell);
-                    //Debug.Log("sumCost = " + curpath.Sumcost);
                     MapManager.Instance.infoHUD.PreviewSupply(curpath.Sumcost);
                     if (!curpath.IsFinded) {
                         Debug.Log("Cant Catch.");

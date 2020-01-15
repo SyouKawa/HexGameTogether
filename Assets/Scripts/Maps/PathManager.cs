@@ -34,7 +34,6 @@ public class PathManager : Manager<PathManager> {
         public float sumCost { get => fromcost + destdis; }
 
         public HexCell prepathcell; //前继节点
-
         public FpData() {
             fromcost = 0f;
             destdis = 0f;
@@ -46,6 +45,7 @@ public class PathManager : Manager<PathManager> {
     public HashSet<HexCell> closed;
     public HashSet<HexCell> open;
     private Dictionary<HexCell, FpData> cellsdata;
+    private List<PathPoint> pointLine;
 
     public PathManager() {
         closed = new HashSet<HexCell>();
@@ -73,18 +73,33 @@ public class PathManager : Manager<PathManager> {
             finalpath.Add(cur);
             sumCost += cur.FieldCost;
             if (sumCost > PlayerManager.Instance.Player.supply) {
-                return FpResult.Fail;  
+                return FpResult.Fail;
             }
             cur = cellsdata[cur].prepathcell;
         }
         finalpath.Add(from);
         finalpath.Reverse();
-
+        SpawnPath(finalpath);
         FpResult result = new FpResult(true, finalpath, sumCost);
 
-        //FreeFindPathData();
-
         return result;
+    }
+
+    //根据寻路结果创建一条用于显示的路径
+    public void SpawnPath(List<HexCell> path){
+        pointLine = new List<PathPoint>();
+        for(int i=0;i<path.Count - 1;i++){
+            //目标向量
+            Vector2 dir = (Vector2)(path[i+1].Transform.position - path[i].Transform.position).normalized;
+            //计算与目标向量之间的夹角
+            float angle = Vector2.SignedAngle(Vector2.right,dir);
+            Debug.Log("cur angle:"+angle);
+            //创建路径点并旋转方向
+            PathPoint point = new PathPoint(path[i]);
+            point.Transform.RotateAround(path[i].Transform.position,Vector3.forward,angle);
+            //加入路径列表
+            pointLine.Add(point);
+        }
     }
 
     /// <summary>
@@ -230,6 +245,10 @@ public class PathManager : Manager<PathManager> {
         closed = new HashSet<HexCell>();
         open = new HashSet<HexCell>();
         cellsdata = new Dictionary<HexCell, FpData>();
+        //销毁路径点并归还对象池
+        if(pointLine != null){
+            PrefabBinding.DeleteList(pointLine);
+        }
 
         void ResetCell(HexCell cell){
             cell.DebugBGRenderer.color = new Color(0, 0, 0, 0);
