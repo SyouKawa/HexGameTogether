@@ -49,6 +49,9 @@ TagManager:
   - name: Building
     uniqueID: 3109631621
     locked: 0
+  - name: Rail
+    uniqueID: 3150247595
+    locked: 0
   - name: Player
     uniqueID: 4243916111
     locked: 0
