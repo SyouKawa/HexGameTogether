@@ -78,7 +78,7 @@ public abstract class PrefabBinding {
     /// <summary>
     /// Unity Transform
     /// </summary>
-    public Transform Transform { get => Source.transform; }
+    public Transform Transform {get;set;}
     /// <summary>
     /// 根据子节点名称存储所有节点
     /// </summary>
@@ -100,11 +100,18 @@ public abstract class PrefabBinding {
     /// 构造的时候从对象池获取数据源
     /// </summary>
     public PrefabBinding() {
+        BaseInit();
+    }
+
+    protected virtual void BaseInit(){
         Source = ObjectPool.Instance.GetInstantiate(this);
+        Transform = Source.transform;
         //递归地存储节点
         nodes = new Dictionary<string, GameObject>();
         RecursiveNode(Transform);
     }
+
+
     /// <summary>
     /// 递归地获得所有子节点
     /// </summary>

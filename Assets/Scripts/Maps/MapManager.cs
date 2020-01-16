@@ -89,7 +89,7 @@ public partial class MapManager : Manager<MapManager> {
             int col = mapPos.x;
             int row = mapPos.y;
             //当前基准坐标
-            Vector3 pos = new Vector3(-ConstHorizonDis * row, MinInnerRadius * row, 0f);
+            Vector3 pos = new Vector3(-XCellDis * row, YCellDis * row, 0f);
 
             //按坐标新建每一个cell(数组下标按坐标,而非行列,所以row和col位置互换)
             cells[col, row].FieldType = type;
@@ -101,10 +101,10 @@ public partial class MapManager : Manager<MapManager> {
             //设置cell贴图
             cells[col, row].CellRenderer.sprite = curImg;
             //设置cell边缘BgImg颜色
-            cells[col,row].Find("BGImg").GetComponent<SpriteRenderer>().color = GameData.orange;
+            //cells[col,row].Find("BGImg").GetComponent<SpriteRenderer>().color = GameData.orange;
 
             //调整坐标,并按照row+col之和修改z值保证屏幕远近的遮挡关系(如果为湖海,则调节orderinLayer为更低层级)
-            cells[col, row].Source.transform.position = new Vector3(pos.x + ConstHorizonDis * col, pos.y + MinInnerRadius * col, col + row);
+            cells[col, row].Source.transform.position = new Vector3(pos.x + XCellDis * col, pos.y + YCellDis * col, col + row);
             if (cells[col, row].FieldType == FieldType.Lake) {
                 cells[col, row].CellRenderer.sortingOrder = -1;
             }
@@ -112,7 +112,7 @@ public partial class MapManager : Manager<MapManager> {
             cells[col, row].Name = Utils.FormatString("Cell:{0},{1}", col.ToString(), row.ToString());
 
             //按照倍率调节图片缩放
-            cells[col, row].CellRenderer.transform.localScale = GameData.RatesV3;
+            cells[col, row].CellRenderer.transform.localScale = GameData.Rates;
             //设置DebugText
             cells[col, row].DebugTextMesh.text = cells[col, row].MapPos.ToString();
         }
@@ -135,7 +135,7 @@ public partial class MapManager : Manager<MapManager> {
                     curImg = ResManager.Instance.GetRandomFieldImg(FieldType.Lake);
                 }
                 cell.CellRenderer.sprite = curImg;
-                cell.Find("BGImg").GetComponent<SpriteRenderer>().color = GameData.gray;
+                //cell.Find("BGImg").GetComponent<SpriteRenderer>().color = GameData.gray;
                 cell.CellRenderer.sortingOrder = -1;
                 cell.FieldType = FieldType.EdgeSea;
             }

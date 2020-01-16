@@ -62,6 +62,66 @@ TextureImporter:
   - first:
       213: -7197807259837894284
     second: tiles_grasslands_colored_19
+  - first:
+      213: 2385195676734696705
+    second: tiles_Plain_colored_0
+  - first:
+      213: 8168821360345993588
+    second: tiles_Plain_colored_1
+  - first:
+      213: 3395918218288099964
+    second: tiles_Plain_colored_2
+  - first:
+      213: 1365560278332464967
+    second: tiles_Plain_colored_3
+  - first:
+      213: -2832467595599742866
+    second: tiles_Plain_colored_4
+  - first:
+      213: 6441423227333222690
+    second: tiles_Plain_colored_5
+  - first:
+      213: -4160985807544003841
+    second: tiles_Plain_colored_6
+  - first:
+      213: 3772311828923394135
+    second: tiles_Plain_colored_7
+  - first:
+      213: 8155526783495795663
+    second: tiles_Plain_colored_8
+  - first:
+      213: -4614483518801526662
+    second: tiles_Plain_colored_9
+  - first:
+      213: 4056407010394248816
+    second: tiles_Plain_colored_10
+  - first:
+      213: -6910343615068819265
+    second: tiles_Plain_colored_11
+  - first:
+      213: -2136388576583820346
+    second: tiles_Plain_colored_12
+  - first:
+      213: -7961937632759757279
+    second: tiles_Plain_colored_13
+  - first:
+      213: 9191897569461298361
+    second: tiles_Plain_colored_14
+  - first:
+      213: -3900252702803987638
+    second: tiles_Plain_colored_15
+  - first:
+      213: 7103310384288992121
+    second: tiles_Plain_colored_16
+  - first:
+      213: -577305492795255915
+    second: tiles_Plain_colored_17
+  - first:
+      213: 1115918606228881032
+    second: tiles_Plain_colored_18
+  - first:
+      213: -1733458870592202524
+    second: tiles_Plain_colored_19
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -146,13 +206,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: tiles_grasslands_colored_0
+      name: tiles_Plain_colored_0
       rect:
         serializedVersion: 2
-        x: 17
-        y: 1687
-        width: 347
-        height: 147
+        x: 0
+        y: 1668
+        width: 380
+        height: 380
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -160,20 +220,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7aceaeed9c589499fadf182a651799ca
-      internalID: -5054618721893178985
+      spriteID: acfc9463f67e8bb48977f82c8e929059
+      internalID: 2385195676734696705
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_grasslands_colored_1
+      name: tiles_Plain_colored_1
       rect:
         serializedVersion: 2
-        x: 396
-        y: 1687
-        width: 348
-        height: 154
+        x: 380
+        y: 1668
+        width: 380
+        height: 380
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,20 +241,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 720a9ac435e7a4f669be78e42b971b01
-      internalID: -8334800152830488670
+      spriteID: a3cc7ef99f49b5945b76c43277cccfb0
+      internalID: 8168821360345993588
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_grasslands_colored_2
+      name: tiles_Plain_colored_2
       rect:
         serializedVersion: 2
-        x: 776
-        y: 1688
-        width: 348
-        height: 151
+        x: 760
+        y: 1668
+        width: 380
+        height: 380
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -202,20 +262,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ae9f5059ee8694bf1b42bd5c0cd7a774
-      internalID: 1767897084548498649
+      spriteID: f7d0de613de30e84896d6645f76fff7e
+      internalID: 3395918218288099964
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_grasslands_colored_3
+      name: tiles_Plain_colored_3
       rect:
         serializedVersion: 2
-        x: 1156
-        y: 1688
-        width: 348
-        height: 147
+        x: 1140
+        y: 1668
+        width: 380
+        height: 380
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -223,20 +283,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fb79fc6917aae41dcbd568fcfa6688d9
-      internalID: -2365656456574959431
+      spriteID: 6fdb351c0ed99fc48926163fd5ad4832
+      internalID: 1365560278332464967
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_grasslands_colored_4
+      name: tiles_Plain_colored_4
       rect:
         serializedVersion: 2
-        x: 1536
-        y: 1687
-        width: 348
-        height: 156
+        x: 1520
+        y: 1668
+        width: 380
+        height: 380
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -244,20 +304,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bd2515805251e40e4922a2316174a4d4
-      internalID: 6166522247410921705
+      spriteID: b2586017faa95ad40a966dc1e2fd54a9
+      internalID: -2832467595599742866
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_grasslands_colored_5
+      name: tiles_Plain_colored_5
       rect:
         serializedVersion: 2
-        x: 16
-        y: 1308
-        width: 349
-        height: 153
+        x: 0
+        y: 1288
+        width: 380
+        height: 380
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -265,20 +325,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1f3537a4458f646679b99ccf5e1fa553
-      internalID: -4660370638197277337
+      spriteID: f10a0446b4569244c9f177fcdd96be14
+      internalID: 6441423227333222690
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_grasslands_colored_6
+      name: tiles_Plain_colored_6
       rect:
         serializedVersion: 2
-        x: 396
-        y: 1307
-        width: 348
-        height: 148
+        x: 380
+        y: 1288
+        width: 380
+        height: 380
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -286,20 +346,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b3805f1437d0b464a96760b30399cc25
-      internalID: 138108977397510342
+      spriteID: 2a2918666f6d2684bbe4e790331d4c6a
+      internalID: -4160985807544003841
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_grasslands_colored_7
+      name: tiles_Plain_colored_7
       rect:
         serializedVersion: 2
-        x: 776
-        y: 1307
-        width: 347
-        height: 152
+        x: 760
+        y: 1288
+        width: 380
+        height: 380
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -307,20 +367,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0eefebdf80a9d41058e2ca19208d2d42
-      internalID: -3972804737325457401
+      spriteID: 64ef11e28f80b67459a56e5c05c3d56d
+      internalID: 3772311828923394135
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_grasslands_colored_8
+      name: tiles_Plain_colored_8
       rect:
         serializedVersion: 2
-        x: 1157
-        y: 1308
-        width: 347
-        height: 147
+        x: 1140
+        y: 1288
+        width: 380
+        height: 380
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -328,20 +388,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a833afe1303bc457bac862c9ce5561dd
-      internalID: -5773186862130501297
+      spriteID: 33b70824a95ee5945af2d6de305862bc
+      internalID: 8155526783495795663
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_grasslands_colored_9
+      name: tiles_Plain_colored_9
       rect:
         serializedVersion: 2
-        x: 1536
-        y: 1307
-        width: 349
-        height: 142
+        x: 1520
+        y: 1288
+        width: 380
+        height: 380
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -349,20 +409,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 95a3902f07ea64f048891c8a2aef3066
-      internalID: 8918388482787105404
+      spriteID: fb1fda27dd5b423489412878f3c36653
+      internalID: -4614483518801526662
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_grasslands_colored_10
+      name: tiles_Plain_colored_10
       rect:
         serializedVersion: 2
-        x: 17
-        y: 928
-        width: 346
-        height: 152
+        x: 0
+        y: 908
+        width: 380
+        height: 380
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -370,20 +430,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 313ca4053363b4a81bd65ca290e1683f
-      internalID: -2273131484030987828
+      spriteID: 2ad2ddf0cbbd430408d4aff2e3a8e296
+      internalID: 4056407010394248816
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_grasslands_colored_11
+      name: tiles_Plain_colored_11
       rect:
         serializedVersion: 2
-        x: 397
-        y: 928
-        width: 347
-        height: 157
+        x: 380
+        y: 908
+        width: 380
+        height: 380
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -391,20 +451,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c224bc26fe43f401d8dd27f486e26bae
-      internalID: 6539249321343576787
+      spriteID: 15e8e4e57b1dd684db55d111836a1f93
+      internalID: -6910343615068819265
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_grasslands_colored_12
+      name: tiles_Plain_colored_12
       rect:
         serializedVersion: 2
-        x: 777
-        y: 928
-        width: 347
-        height: 156
+        x: 760
+        y: 908
+        width: 380
+        height: 380
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -412,20 +472,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e251d7519ec0e4f7d83db6933d7910f0
-      internalID: -7264374711630957990
+      spriteID: 8887256865a177247afff5b3191ffdac
+      internalID: -2136388576583820346
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_grasslands_colored_13
+      name: tiles_Plain_colored_13
       rect:
         serializedVersion: 2
-        x: 1157
-        y: 927
-        width: 348
-        height: 150
+        x: 1140
+        y: 908
+        width: 380
+        height: 380
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -433,20 +493,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e22ebeaa7e33e47e7bd998e0fbce1748
-      internalID: -7945545350562791758
+      spriteID: 8de28355eb8d2a44381ffc4f35e1490c
+      internalID: -7961937632759757279
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_grasslands_colored_14
+      name: tiles_Plain_colored_14
       rect:
         serializedVersion: 2
-        x: 1537
-        y: 927
-        width: 348
-        height: 172
+        x: 1520
+        y: 908
+        width: 380
+        height: 380
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -454,20 +514,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 626c8f1dc4c134ae1874315e094e96b9
-      internalID: 716126592122669671
+      spriteID: a758930655ad8984894b1687c0947a6d
+      internalID: 9191897569461298361
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_grasslands_colored_15
+      name: tiles_Plain_colored_15
       rect:
         serializedVersion: 2
-        x: 16
-        y: 547
-        width: 348
-        height: 144
+        x: 0
+        y: 528
+        width: 380
+        height: 380
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -475,20 +535,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e7f4ed2bbf0074783b7b39f2b398be7c
-      internalID: 6918965283396370559
+      spriteID: 09c4fea9f6c566b459dc61396c1efcdb
+      internalID: -3900252702803987638
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_grasslands_colored_16
+      name: tiles_Plain_colored_16
       rect:
         serializedVersion: 2
-        x: 396
-        y: 547
-        width: 349
-        height: 142
+        x: 380
+        y: 528
+        width: 380
+        height: 380
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -496,20 +556,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d2b4c76c2f1c64a23b17d7507eda626c
-      internalID: -40820926181836176
+      spriteID: 0a19f9e8ebd83d4428ab857760270e06
+      internalID: 7103310384288992121
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_grasslands_colored_17
+      name: tiles_Plain_colored_17
       rect:
         serializedVersion: 2
-        x: 776
-        y: 548
-        width: 349
-        height: 143
+        x: 760
+        y: 528
+        width: 380
+        height: 380
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -517,20 +577,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a05860563e48d406b984a878e6006d92
-      internalID: -9221826911326192332
+      spriteID: a11db495096a14140925ea6d8bcf0e85
+      internalID: -577305492795255915
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_grasslands_colored_18
+      name: tiles_Plain_colored_18
       rect:
         serializedVersion: 2
-        x: 1157
-        y: 548
-        width: 349
-        height: 149
+        x: 1140
+        y: 528
+        width: 380
+        height: 380
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -538,20 +598,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cacfd1baa9a81404f8ef93f534f43c7c
-      internalID: 3935884542621479902
+      spriteID: 3e88d7d6f8ac6304fb4a04b42687be6b
+      internalID: 1115918606228881032
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_grasslands_colored_19
+      name: tiles_Plain_colored_19
       rect:
         serializedVersion: 2
-        x: 1537
-        y: 548
-        width: 347
-        height: 145
+        x: 1520
+        y: 528
+        width: 380
+        height: 380
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -559,8 +619,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 16a903ce74676410daf2d12d4adc6767
-      internalID: -7197807259837894284
+      spriteID: 34c97be7395d3c84bb48ded41724a87a
+      internalID: -1733458870592202524
       vertices: []
       indices: 
       edges: []

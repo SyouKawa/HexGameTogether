@@ -62,6 +62,66 @@ TextureImporter:
   - first:
       213: 7518593291117329698
     second: tiles_mountains_colored_19
+  - first:
+      213: 3263579623379594279
+    second: tiles_Mountain_colored_0
+  - first:
+      213: -94962541888133292
+    second: tiles_Mountain_colored_1
+  - first:
+      213: 5522527003869427957
+    second: tiles_Mountain_colored_2
+  - first:
+      213: -2576966512277454924
+    second: tiles_Mountain_colored_3
+  - first:
+      213: -1736689879381546950
+    second: tiles_Mountain_colored_4
+  - first:
+      213: -1660702266600290372
+    second: tiles_Mountain_colored_5
+  - first:
+      213: 1769669499605452625
+    second: tiles_Mountain_colored_6
+  - first:
+      213: 7320672050717006437
+    second: tiles_Mountain_colored_7
+  - first:
+      213: 1082341332955809291
+    second: tiles_Mountain_colored_8
+  - first:
+      213: 4570834233129888769
+    second: tiles_Mountain_colored_9
+  - first:
+      213: -1678021698445250497
+    second: tiles_Mountain_colored_10
+  - first:
+      213: 5007541387752322003
+    second: tiles_Mountain_colored_11
+  - first:
+      213: 9170138118232644673
+    second: tiles_Mountain_colored_12
+  - first:
+      213: 7797677817365386108
+    second: tiles_Mountain_colored_13
+  - first:
+      213: 6235992776962250283
+    second: tiles_Mountain_colored_14
+  - first:
+      213: 4137074818432563531
+    second: tiles_Mountain_colored_15
+  - first:
+      213: -3375852693990278685
+    second: tiles_Mountain_colored_16
+  - first:
+      213: -2312853056299795770
+    second: tiles_Mountain_colored_17
+  - first:
+      213: -2691904813325997008
+    second: tiles_Mountain_colored_18
+  - first:
+      213: 9173076632877698443
+    second: tiles_Mountain_colored_19
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -146,421 +206,421 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: tiles_mountains_colored_0
+      name: tiles_Mountain_colored_0
       rect:
         serializedVersion: 2
-        x: 18
-        y: 1687
-        width: 349
-        height: 218
-      alignment: 9
-      pivot: {x: 0.50000006, y: 0.3354733}
+        x: 0
+        y: 1668
+        width: 380
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a448f7bcd3c9d4c84bfe44a930a78675
-      internalID: -3658021558010675093
+      spriteID: f844c68c26aeb0648a99eb6479c0536a
+      internalID: 3263579623379594279
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_mountains_colored_1
+      name: tiles_Mountain_colored_1
       rect:
         serializedVersion: 2
-        x: 394
-        y: 1689
-        width: 349
-        height: 216
-      alignment: 9
-      pivot: {x: 0.5033886, y: 0.3394244}
+        x: 380
+        y: 1668
+        width: 380
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b30392bbc667a4174bbdb0170d3d785d
-      internalID: -6510655533348409751
+      spriteID: 28c8857656a497440b7b97808845445f
+      internalID: -94962541888133292
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_mountains_colored_2
+      name: tiles_Mountain_colored_2
       rect:
         serializedVersion: 2
-        x: 777
-        y: 1688
-        width: 347
-        height: 242
-      alignment: 9
-      pivot: {x: 0.50496423, y: 0.31492475}
+        x: 760
+        y: 1668
+        width: 380
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ce4112581b3624cf3975993e0f8adcc9
-      internalID: -1606279035018000422
+      spriteID: 687bda55db11b984b8699f7e8439a3d5
+      internalID: 5522527003869427957
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_mountains_colored_3
+      name: tiles_Mountain_colored_3
       rect:
         serializedVersion: 2
-        x: 1152
-        y: 1688
-        width: 361
-        height: 239
-      alignment: 9
-      pivot: {x: 0.4952281, y: 0.31260112}
+        x: 1140
+        y: 1668
+        width: 380
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 44cf54cb5d9d14c1aab6b31221cd8b46
-      internalID: 1345956710487216175
+      spriteID: cd09ceea75953fe47b1390820d318492
+      internalID: -2576966512277454924
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_mountains_colored_4
+      name: tiles_Mountain_colored_4
       rect:
         serializedVersion: 2
-        x: 1537
-        y: 1688
-        width: 347
-        height: 233
-      alignment: 9
-      pivot: {x: 0.5056286, y: 0.2820301}
+        x: 1520
+        y: 1668
+        width: 380
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f5ee491b2322d422daf94bf2db2f017f
-      internalID: -3028866860675741247
+      spriteID: d91a10a604096494fbf8e5ffcefc94bc
+      internalID: -1736689879381546950
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_mountains_colored_5
+      name: tiles_Mountain_colored_5
       rect:
         serializedVersion: 2
-        x: 17
-        y: 1307
-        width: 346
-        height: 260
-      alignment: 9
-      pivot: {x: 0.5, y: 0.24846895}
+        x: 0
+        y: 1288
+        width: 380
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f46d13f61b8a7409a9f1e2b8487e3b72
-      internalID: -5621831948048368625
+      spriteID: 98d9723629c67374a8171e2c1c355245
+      internalID: -1660702266600290372
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_mountains_colored_6
+      name: tiles_Mountain_colored_6
       rect:
         serializedVersion: 2
-        x: 397
-        y: 1309
-        width: 347
-        height: 244
-      alignment: 9
-      pivot: {x: 0.5, y: 0.2722443}
+        x: 380
+        y: 1288
+        width: 380
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1ca34beb6841648c0b47c7960f9813d7
-      internalID: 4617377995515869327
+      spriteID: 1d0863e41def5b845b6e26a2edbfed15
+      internalID: 1769669499605452625
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_mountains_colored_7
+      name: tiles_Mountain_colored_7
       rect:
         serializedVersion: 2
-        x: 778
-        y: 1305
-        width: 349
-        height: 305
-      alignment: 9
-      pivot: {x: 0.5000002, y: 0.21530561}
+        x: 760
+        y: 1288
+        width: 380
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 68457dd46e655415098ae7c2f5c7fb5d
-      internalID: -2952230499400785965
+      spriteID: abd96f6177984ea4b9e284ffd760bf72
+      internalID: 7320672050717006437
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_mountains_colored_8
+      name: tiles_Mountain_colored_8
       rect:
         serializedVersion: 2
-        x: 1157
-        y: 1309
-        width: 346
-        height: 266
-      alignment: 9
-      pivot: {x: 0.51723766, y: 0.24953237}
+        x: 1140
+        y: 1288
+        width: 380
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5a20fbc14fc2b4ad390722a68ac544b0
-      internalID: -5363623270350442527
+      spriteID: 21b4e64ca6d7baf4bbf5cc31afe72cc6
+      internalID: 1082341332955809291
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_mountains_colored_9
+      name: tiles_Mountain_colored_9
       rect:
         serializedVersion: 2
-        x: 1533
-        y: 1309
-        width: 353
-        height: 234
-      alignment: 9
-      pivot: {x: 0.51126367, y: 0.32158223}
+        x: 1520
+        y: 1288
+        width: 380
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eede1739a2be3488fab0e0434fd7b59c
-      internalID: -2459269785369752909
+      spriteID: 2f6661b291599b64da932ffc9b6fdfdc
+      internalID: 4570834233129888769
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_mountains_colored_10
+      name: tiles_Mountain_colored_10
       rect:
         serializedVersion: 2
-        x: 18
-        y: 929
-        width: 348
-        height: 298
-      alignment: 9
-      pivot: {x: 0.50817066, y: 0.22329405}
+        x: 0
+        y: 908
+        width: 380
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 47d702e57a9794d9497fa8b1e45f3df7
-      internalID: 3655752941139634814
+      spriteID: ce651cc41de9fca4999eb8967276fd83
+      internalID: -1678021698445250497
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_mountains_colored_11
+      name: tiles_Mountain_colored_11
       rect:
         serializedVersion: 2
-        x: 390
-        y: 928
-        width: 353
-        height: 298
-      alignment: 9
-      pivot: {x: 0.5080549, y: 0.2137525}
+        x: 380
+        y: 908
+        width: 380
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ed24220eaefee4f30ad4805340b6323d
-      internalID: 2570719235875032182
+      spriteID: 39e69951d7ed01c469533d25a55cecfc
+      internalID: 5007541387752322003
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_mountains_colored_12
+      name: tiles_Mountain_colored_12
       rect:
         serializedVersion: 2
-        x: 778
-        y: 929
-        width: 345
-        height: 299
-      alignment: 9
-      pivot: {x: 0.4906503, y: 0.20871717}
+        x: 760
+        y: 908
+        width: 380
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 682cb8c30c5ac43adb81442c1388995f
-      internalID: -4350880163472174170
+      spriteID: 6c31f0ae5cd4bc04cb42f1c07fcfd420
+      internalID: 9170138118232644673
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_mountains_colored_13
+      name: tiles_Mountain_colored_13
       rect:
         serializedVersion: 2
-        x: 1157
-        y: 929
-        width: 354
-        height: 266
-      alignment: 9
-      pivot: {x: 0.481776, y: 0.23321372}
+        x: 1140
+        y: 908
+        width: 380
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3d1d2d19fb37d48d699a28865e271f95
-      internalID: -1025733533272784757
+      spriteID: 75d3d1b77cb235b41b4633d2b31eeb3e
+      internalID: 7797677817365386108
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_mountains_colored_14
+      name: tiles_Mountain_colored_14
       rect:
         serializedVersion: 2
-        x: 1538
-        y: 928
-        width: 345
-        height: 294
-      alignment: 9
-      pivot: {x: 0.5093499, y: 0.21473497}
+        x: 1520
+        y: 908
+        width: 380
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b2bc8b51fe9b14816b3f777181c44793
-      internalID: 5860698568712436923
+      spriteID: 16ef5da65915af24c8bc0fe992afa76f
+      internalID: 6235992776962250283
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_mountains_colored_15
+      name: tiles_Mountain_colored_15
       rect:
         serializedVersion: 2
-        x: 17
-        y: 547
-        width: 346
-        height: 292
-      alignment: 9
-      pivot: {x: 0.5, y: 0.2127811}
+        x: 0
+        y: 528
+        width: 380
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5f9051154b3ad4563843b7e04cc90b2d
-      internalID: 2361835353329118376
+      spriteID: d4ae091c1bc489b4bb0c005b030d035c
+      internalID: 4137074818432563531
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_mountains_colored_16
+      name: tiles_Mountain_colored_16
       rect:
         serializedVersion: 2
-        x: 398
-        y: 548
-        width: 345
-        height: 297
-      alignment: 9
-      pivot: {x: 0.5093499, y: 0.21761663}
+        x: 380
+        y: 528
+        width: 380
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 06a559e3fb4d54f07b79b56d6efc5eb3
-      internalID: -2118522013170229704
+      spriteID: 613138017c1de5b459200a2c1b174537
+      internalID: -3375852693990278685
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_mountains_colored_17
+      name: tiles_Mountain_colored_17
       rect:
         serializedVersion: 2
-        x: 778
-        y: 548
-        width: 345
-        height: 266
-      alignment: 9
-      pivot: {x: 0.5, y: 0.25263736}
+        x: 760
+        y: 528
+        width: 380
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6b475de7485ba40e1ae330c2d05e1499
-      internalID: 5090194154783585811
+      spriteID: 46f23f0ec6331f9488c7238c73dc664d
+      internalID: -2312853056299795770
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_mountains_colored_18
+      name: tiles_Mountain_colored_18
       rect:
         serializedVersion: 2
-        x: 1157
-        y: 548
-        width: 346
-        height: 305
-      alignment: 9
-      pivot: {x: 0.5, y: 0.18153717}
+        x: 1140
+        y: 528
+        width: 380
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 77424b28ea1614ed0b9479430f90dadf
-      internalID: -1943189110502535738
+      spriteID: b236d2520b147f8448ac554c883fc4c0
+      internalID: -2691904813325997008
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_mountains_colored_19
+      name: tiles_Mountain_colored_19
       rect:
         serializedVersion: 2
-        x: 1538
-        y: 547
-        width: 345
-        height: 296
-      alignment: 9
-      pivot: {x: 0.5, y: 0.22478093}
+        x: 1520
+        y: 528
+        width: 380
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7caeb0d6a20b1450a94ce5c67ed24779
-      internalID: 7518593291117329698
+      spriteID: f42689b88ddc31f46a9860b68fab8bf1
+      internalID: 9173076632877698443
       vertices: []
       indices: 
       edges: []

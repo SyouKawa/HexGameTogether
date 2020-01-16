@@ -15,6 +15,11 @@ PlayerInMap放在PlayerManager里
 背包做成的样式 10个格子 有展开 ⬆ 和隐藏 ↓ 按钮,展开可以看见下面的20个格子 如果多的话进行翻页 ← →
 TODO : 左键点击 开始拖拽 右键点击 进行使用
 
+1/16 kya
+改动Cell切割方式，精调Cell的XY间距
+HexCell 增加 WorldPos属性，获取HexCell时用WorldPos代替Transform.Position
+手动调整并缩小了HexCell的碰撞盒，使其不会重叠
+TODO： 通过反射调用反向绑定函数。详见PlayerManager 第97行
 
 
 //下面应该用不上了

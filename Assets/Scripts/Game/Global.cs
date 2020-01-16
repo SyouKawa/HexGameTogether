@@ -20,6 +20,8 @@ public class Global : MonoBehaviour {
     public float CameraRollSpeed = 5f;
     public float CameraDriveSpeed = 0.5f;
 
+    public float YCellDis = 6.7f ;//固定垂直间距
+    public float XCellDis = 22.7f ;//固定水平间距
     public bool ShowMapDebugInfo;
 
     public EventHelper EventHelper { get; set; }

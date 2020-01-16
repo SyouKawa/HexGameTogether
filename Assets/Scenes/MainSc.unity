@@ -200,6 +200,8 @@ MonoBehaviour:
   DefaultCameraSize: 70
   CameraRollSpeed: 5
   CameraDriveSpeed: 0.5
+  YCellDis: 6.75
+  XCellDis: 22.58
   ShowMapDebugInfo: 0
 --- !u!114 &644846343
 MonoBehaviour:

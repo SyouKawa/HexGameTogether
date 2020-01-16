@@ -94,6 +94,12 @@ public class PlayerManager : Manager<PlayerManager> {
         /// </summary>
         private void UpdateFind(RaycastHit2D hit) {
             if (hit.collider.tag == "MapCell") {
+                /*TODO：
+                    找到了一个完美的反射应用场景
+                    这里可以用<反射>来完美避免这个问题
+                    通过修改底层GetClass 从而GetClass<HexCell>(hit.collider)即可,或者达到同样方便
+                    提示: public static GameObject RevertBinding(Collider collider);
+                */
                 HexCell cell = GetClass<HexCell>(hit.collider.transform.parent.gameObject);
                 //非寻路区域直接返回
                 if (cell.FieldType == FieldType.EdgeSea || cell.FieldType == FieldType.Lake) {

@@ -27,7 +27,6 @@ Path:
 */
 [PrefabPath("Prefabs/Map/BasicHexCell")]
 public partial class HexCell : PrefabBinding {
-
     public HexCell(Vector2Int _MapPos) {
         MapPos = _MapPos;
         CellRenderer = Find("CellImg").GetComponent<SpriteRenderer>();
@@ -95,7 +94,7 @@ public partial class HexCell {
 
     public void InitBuilding() {
         BuildingRenderer = Find("Building").GetComponent<SpriteRenderer>();
-        Find("BuildingRoot").transform.localScale = GameData.RatesV3;
+        //Find("BuildingRoot").transform.localScale = GameData.Rates;
     }
 
     public void ShowBuiding(BuildingType type) {

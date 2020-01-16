@@ -4,18 +4,16 @@ using UnityEngine;
 
 public static partial class GameData{
 
-    public const int MaxSupply = 100;
+    public static int MaxSupply = 100;
 
-    public const float Rates = 10f;
-
-    public static Vector3 RatesV3 = new Vector3(Rates,Rates,0);
+    public static Vector3 Rates = new Vector3(10,10,1);
     
-    public const float MaxOuterRadius = 1.7f * Rates;//最大外径
-    public const float MinInnerRadius = 0.68f * Rates;//最小内径
-    public const float ConstHorizonDis = 2.2f * Rates;//固定水平间距
 
-    public const int EdgeNum = 6;//Tile环绕边数
-    public const float infinite = 99999f;
+    public static float YCellDis = 0.675f  ;//固定垂直间距
+    public static float XCellDis = 2.258f  ;//固定水平间距
+
+    public static int EdgeNum = 6;//Tile环绕边数
+    public static float infinite = 99999f;
     public static System.Random random = new System.Random(1);
 
     //斜向移动单位Cell消耗的帧数
