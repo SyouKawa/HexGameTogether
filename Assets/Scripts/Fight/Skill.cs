@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-
+/*
 /// <summary>
 /// 人物可以组合出的技能,通常技能都是伴随人物
 /// 根据人物的特性从而可以进行组合 释放技能时很多时候都会消耗消耗品
@@ -23,6 +23,8 @@ public class Skill {
     /// </summary>
     public string logic;
 }
+*/
+
 
 /// <summary>
 /// 一个用于逻辑判断的辅助容器

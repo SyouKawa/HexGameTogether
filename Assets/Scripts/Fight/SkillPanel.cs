@@ -31,8 +31,8 @@ public class SkillReferenceItem : PrefabBinding {
         text = Source.transform.GetChild(1).GetComponent<Text>();
 
         StringBuilder sb = new StringBuilder();
-        sb.AppendLine(sourceSkill.name);
-        sb.AppendLine(sourceSkill.discrition);
+        sb.AppendLine(sourceSkill.Name);
+        sb.AppendLine(sourceSkill.Discription);
         text.text = sb.ToString();
 
         foreach (DiceSide side in sourceSkill.needSides) {

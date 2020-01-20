@@ -37,8 +37,6 @@ public class Global : MonoBehaviour {
         EventHelper = new EventHelper();
         //遍历程序集. 获取Singleton的子类,初始化Singleton
         InvokeManager();
-
-
     }
 
     private void Start(){

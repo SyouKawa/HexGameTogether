@@ -134,6 +134,7 @@ public class BattleMode : MonoBehaviour {
      * 坚固路障 3盾 路障+黄迅速+蓝观察
     */
     public static List<Skill> GetTestSkills() {
+        /*
         List<Skill> result = new List<Skill>() {
             new Skill() {
                 name = "火炮开火",
@@ -190,8 +191,8 @@ public class BattleMode : MonoBehaviour {
                 logic = "Shield(3);"
             }
         };
-
-        return result;
+        */
+        return new List<Skill>();
     }
 
 
