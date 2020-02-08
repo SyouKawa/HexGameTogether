@@ -32,7 +32,7 @@ public class SkillReferenceItem : PrefabBinding {
 
         StringBuilder sb = new StringBuilder();
         sb.AppendLine(sourceSkill.Name);
-        sb.AppendLine(sourceSkill.Discription);
+        sb.AppendLine(sourceSkill.Description);
         text.text = sb.ToString();
 
         foreach (DiceSide side in sourceSkill.needSides) {

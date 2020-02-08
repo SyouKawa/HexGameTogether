@@ -1,56 +1,59 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ExcelDataReader;
+using System.Reflection;
 using System.IO;
 using UnityEngine;
 using System.Data;
 
 
 /// <summary>
-/// ²âÊÔÓÃÀı
+/// æµ‹è¯•ç”¨ä¾‹
 /// </summary>
 public class Skill {
     #region Read From Excel
     public int ID = 1;
-    public string Name = "¼¼ÄÜÃû";
-    public string Discription = "¼¼ÄÜĞ§¹û";
+    public string Name = "æŠ€èƒ½å";
+    public string Description = "æŠ€èƒ½æ•ˆæœ";
     /// <summary>
-    /// ´ú±íÇ¿¶È,Êµ¼ÊÇé¿öÁíËµ
+    /// ä»£è¡¨å¼ºåº¦,å®é™…æƒ…å†µå¦è¯´
     /// </summary>
     public int Power = 100;
     /// <summary>
-    /// À¶ºÄ
+    /// è“è€—
     /// </summary>
     public int MPCost = 10;
     /// <summary>
-    /// Ä¬ÈÏcd
+    /// é»˜è®¤cd
     /// </summary>
     public float CD = -1f;
     /// <summary>
-    /// Ä¬ÈÏÊ©·¨Ê±¼ä,¸ºÊı±íÊ¾ÎªË²·¢¼¼ÄÜ
+    /// é»˜è®¤æ–½æ³•æ—¶é—´,è´Ÿæ•°è¡¨ç¤ºä¸ºç¬å‘æŠ€èƒ½
     /// </summary>
     public float CastInterval = 1.5f;
     /// <summary>
-    /// ¼¼ÄÜ±»ÊÍ·ÅÊ±Ö´ĞĞµÄ½Å±¾
+    /// æŠ€èƒ½è¢«é‡Šæ”¾æ—¶æ‰§è¡Œçš„è„šæœ¬
     /// </summary>
     public string CastScript = "";
     #endregion
      
-    //ÇëºöÊÓËü
+    //è¯·å¿½è§†å®ƒ
     public List<DiceSide> needSides;
+
+    //æ‰“å°å‡½æ•°
+    public void print(){
+        var str = Utils.FormatString("{0}:[\nDescrp:{1},\nPow:{2},\nMp:{3},\t]",Name,Description,Power,MPCost);
+        Log.Debug(str);
+    }
 }
 
-
-//TODO: Íê³É¼ÓÔØÆ÷¹¦ÄÜ, ²¢¾¡¿ÉÄÜÍê±¸µÄÌí¼ÓºÃ¸÷ÖÖÒì³£´¦Àí,¸ñÊ½´íÎó,¶ÁÈ¡Îª¿ÕµÈµÈµÈµÈ.
-//¸Ä½øLoadSkillº¯Êı,Ê¹Õâ¸öÀà¿ÉÒÔ×Ô¶¯¼ÓÔØExcelÖĞËùÓĞµÄ±í. ²¢½«ËùÓĞµÄ±íµÄÊı¾İ½øĞĞ±£´æ.
-//LoadSkill()Ö»ÊÇ¾ÙÀı,Çë±£Áô¶îÍâÌí¼ÓµÄ²âÊÔÓÃÀı.
-//ÕûÌåÁ÷³Ì: Excel -> ExcelDataReader -> DataSet -> DataTable -> List<T>
+//TODO: å®ŒæˆåŠ è½½å™¨åŠŸèƒ½, å¹¶å°½å¯èƒ½å®Œå¤‡çš„æ·»åŠ å¥½å„ç§å¼‚å¸¸å¤„ç†,æ ¼å¼é”™è¯¯,è¯»å–ä¸ºç©ºç­‰ç­‰ç­‰ç­‰.
+//æ”¹è¿›LoadSkillå‡½æ•°,ä½¿è¿™ä¸ªç±»å¯ä»¥è‡ªåŠ¨åŠ è½½Excelä¸­æ‰€æœ‰çš„è¡¨. å¹¶å°†æ‰€æœ‰çš„è¡¨çš„æ•°æ®è¿›è¡Œä¿å­˜.
+//LoadSkill()åªæ˜¯ä¸¾ä¾‹,è¯·ä¿ç•™é¢å¤–æ·»åŠ çš„æµ‹è¯•ç”¨ä¾‹.
+//æ•´ä½“æµç¨‹: Excel -> ExcelDataReader -> DataSet -> DataTable -> List<T>
 
 /// <summary>
-/// Excel¼ÓÔØÆ÷
+/// ExcelåŠ è½½å™¨
 /// </summary>
 public class ExcelReader : Manager<ExcelReader> {
     public string path;
@@ -61,47 +64,73 @@ public class ExcelReader : Manager<ExcelReader> {
     }
 
     public void LoadData() {
-        path = Application.dataPath + "\\Resources\\ExcelData\\GameData.xlsx";
+        path = Application.dataPath + Utils.GetPlatformPath();
         DataSet set;
-
-        using(var stream = File.Open(path, FileMode.Open, FileAccess.Read)) {
-            //¶ÁÈ¡Excel
-            using(var reader = ExcelReaderFactory.CreateReader(stream)) {
-                //½«Æä×ª»¯ÎªDataSet
-                set = reader.AsDataSet();
+        try{
+            var stream = File.Open(path, FileMode.Open, FileAccess.Read);
+            var reader = ExcelReaderFactory.CreateReader(stream);
+            //å°†å…¶è½¬åŒ–ä¸ºDataSet
+            set = reader.AsDataSet();
+            foreach (DataTable table in set.Tables) {
+            //å°†DataTableåˆ†ç±»ä¿å­˜,å…¶ä¸­Excelåˆ†é¡µçš„å‘½åå°±æ˜¯TableName
+            //DataColunmå’ŒDataRowåˆ†åˆ«å¯¹åº”Excelçš„è¡Œåˆ—,å…·ä½“è¯·æŸ¥é˜….netä¸­çš„DataTableæ•°æ®ç±»å‹
+                if(table.Rows.Count<2){
+                    Log.Warning("{0}è¡¨å†…å®¹ä¸å®Œæ•´ï¼ˆç©ºè¡¨æˆ–åªæœ‰è¡¨å¤´ï¼‰ï¼Œå·²è·³è¿‡",table.TableName);
+                    continue;
+                }
+                Data.Add(table.TableName, table);
+            }
+            Log.Debug("æœ¬æ¬¡åŠ è½½å·²å®Œæˆ,å…±è¯»å–{0}å¼ è¡¨,å…±åŠ è½½æˆåŠŸ{1}å¼ è¡¨",set.Tables.Count,Data.Count);
+        }
+        catch(SystemException e){
+            Type errorType = e.GetType();
+            if(errorType.Equals(typeof(FileNotFoundException))){
+                Log.Error("æ— æ³•æ‰¾åˆ°åŠ è½½æ–‡ä»¶:{0}\n",path);
+                return ;
+            }
+            else{
+                Log.Error("æœªçŸ¥åŠ è½½é”™è¯¯(è¯·æ ¹æ®é”™è¯¯ç±»å‹è¡¥å……)\n");
+                return;
             }
         }
-
-        foreach (DataTable table in set.Tables) {
-            //½«DataTable·ÖÀà±£´æ,ÆäÖĞExcel·ÖÒ³µÄÃüÃû¾ÍÊÇTableName
-            //DataColunmºÍDataRow·Ö±ğ¶ÔÓ¦ExcelµÄĞĞÁĞ,¾ßÌåÇë²éÔÄ.netÖĞµÄDataTableÊı¾İÀàĞÍ
-            Data.Add(table.TableName, table);
-        }
-
-        Log.Debug("±¾´Î¼ÓÔØÒÑÍê³É,¹²¼ÓÔØ{0}ÕÅ±í", set.Tables.Count);
+        
+        LoadTable<Skill>();
     }
 
-    public List<Skill> LoadSkill() {
-        DataTable table = Data["Skill"];
-        int colCount = table.Columns.Count;
+    public List<T> LoadTable<T>() where T : class,new(){
+        DataTable table = Data[typeof(T).Name];
+        int rowCount = table.Rows.Count;
+        //ä½¿ç”¨é¦–è¡Œåˆ›å»ºTableParser,å°†è¿™å¼ è¡¨å’Œä¸€ä¸ªæ•°æ®ç±»å‹ç»‘å®š
         DataRow firstRow = table.Rows[0];
-        //Ê¹ÓÃÊ×ĞĞ´´½¨TableParser,½«ÕâÕÅ±íºÍÒ»¸öÊı¾İÀàĞÍ°ó¶¨
-        TableParser<Skill> skillParser = TableParser<Skill>.Create(firstRow);
+        TableParser<T> classParser = TableParser<T>.Create(firstRow);
 
-        List<Skill> result = new List<Skill>();
-        //¶ÁÈ¡ÆäËûĞĞµÄĞÅÏ¢µ½Êı¾İÖĞ
-        for(int i = 1; i < colCount; i++) {
-            result.Add(skillParser.Parse(table.Rows[i]));
+        List<T> result = new List<T>();
+        //è¯»å–å…¶ä»–è¡Œçš„ä¿¡æ¯åˆ°æ•°æ®ä¸­
+        for(int i = 1; i < rowCount; i++) {
+            //
+            if(classParser.Parse(table.Rows[i]) == null){
+                Log.Warning("ç¬¬{0}è¡Œè§£æå¤±è´¥",i);
+                continue;
+            }
+            //æ·»åŠ è½¬æ¢åçš„å®ä¾‹åˆ°åˆ—è¡¨å¹¶è¾“å‡ºæ˜¾ç¤º
+            result.Add(classParser.Parse(table.Rows[i]));
+            PrintResult<T>(result[i-1]);
         }
         return result;
     }
 
+    public void PrintResult<T>(T res){
+        FieldInfo[] infos = res.GetType().GetFields();
+        var str = Utils.FormatString("ID:{0},Name:{1}",infos[0].GetValue(res),infos[1].GetValue(res));
+        Log.Debug(str);
+    }
+
     /// <summary>
-    /// µ¥¸ö±í½âÎöÆ÷
+    /// å•ä¸ªè¡¨è§£æå™¨
     /// </summary>
-    public class TableParser<T> where T : class, new() {
+    public class TableParser<T> where T : class,new() {
         /// <summary>
-        /// ½«ExcelÖĞ×Ô¼º¶¨ÒåµÄÀàĞÍ×ª»¯Îª±ê×¼C#ÀàĞÍ
+        /// å°†Excelä¸­è‡ªå·±å®šä¹‰çš„ç±»å‹è½¬åŒ–ä¸ºæ ‡å‡†C#ç±»å‹
         /// </summary>
         public static Dictionary<string, Type> TypeDic = new Dictionary<string, Type>()
         {
@@ -110,26 +139,25 @@ public class ExcelReader : Manager<ExcelReader> {
             {"float", typeof(float)},
         };
 
-
         public Dictionary<string, Type> headerData = new Dictionary<string, Type>();
 
         public int Count = 0;
 
-
         private TableParser() { }
         /// <summary>
-        /// Í¨¹ıÊ×ĞĞÀ´´´½¨TableParser¶ÔÏó,´´½¨Ê§°Ü·µ»Ønull
+        /// é€šè¿‡é¦–è¡Œæ¥åˆ›å»ºTableParserå¯¹è±¡,åˆ›å»ºå¤±è´¥è¿”å›null
         /// </summary>
         public static TableParser<T> Create(DataRow header) {
             TableParser<T> parser = new TableParser<T>();
-            foreach (object obj in header.ItemArray) {
+            foreach (object obj in header.ItemArray) { // è¡¨ä¸­
                 string str = (string)obj;
-                string[] ss = str.Split('#');
-                if(ss.Length < 2) {
-                    Log.Error("½âÎö±íÍ·´íÎó{0}", str);
+                string[] ss = str.Split('\n');
+                if(ss.Length < 3) {
+                    Log.Error("è§£æè¡¨å¤´é”™è¯¯{0}", str);
                     return null;
                 }
-                parser.headerData.Add(ss[0], TypeDic[ss[1]]);
+                //æŒ‰ç…§ä»å·¦åˆ°å³çš„é¡ºåºï¼Œå°†è¡¨ä¸­æ¯åˆ—æ‰€ä»£è¡¨çš„å˜é‡åŠå…¶ç±»å‹æ·»åŠ åˆ°è§£æå™¨
+                parser.headerData.Add(ss[0], TypeDic[ss[1]]); // æœ¬èº«å­˜çš„å°±æ˜¯typeofç»“æœ
             }
             return parser;
         }
@@ -139,13 +167,32 @@ public class ExcelReader : Manager<ExcelReader> {
         /// </summary>
         public T Parse(DataRow row) {
             T obj = new T();
-            SetValue(obj, row);
-            return obj;
+            //å¦‚æœèµ‹å€¼æœªæˆåŠŸï¼Œåˆ™ç›´æ¥è¿”å›ç©º
+            if(!SetValue(obj, row)){
+                return null;
+            }
+            return obj; //è¿”å›å€¼è¢«åŠ å…¥ç»“æœåˆ—è¡¨
         }
 
-        //½«dataÖĞµÄÊı¾İ¸³Öµ¸ø¶ÔÏó ¿É²Î¿¼GlobalÖĞµÄ·´Éä
-        private void SetValue(T obj,DataRow data){
-
+        //å°†dataä¸­çš„æ•°æ®èµ‹å€¼ç»™å¯¹è±¡ å¯å‚è€ƒGlobalä¸­çš„åå°„
+        private bool SetValue(T obj,DataRow data){
+            FieldInfo[] vars = obj.GetType().GetFields();
+            for(int i=0;i<data.ItemArray.Length;i++){
+                //å¦‚æœå½“å‰è¡Œæœ‰ä»»ä½•ä¸€æ ¼ä¿¡æ¯ä¸ºç©ºï¼Œåˆ™æç¤ºè¡¨æ ¼ä¿¡æ¯ä¸å®Œå–„ï¼Œå¹¶ç›´æ¥è·³å‡ºèµ‹å€¼
+                if(data.ItemArray[i].Equals(DBNull.Value)){
+                    Log.Warning("å½“å‰è¡Œä¿¡æ¯ä¸å®Œå–„å·²è·³è¿‡ï¼Œè¯·æ£€æŸ¥å­˜å‚¨{0}ç±»å‹è¡¨ä¸­{1}åˆ—ä¿¡æ¯æ˜¯å¦éƒ½å®Œå–„å¡«å†™",typeof(T),vars[i].Name);
+                    return false;
+                }
+                //å¦‚æœä¿¡æ¯å®Œå–„åˆ™è¿›è¡Œå¯¹åº”çš„ç±»å‹è½¬æ¢
+                try{
+                    var value = Convert.ChangeType(data.ItemArray[i],headerData[vars[i].Name]);
+                    vars[i].SetValue(obj,value);
+                }catch(SystemException e){
+                    Log.Warning("ä¿¡æ¯å¡«å†™æœ‰è¯¯ï¼Œè¯·æ£€æŸ¥å­˜å‚¨{0}ç±»å‹è¡¨ä¸­{1}åˆ—ä¿¡æ¯çš„ç±»å‹æ˜¯å¦æ­£ç¡®",typeof(T),vars[i].Name);
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

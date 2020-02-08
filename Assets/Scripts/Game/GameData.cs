@@ -40,4 +40,21 @@ public static partial class GameData{
         {"Moun",30},{"Lake",10},{"Forest",60},{"Plain",100}
      };
     public static int WaveRate = 15;
+
+    //不同平台和运行模式读取数据时的通用路径列表
+    //平台（eg：OSX，Windows，Android，IOS）
+    //运行模式（eg：Editor编辑器模式和Player运行模式）
+    public static Dictionary<RuntimePlatform,string> ExcelPaths = new Dictionary<RuntimePlatform, string>{
+        
+        //不同平台的Editor模式
+        {RuntimePlatform.OSXEditor,"/Resources/ExcelData/GameData.xlsx"},
+        {RuntimePlatform.WindowsEditor,"\\Resources\\ExcelData\\GameData.xlsx"},
+        
+        //不同平台的App模式（读取AssetBundle或files的路径） ,以下仅为样例
+        {RuntimePlatform.Android,"/data/app/HexGame.apk/!/assets/GameData.data"},
+        {RuntimePlatform.WindowsPlayer,"\\res\\data\\ExcelGameData.bin"},
+        {RuntimePlatform.IPhonePlayer,"/com.AssetsBundles/data/GameData.data"}
+        
+        //TODO：不同平台的Web模式（读取BinFile）
+    };
 }
