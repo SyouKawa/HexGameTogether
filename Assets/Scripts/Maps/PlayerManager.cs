@@ -79,7 +79,7 @@ public class PlayerManager : Manager<PlayerManager> {
             if (Input.GetMouseButtonDown(0)) {
                 if (hit.collider.tag == "MapCell") {
                     //TODO:显示点击Cell的详细信息
-                    HexCell curCell = GetClass<HexCell>(hit.collider.transform.parent.gameObject);
+                    HexCell curCell = GetClass<HexCell>(hit.collider);
                     Debug.Log(curCell.MapPos);
                 }
                 if (hit.collider.tag == "Player") {
@@ -100,7 +100,8 @@ public class PlayerManager : Manager<PlayerManager> {
                     通过修改底层GetClass 从而GetClass<HexCell>(hit.collider)即可,或者达到同样方便
                     提示: public static GameObject RevertBinding(Collider collider);
                 */
-                HexCell cell = GetClass<HexCell>(hit.collider.transform.parent.gameObject);
+                HexCell cell = GetClass<HexCell>(hit.collider);
+                Debug.Log(cell.MapPos);
                 //非寻路区域直接返回
                 if (cell.FieldType == FieldType.EdgeSea || cell.FieldType == FieldType.Lake) {
                     return;

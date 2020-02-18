@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using UnityEngine;
+using UnityEditor;
 
 /// <summary>
 /// 常用数据操作静态类
@@ -30,6 +31,28 @@ public static class Utils {
             }
             return allTypes;
         }
+    }
+
+    [Obsolete("Prefab在运行时不可检测，已废弃",true)]
+    public static GameObject GetClassByChild<T>(GameObject curObj) where T: PrefabBinding{
+        GameObject classObj=curObj;
+        //Prefab路径
+        string attrPath = typeof(T).GetCustomAttribute<PrefabPath>().path;
+        //Attribute.IsDefined(curObj.GetType(),PrefabPath)
+        string objPath = AssetDatabase.GetAssetPath(curObj);
+        
+        /*如果不是PrefabClass节点，则往上递归
+        if(objPath!=null && attrPath == objPath){
+            return classObj;
+        }*/
+        //如果当前是根节点，则直接返回当前GameObject
+        if(curObj.transform.parent!=null){
+            classObj = GetClassByChild<T>(curObj.transform.parent.gameObject);
+        }else{
+            Debug.Log("已超出GameObject递归目录，当前节点为Global，将返回Null");
+            return null;
+        }     
+        return classObj;
     }
 
     /// <summary>

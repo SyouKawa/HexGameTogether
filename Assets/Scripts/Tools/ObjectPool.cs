@@ -122,20 +122,47 @@ public class ObjectPool {
     }
 
     /// <summary>
-    /// 通过对象获取类型
+    /// 通过点击获得的碰撞体获取类型
     /// </summary>
     /// <typeparam name="T">要获取的框架类型</typeparam>
     /// <param name="gameObject"></param>
     /// <returns></returns>
-    public T GetClass<T>(GameObject gameObject) where T : class {
+    public T GetClass<T>(GameObject gameobject) where T : class {
         Dictionary<GameObject, object> dic = data[typeof(T)];
-        if (dic.ContainsKey(gameObject)) {
-            return dic[gameObject] as T;
+        if (dic.ContainsKey(gameobject)) {
+            return dic[gameobject] as T;
         }
         else {
             Debug.LogError("未找到框架类" + typeof(T).Name);
             return null;
         }
+    }
+
+    public T GetClass<T>(Collider2D col) where T : PrefabBinding{
+        Dictionary<GameObject, object> dic = data[typeof(T)];
+        GameObject gameobject = GetClassByChild(col.gameObject,col.tag);
+        if(dic.ContainsKey(gameobject)){
+            return dic[gameobject] as T;
+        }
+        else {
+            Debug.LogError("未找到PrefabBinding类:" + typeof(T).Name);
+            return null;
+        }
+    }
+    public static GameObject GetClassByChild(GameObject curObj,string tag){
+        GameObject classObj=curObj;
+        //Debug.Log(curObj.name+","+curObj.GetType());
+        if(curObj.transform.parent != null){
+            GameObject upperObj = curObj.transform.parent.gameObject;
+            //如果父节点与当前节点有相同的tag，则说明当前节点处于prefab内部，需要递归向上查找prefabBinding主节点
+            if(upperObj.tag == tag){
+                classObj=GetClassByChild(upperObj,tag);
+            }
+            //tag不同，说明上层节点已经不是prefab，所以当前节点是prefabBinding的主节点，此时返回当前节点
+            return classObj;
+        }
+        Log.Warning("无法递归找到PrefabBinding类的GameObject，将返回Null");
+        return null;
     }
 
     /// <summary>

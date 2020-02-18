@@ -163,4 +163,8 @@ public abstract class PrefabBinding {
     public static T GetClass<T>(GameObject gameObject) where T : class {
         return ObjectPool.Instance.GetClass<T>(gameObject);
     }
+
+    public static T GetClass<T>(Collider2D collider) where T : PrefabBinding{
+        return ObjectPool.Instance.GetClass<T>(collider);
+    }
 }
