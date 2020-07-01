@@ -1,0 +1,643 @@
+fileFormatVersion: 2
+guid: bd4c9d46eaee64364ac84c93a8565734
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6314174316583385464
+    second: tiles_oceans_colored_0
+  - first:
+      213: -345286048626761879
+    second: tiles_oceans_colored_1
+  - first:
+      213: -6887754414677254516
+    second: tiles_oceans_colored_2
+  - first:
+      213: 3581211524718732958
+    second: tiles_oceans_colored_3
+  - first:
+      213: 8916556174113889470
+    second: tiles_oceans_colored_4
+  - first:
+      213: 9004248485447095975
+    second: tiles_oceans_colored_5
+  - first:
+      213: -4897365763822259214
+    second: tiles_oceans_colored_6
+  - first:
+      213: -1787940261876125401
+    second: tiles_oceans_colored_7
+  - first:
+      213: 7146971992406927064
+    second: tiles_oceans_colored_8
+  - first:
+      213: 659810923027179872
+    second: tiles_oceans_colored_9
+  - first:
+      213: 6289821975994636632
+    second: tiles_oceans_colored_10
+  - first:
+      213: 2534165006929456029
+    second: tiles_oceans_colored_11
+  - first:
+      213: 6484262208435876378
+    second: tiles_oceans_colored_12
+  - first:
+      213: 561244677875805218
+    second: tiles_oceans_colored_13
+  - first:
+      213: 8450137941153145091
+    second: tiles_oceans_colored_14
+  - first:
+      213: 2669455561425437117
+    second: tiles_oceans_colored_15
+  - first:
+      213: -8721872486143252372
+    second: tiles_oceans_colored_16
+  - first:
+      213: -8588427361210871232
+    second: tiles_oceans_colored_17
+  - first:
+      213: 557471268440010829
+    second: tiles_oceans_colored_18
+  - first:
+      213: 6733210156816813561
+    second: tiles_oceans_colored_19
+  - first:
+      213: 4191089748655118452
+    second: tiles_Lake_colored_0
+  - first:
+      213: 497288563664198463
+    second: tiles_Lake_colored_1
+  - first:
+      213: -8539812173890062846
+    second: tiles_Lake_colored_2
+  - first:
+      213: -4390415799398400280
+    second: tiles_Lake_colored_3
+  - first:
+      213: -3636323942081983380
+    second: tiles_Lake_colored_4
+  - first:
+      213: 8954708627365494686
+    second: tiles_Lake_colored_5
+  - first:
+      213: -2893776261274353781
+    second: tiles_Lake_colored_6
+  - first:
+      213: 732209693150061001
+    second: tiles_Lake_colored_7
+  - first:
+      213: -4072337460042400557
+    second: tiles_Lake_colored_8
+  - first:
+      213: 7383914207468112379
+    second: tiles_Lake_colored_9
+  - first:
+      213: 1660560341021269007
+    second: tiles_Lake_colored_10
+  - first:
+      213: 1457666287247168810
+    second: tiles_Lake_colored_11
+  - first:
+      213: -8342454553279590073
+    second: tiles_Lake_colored_12
+  - first:
+      213: -1795378279522911693
+    second: tiles_Lake_colored_13
+  - first:
+      213: -3112826681205571584
+    second: tiles_Lake_colored_14
+  - first:
+      213: 268713318063882699
+    second: tiles_Lake_colored_15
+  - first:
+      213: 5123397788596504178
+    second: tiles_Lake_colored_16
+  - first:
+      213: 2400310384623619373
+    second: tiles_Lake_colored_17
+  - first:
+      213: 4489122100021491868
+    second: tiles_Lake_colored_18
+  - first:
+      213: 2906367578500760807
+    second: tiles_Lake_colored_19
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 2
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: tiles_Lake_colored_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1668
+        width: 380
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f01dc668def33d499bb937cb879960e
+      internalID: 4191089748655118452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_Lake_colored_1
+      rect:
+        serializedVersion: 2
+        x: 380
+        y: 1668
+        width: 380
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77310882561ea8f48b28efc04e559118
+      internalID: 497288563664198463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_Lake_colored_2
+      rect:
+        serializedVersion: 2
+        x: 760
+        y: 1668
+        width: 380
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2aa48f34bfd77f44a044c681266ad30
+      internalID: -8539812173890062846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_Lake_colored_3
+      rect:
+        serializedVersion: 2
+        x: 1140
+        y: 1668
+        width: 380
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ed4f2a942b21ac4ca644b985b1c5977
+      internalID: -4390415799398400280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_Lake_colored_4
+      rect:
+        serializedVersion: 2
+        x: 1520
+        y: 1668
+        width: 380
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83f473b2bcce6f64d885ca6e6bfd25da
+      internalID: -3636323942081983380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_Lake_colored_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1288
+        width: 380
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c3b30f83acae2f408c17c79655d0ec7
+      internalID: 8954708627365494686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_Lake_colored_6
+      rect:
+        serializedVersion: 2
+        x: 380
+        y: 1288
+        width: 380
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 046b15acd0c38d54ab4106ba1947414a
+      internalID: -2893776261274353781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_Lake_colored_7
+      rect:
+        serializedVersion: 2
+        x: 760
+        y: 1288
+        width: 380
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47e284c7ce4a08146945c126776a407b
+      internalID: 732209693150061001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_Lake_colored_8
+      rect:
+        serializedVersion: 2
+        x: 1140
+        y: 1288
+        width: 380
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df138fc2272710144a6646f5773fdf9a
+      internalID: -4072337460042400557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_Lake_colored_9
+      rect:
+        serializedVersion: 2
+        x: 1520
+        y: 1288
+        width: 380
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 550d6212108ff35419d11236d0c24896
+      internalID: 7383914207468112379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_Lake_colored_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 908
+        width: 380
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ba5dc8a7d9a973489a15232d57313c4
+      internalID: 1660560341021269007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_Lake_colored_11
+      rect:
+        serializedVersion: 2
+        x: 380
+        y: 908
+        width: 380
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45599f8b99c19c441b664b26618c4936
+      internalID: 1457666287247168810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_Lake_colored_12
+      rect:
+        serializedVersion: 2
+        x: 760
+        y: 908
+        width: 380
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1694155e45e212343b6cc8526f1ce86a
+      internalID: -8342454553279590073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_Lake_colored_13
+      rect:
+        serializedVersion: 2
+        x: 1140
+        y: 908
+        width: 380
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dabf7d4fc2873c34d8d0503f2e6b1dcc
+      internalID: -1795378279522911693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_Lake_colored_14
+      rect:
+        serializedVersion: 2
+        x: 1520
+        y: 908
+        width: 380
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17ff13844e8c9274db94dd02d9109a48
+      internalID: -3112826681205571584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_Lake_colored_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 528
+        width: 380
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32c0d48a24207b24e9bd2ac965f2994b
+      internalID: 268713318063882699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_Lake_colored_16
+      rect:
+        serializedVersion: 2
+        x: 380
+        y: 528
+        width: 380
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f4b97a59862b154ebfba2eb98113a61
+      internalID: 5123397788596504178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_Lake_colored_17
+      rect:
+        serializedVersion: 2
+        x: 760
+        y: 528
+        width: 380
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e4fc5d2fbc88d24ab490b3873515d87
+      internalID: 2400310384623619373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_Lake_colored_18
+      rect:
+        serializedVersion: 2
+        x: 1140
+        y: 528
+        width: 380
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 386155596f7598d4e9197a9f2f877b8d
+      internalID: 4489122100021491868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_Lake_colored_19
+      rect:
+        serializedVersion: 2
+        x: 1520
+        y: 528
+        width: 380
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f222185df3ca48c4f97090598b18e6f3
+      internalID: 2906367578500760807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 33b52e387f6da48adb9a4045b2d4f29b
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

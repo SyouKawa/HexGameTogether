@@ -9,6 +9,7 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Mm]emoryCaptures/
+/[Pr]ojectSettings/
 
 # Never ignore Asset meta data
 !/[Aa]ssets/**/*.meta
@@ -24,6 +25,9 @@
 
 # Visual Studio cache directory
 .vs/
+.vscode/
+[Aa]ssets/VSCode/
+[Aa]ssets/VSCode.meta
 
 # Gradle cache directory
 .gradle/
@@ -61,3 +65,5 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+ProjectSettings/ProjectSettings.asset
+ProjectSettings/ProjectVersion.txt
